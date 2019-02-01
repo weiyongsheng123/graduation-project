@@ -179,7 +179,11 @@ class RegistrationForm extends PureComponent {
                   <Checkbox>
                     我已阅读
                     <Link to="/register/userProtocol">
-                    <p>用户服务协议</p>
+                    <p className="inline">用户服务协议</p>
+                    </Link>
+                    <span className="inline">和</span>
+                    <Link to="/register/privacyPolicy">
+                    <p  className="inline">隐私政策</p>
                     </Link>
                   </Checkbox>
                 )}
@@ -189,7 +193,7 @@ class RegistrationForm extends PureComponent {
               </Form.Item>
             </Form>
           </RegisterForm>
-          <Link to="/">
+          <Link to="/login">
             <BackLogin>已有账号，立即登录</BackLogin>
           </Link>
         </InputArea>

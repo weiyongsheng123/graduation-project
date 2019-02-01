@@ -71,6 +71,9 @@ export const RegisterForm = styled.div`
   .decreaseMargin {
     margin-bottom: 10px;
   }
+  .inline {
+    display: inline-block;
+  }
 `;
 
 export const AnimateArea = styled.div`
@@ -127,6 +130,9 @@ export const AnimatePart = styled.div`
     height: 54px;
     .ant-checkbox-wrapper {
       width: 180px;
+    }
+    .inline {
+      display: inline-block;
     }
   }
 `;

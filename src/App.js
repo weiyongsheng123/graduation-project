@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { GlobalStyle } from './style';
+import { Iconfont } from "./statics/iconfont/iconfont";
 import store from './store';
 import Login from './pages/login';
 import Register from './pages/register';
+import Home from './pages/home';
 import UserProtocol from './pages/register/components/useServiceProtocol';
+import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
 class App extends Component {
   
@@ -13,10 +16,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <GlobalStyle/>
+        <Iconfont/>
         <BrowserRouter>
           <div>
             <Route
-              path="/"
+              path="/login"
               exact
               component={Login}
             >
@@ -31,6 +35,18 @@ class App extends Component {
               path="/register/userProtocol"
               exact
               component={UserProtocol}
+            >
+            </Route>
+            <Route
+              path="/register/privacyPolicy"
+              exact
+              component={PrivacyPolicy}
+            >
+            </Route>
+            <Route
+              path="/"
+              exact
+              component={Home}
             >
             </Route>
           </div>

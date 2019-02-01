@@ -4,7 +4,7 @@ export const HeaderWrapper = styled.div`
   width: 100%;
   height: 56px;
   line-height: 56px;
-  background-color: #fff;
+  background-color: #1890ff;
   border-bottom: 1px solid #e8e8e8;
 `;
 
@@ -23,7 +23,7 @@ export const HeaderPattern = styled.div`
   max-width: 120px;
   height: 40px;
   font-size: 22px;
-  color: #333;
+  color: #fff;
   line-height: 56px;
   float: left;
   font-weight: 400;
@@ -34,7 +34,7 @@ export const HeaderLogin = styled.div`
   max-width: 120px;
   height: 40px;
   font-size: 16px;
-  color: #333;
+  color: #fff;
   line-height: 56px;
   float: right;
   font-weight: 400;
@@ -45,7 +45,7 @@ export const HeaderHelp = styled.div`
   max-width: 120px;
   height: 40px;
   font-size: 16px;
-  color: #333;
+  color: #fff;
   line-height: 56px;
   float: right;
   font-weight: 400;
@@ -57,7 +57,7 @@ export const HeaderLine = styled.span`
   height: 40px;
   display: block;
   font-size: 22px;
-  color: #333;
+  color: #fff;
   line-height: 56px;
   color: #8F8F8F;
   font-weight: 400;

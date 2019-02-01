@@ -52,7 +52,7 @@ class RegistrationForm extends PureComponent {
                </Button>
              </ButtonGroup>
           </InputSubmit>
-          <Link to="/">
+          <Link to="/login">
             <BackLogin>已有账号，立即登录</BackLogin>
           </Link>
          </AnimatePart>
@@ -131,7 +131,13 @@ class RegistrationForm extends PureComponent {
            </InputDiv>
            <Checkbox className='checkRead'>
              我已阅读
-             <a href="http://www.baidu.com">企业注册协议</a>
+             <Link to="/register/userProtocol">
+              <p className="inline">用户服务协议</p>
+              </Link>
+              <span className="inline">和</span>
+              <Link to="/register/privacyPolicy">
+              <p  className="inline">隐私政策</p>
+              </Link>
            </Checkbox>
            <Button type="primary" block>注册</Button>
            <InputSubmit>

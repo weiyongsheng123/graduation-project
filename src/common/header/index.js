@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { HeaderWrapper, HeaderImg, HeaderPattern, HeaderLogin, HeaderHelp, HeaderLine } from './style';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends PureComponent {
 
@@ -13,7 +14,7 @@ class Header extends PureComponent {
        <HeaderPattern>{pattern}</HeaderPattern>
        <HeaderHelp>帮助中心</HeaderHelp>
        <HeaderLine className="right">&nbsp;&nbsp;&nbsp;</HeaderLine>
-       <HeaderLogin>首页</HeaderLogin>
+       <Link to="/"><HeaderLogin>首页</HeaderLogin></Link>
      </HeaderWrapper>
     )
   };

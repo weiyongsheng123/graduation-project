@@ -170,7 +170,7 @@ export const InputForget = styled.div`
 
 export const TelephoneShow = styled.div`
   width: 300px;
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1.0;
   height: 40px;
   position: fixed;
