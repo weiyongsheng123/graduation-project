@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
-import { HomeWrapper } from './style';
+import { HomeWrapper, SearchWrapper } from './style';
 import Head from '../../common/head';
+import InputSearch from './components/inputSearch';
+import LogoCity from './components/logoCity';
+import AdvertiseMent from './components/advertisement';
+import NewRecruit from './components/newRecruit';
+import Suspension from './components/suspension';
 
 class Home extends PureComponent {
 
@@ -8,6 +13,13 @@ class Home extends PureComponent {
     return (
       <HomeWrapper>
         <Head/>
+        <SearchWrapper>
+          <InputSearch/>
+          <LogoCity/>
+        </SearchWrapper>
+        <AdvertiseMent/>
+        <NewRecruit/>
+        <Suspension/>
       </HomeWrapper>
     )
   }
