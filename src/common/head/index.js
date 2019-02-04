@@ -11,7 +11,7 @@ class Head extends PureComponent {
    let choice = null;
    const { showCityList, setCity } = this.props;
    if (pattern === '求职者端') {
-     choice = <PersonCenter>个人中心</PersonCenter>;
+     choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
    }
    else {
      choice = <CompanyServer>企业服务</CompanyServer>;

@@ -3,7 +3,6 @@ import { RegisterDiv, InputArea, RegisterTitle, RegisterForm, BackLogin } from '
 import {
   Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button,
 } from 'antd';
-import 'antd/dist/antd.css';
 import Ident from '../../../common/identCode';
 import { Link } from 'react-router-dom';
 

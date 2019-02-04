@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RegisterDiv, AnimateArea, AnimatePart, InputH3, InputSpan, InputDiv, InputSubmit, IdentWContainer, BackLogin } from '../style';
 import { Input, Button, Icon, Checkbox } from 'antd';
-import 'antd/dist/antd.css';
 import Ident from '../../../common/identCode';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';

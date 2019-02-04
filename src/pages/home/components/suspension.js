@@ -3,7 +3,6 @@ import { ScrollTop, Suggest, AdvertiseOne, AdvertiseTwo } from '../style';
 import { connect } from 'react-redux';
 import { changeSuspension } from '../store/actionCreators';
 import { Tooltip } from 'antd';
-import 'antd/dist/antd.css';
 
 class Suspension extends PureComponent {
 

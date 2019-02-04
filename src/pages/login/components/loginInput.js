@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { InputArea, InputH3, InputSpan, InputDiv, InputRemerber, InputSubmit, InputForget } from '../style';
 import { changeHeaderPattern } from '../../../common/header/store/actionCreators'
 import { Input, Button, Checkbox } from 'antd';
-import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 
 class LoginInput extends PureComponent {

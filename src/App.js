@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { GlobalStyle } from './style';
 import { Iconfont } from "./statics/iconfont/iconfont";
+import 'antd/dist/antd.css';
 import store from './store';
 import Login from './pages/login';
 import Register from './pages/register';
 import Home from './pages/home';
+import Resume from './pages/resume';
 import UserProtocol from './pages/register/components/useServiceProtocol';
 import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
@@ -47,6 +49,12 @@ class App extends Component {
               path="/"
               exact
               component={Home}
+            >
+            </Route>
+            <Route
+              path="/resume"
+              exact
+              component={Resume}
             >
             </Route>
           </div>

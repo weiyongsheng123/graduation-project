@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {
   Input, Select, Button, Cascader
 } from 'antd';
-import 'antd/dist/antd.css';
 
 class InputSearch extends PureComponent {
 
