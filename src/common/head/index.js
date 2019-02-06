@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { HeadWrapper, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, TelephoneContact } from './style';
+import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, TelephoneContact } from './style';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
@@ -14,10 +14,13 @@ class Head extends PureComponent {
      choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
    }
    else {
-     choice = <CompanyServer>企业服务</CompanyServer>;
+     choice = <Link to="/company"><CompanyServer>企业服务</CompanyServer></Link>;
    }
     return (
      <HeadWrapper>
+       <Link to="/">
+         <BackHome>首页</BackHome>
+       </Link>
        <CityChange onMouseOver={()=>{showCityList(true)}} onMouseLeave={()=>{showCityList(false)}}>
          <i className="iconfont">&#xe62e;</i>
          <span>{ nowCity }</span>

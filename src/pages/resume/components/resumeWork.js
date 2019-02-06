@@ -41,7 +41,7 @@ class ResumeWork extends PureComponent {
   render () {
 
     return (
-      <WorkArea>
+      <WorkArea id="resumework">
         <WorkTitle>工作经验</WorkTitle>
         <WorkButton>
           <Button type="dashed" onClick={this.showEdit}>

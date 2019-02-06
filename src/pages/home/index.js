@@ -5,7 +5,7 @@ import InputSearch from './components/inputSearch';
 import LogoCity from './components/logoCity';
 import AdvertiseMent from './components/advertisement';
 import NewRecruit from './components/newRecruit';
-import Suspension from './components/suspension';
+import Suspension from '../../common/suspension';
 import SomethingElse from './components/somethingElse';
 
 class Home extends PureComponent {

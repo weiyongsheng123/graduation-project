@@ -16,7 +16,7 @@ class ResumeName extends PureComponent {
    const RadioGroup = Radio.Group;
    const Option = Select.Option;
     return (
-      <ResumeNameArea>
+      <ResumeNameArea id="resumename">
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}

@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import Head from '../../common/head';
-import { ResumeWrapper } from './style';
+import Suspension from '../../common/suspension';
+import { ResumeWrapper, ResumeContent } from './style';
 import ResumeHeader from './components/resumeHeader';
 import ResumeDetail from './components/indexDetail';
+import ResumeNav from './components/resumeNav';
 
 class Resume extends PureComponent {
 
@@ -11,7 +13,11 @@ class Resume extends PureComponent {
       <ResumeWrapper>
         <Head/>
         <ResumeHeader/>
-        <ResumeDetail/>
+        <ResumeContent>
+          <ResumeDetail/>
+          <ResumeNav/>
+        </ResumeContent>
+        <Suspension/>
       </ResumeWrapper>
     )
   }

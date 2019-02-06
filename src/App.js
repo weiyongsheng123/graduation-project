@@ -9,6 +9,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Home from './pages/home';
 import Resume from './pages/resume';
+import Company from './pages/company';
 import UserProtocol from './pages/register/components/useServiceProtocol';
 import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
@@ -55,6 +56,12 @@ class App extends Component {
               path="/resume"
               exact
               component={Resume}
+            >
+            </Route>
+            <Route
+              path="/company"
+              exact
+              component={Company}
             >
             </Route>
           </div>

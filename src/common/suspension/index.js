@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { ScrollTop, Suggest, AdvertiseOne, AdvertiseTwo } from '../style';
+import { ScrollTop, Suggest } from './style';
 import { connect } from 'react-redux';
-import { changeSuspension } from '../store/actionCreators';
+import { changeSuspension } from './store/actionCreators';
 import { Tooltip } from 'antd';
 
 class Suspension extends PureComponent {
@@ -24,8 +24,6 @@ class Suspension extends PureComponent {
                   </div>
                   : null
        }
-       <AdvertiseOne><a href="http://special.zhaopin.com/2019/nh/11237/ahyx013152/careers.html"><img src="https://img02.zhaopin.cn/img_button/201901/31/01_120047558691.gif" alt=""/></a></AdvertiseOne>
-       <AdvertiseTwo><a href="https://xiaoyuan.zhaopin.com/"><img src="https://img00.zhaopin.cn/img_button/201901/18/02_180934127172.jpg" alt=""/></a></AdvertiseTwo>
       </div>
     )
   };
@@ -41,7 +39,7 @@ class Suspension extends PureComponent {
 };
 
 const mapState = (state) => ({
-  isShow: state.getIn(['home','isShow'])
+  isShow: state.getIn(['suspension','isShow'])
 });
 
 const mapDispatch = (dispatch) => {

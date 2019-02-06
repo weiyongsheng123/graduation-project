@@ -16,7 +16,7 @@ class ResumeIntent extends PureComponent {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
     return (
-      <IntentArea>
+      <IntentArea id="resumeintent">
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}

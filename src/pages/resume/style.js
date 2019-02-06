@@ -122,6 +122,13 @@ export const ResumeWrapper = styled.div`
   background: #f4f6f9;
 `;
 
+export const ResumeContent = styled.div`
+  width: 1150px;
+  height: auto;
+  overflow: hidden;
+  margin: auto;
+`;
+
 export const NameArea = styled.div`
   font-size: 14px;
   color: #999;
@@ -287,6 +294,9 @@ export const ResumeNameAreaProfile = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+    &:hover {
+      color: #1787fb;
+    }
     span {
       margin-right: 5px;
       font-size: 16px;
@@ -308,6 +318,10 @@ export const ResumeNameAreaEdit = styled.div`
     font-size: 24px;
     cursor: pointer;
     color: #333;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
 `;
 
@@ -350,6 +364,9 @@ export const IntentProfile = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+    &:hover {
+      color: #1787fb;
+    }
     span {
       margin-right: 5px;
       font-size: 16px;
@@ -396,6 +413,10 @@ export const IntentEdit = styled.div`
     font-size: 24px;
     cursor: pointer;
     color: #333;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
 `;
 
@@ -483,6 +504,10 @@ export const WorkItem = styled.div`
     right: 0px;
     color: #d9d9d9;
     cursor: pointer;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
   .container {
     width: 45%;
@@ -513,15 +538,18 @@ export const WorkEdit = styled.div`
   width: 342px;
   height: auto;
   margin: 0 auto;
-  overflow: hidden;
   position: relative;
   .close {
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: -10px;
+    right: -50px;
     font-size: 24px;
     cursor: pointer;
     color: #333;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
 `;
 
@@ -609,6 +637,10 @@ export const ProjectItem = styled.div`
     right: 0px;
     color: #d9d9d9;
     cursor: pointer;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
   .container {
     width: 90%;
@@ -650,15 +682,18 @@ export const ProjectEdit = styled.div`
   width: 342px;
   height: auto;
   margin: 0 auto;
-  overflow: hidden;
   position: relative;
   .close {
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: -10px;
+    right: -50px;
     font-size: 24px;
     cursor: pointer;
     color: #333;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
 `;
 
@@ -746,6 +781,10 @@ export const EducateItem = styled.div`
     right: 0px;
     color: #d9d9d9;
     cursor: pointer;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
   .container {
     width: 45%;
@@ -776,15 +815,18 @@ export const EducateEdit = styled.div`
   width: 342px;
   height: auto;
   margin: 0 auto;
-  overflow: hidden;
   position: relative;
   .close {
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: -10px;
+    right: -50px;
     font-size: 24px;
     cursor: pointer;
     color: #333;
+    &:hover {
+      color: #1787fb;
+      transition: color 0.3s;
+    }
   }
 `;
 
@@ -805,4 +847,127 @@ export const UploadTitle = styled.p`
   zoom: 1;
   display: block;
   box-sizing: border-box;
+`;
+
+export const DownloadArea = styled.div`
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 20px;
+  .title {
+    width: 140px;
+    font-weight: 550;
+    font-size: 16px;
+    line-height: 50px;
+    height: 50px;
+    display: block;
+  }
+  .item {
+     display: inline-block;
+     width: auto;
+     margin-right: 50px;
+     margin-left: 50px !important;
+     padding-right: 25px;
+     box-sizing: border-box;
+     height: 50px;
+     margin-left: 10px;
+     font-size: 16px;
+     line-height: 50px;
+     overflow: hidden;
+     position: relative;
+     a {
+       height: 100%;
+       text-overflow: ellipsis;
+     }
+     span {
+       display: block;
+       position: absolute;
+       right: 0px;
+       top: 0px;
+       cursor: pointer;
+     }
+  }
+`;
+
+export const Upload = styled.div`
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  .tips {
+    width: 140px;
+    font-weight: 550;
+    font-size: 16px;
+    line-height: 50px;
+    height: 50px;
+    display: block;
+  }
+  input {
+    margin-left: 145px;
+  }
+`;
+
+export const ResumeNavWrapper = styled.div`
+  width: 240px;
+  float: right;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+`;
+
+export const NavUl = styled.ul`
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+`;
+
+export const NavLi = styled.li`
+  width: 100%;
+  font-size: 18px;
+  height: 52px;
+  line-height: 52px;
+  overflow: hidden;
+  cursor: pointer;
+  a {
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    height: 52px;
+    color: #333;
+    &.select {
+      color: #1787fb;
+      border-left: 4px solid #1787fb;
+    }
+    &:hover {
+      transition: color 0.3s;
+      color: #333;
+    }
+  }
+`;
+
+export const CallPolice = styled.a`
+  width: 100%;
+  height: 64px;
+  cursor: pointer;
+  display: block;
+  border: 1px solid #dcdee2;
+  overflow: hidden;
+  padding-left: 20px;
+  &:hover {
+    border-color: #1787fb;
+  }
+  .police {
+    background: url(https://common-bucket.zhaopin.cn/zpfe-complonents-alan/assets/net-plice.a4aaf9.png) no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    width: 55px;
+    height: 60px;
+    vertical-align: bottom;
+  }
+  span {
+    display: inline-block;
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px;
+    margin-left: 5px;
+  }
 `;

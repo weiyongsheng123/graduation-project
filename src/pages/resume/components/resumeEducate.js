@@ -29,7 +29,7 @@ class ResumeEducate extends PureComponent {
   render () {
     const InputGroup = Input.Group;
     return (
-      <EducateArea>
+      <EducateArea id="resumeeducate">
         <EducateTitle>教育经历</EducateTitle>
         <EducateButton>
           <Button type="dashed" onClick={this.showEdit}>
@@ -91,7 +91,7 @@ class ResumeEducate extends PureComponent {
             <InputDiv>
               <label htmlFor="Educatesalary">毕业时间</label>
               <InputGroup compact>
-                <DatePicker />
+                <DatePicker name="Educatesalary" placeholder="请选择时间"/>
               </InputGroup>
             </InputDiv>
             <InputDiv className="chooseMany">

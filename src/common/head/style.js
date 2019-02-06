@@ -9,7 +9,7 @@ export const HeadWrapper = styled.div`
   cursor: pointer;
 `;
 
-export const CityChange = styled.div`
+export const BackHome = styled.div`
   width: auto;
   height: 36px;
   line-height: 36px;
@@ -17,6 +17,16 @@ export const CityChange = styled.div`
   color: #fff;
   float: left;
   margin-left: 150px;
+`;
+
+export const CityChange = styled.div`
+  width: auto;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  color: #fff;
+  float: left;
+  margin-left: 30px;
   cursor: pointer;
   position: relative;
   &:hover {

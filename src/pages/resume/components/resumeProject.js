@@ -35,7 +35,7 @@ class ResumeProject extends PureComponent {
   render () {
     const { TextArea } = Input;
     return (
-      <ProjectArea>
+      <ProjectArea id="resumeproject">
         <ProjectTitle>项目经验</ProjectTitle>
         <ProjectButton>
           <Button type="dashed" onClick={this.showEdit}>
