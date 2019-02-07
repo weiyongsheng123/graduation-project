@@ -1,0 +1,1 @@
+export const SHOW_OR_HIDE = 'show_or_hide';

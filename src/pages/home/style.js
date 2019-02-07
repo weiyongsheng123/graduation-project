@@ -55,6 +55,10 @@ export const InputArea = styled.div`
     width: 370px !important;
     margin-left: 20px;
     margin-top: 40px;
+    .ant-cascader-picker-label {
+      box-sizing: border-box;
+      padding-right: 20px;
+    }
     .ant-cascader-input {
       width: 370px !important;
       box-sizing: border-box;

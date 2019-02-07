@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { EducateArea, EducateTitle, EducateButton, EducateList, InputDiv, EducateItem, EducateEdit } from '../style';
-import { Button, Input, DatePicker } from 'antd';
+import { Button, Input, DatePicker, Select } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 
 class ResumeEducate extends PureComponent {
@@ -28,6 +28,7 @@ class ResumeEducate extends PureComponent {
   }
   render () {
     const InputGroup = Input.Group;
+    const Option = Select.Option;
     return (
       <EducateArea id="resumeeducate">
         <EducateTitle>教育经历</EducateTitle>
@@ -81,8 +82,18 @@ class ResumeEducate extends PureComponent {
               <Input className="input" name="companyName" placeholder="请输入学校名称" allowClear />
             </InputDiv>
             <InputDiv>
-              <label htmlFor="Educatetime">学历</label>
-              <Input className="input" name="Educatetime" placeholder="请输入学历" allowClear />
+              <label htmlFor="education">学历</label>
+              <Select
+                name="education"
+                showSearch
+                placeholder="请选择学历"
+                optionFilterProp="children"
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="大专">大专</Option>
+                <Option value="本科">本科</Option>
+                <Option value="研究生">研究生</Option>
+              </Select>
             </InputDiv>
             <InputDiv>
               <label htmlFor="Educateduty">专业</label>

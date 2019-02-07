@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { WorkArea, WorkTitle, WorkButton, WorkList, InputDiv, WorkItem, WorkEdit } from '../style';
-import { Button, Input } from 'antd';
+import { Button, Input, Select } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 
 class ResumeWork extends PureComponent {
@@ -39,7 +39,7 @@ class ResumeWork extends PureComponent {
     this.showEdit = this.showEdit.bind(this);
   }
   render () {
-
+    const Option = Select.Option;
     return (
       <WorkArea id="resumework">
         <WorkTitle>工作经验</WorkTitle>
@@ -94,7 +94,17 @@ class ResumeWork extends PureComponent {
             </InputDiv>
             <InputDiv>
               <label htmlFor="worktime">工作时长</label>
-              <Input className="input" name="worktime" placeholder="请输入工作时长" allowClear />
+              <Select
+                name="experience"
+                showSearch
+                placeholder="请选择经验时长"
+                optionFilterProp="children"
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="无经验">无经验</Option>
+                <Option value="3-6个月">3-6个月</Option>
+                <Option value="6个月-1年">6个月-1年</Option>
+              </Select>
             </InputDiv>
             <InputDiv>
               <label htmlFor="workduty">工作职位</label>

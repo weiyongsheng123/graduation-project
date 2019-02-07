@@ -77,8 +77,8 @@ export const InputDiv = styled.div`
     span {
       display: block;
       position: absolute;
-      right: -15px;
-      top: 30px;
+      right: 0px;
+      top: 27px;
     }
   }
   .ant-radio-group {
@@ -505,7 +505,7 @@ export const WorkItem = styled.div`
     color: #d9d9d9;
     cursor: pointer;
     &:hover {
-      color: #1787fb;
+      color: red;
       transition: color 0.3s;
     }
   }
@@ -638,7 +638,7 @@ export const ProjectItem = styled.div`
     color: #d9d9d9;
     cursor: pointer;
     &:hover {
-      color: #1787fb;
+      color: red;
       transition: color 0.3s;
     }
   }
@@ -782,7 +782,7 @@ export const EducateItem = styled.div`
     color: #d9d9d9;
     cursor: pointer;
     &:hover {
-      color: #1787fb;
+      color: red;
       transition: color 0.3s;
     }
   }
@@ -867,7 +867,7 @@ export const DownloadArea = styled.div`
      width: auto;
      margin-right: 50px;
      margin-left: 50px !important;
-     padding-right: 25px;
+     padding-right: 65px;
      box-sizing: border-box;
      height: 50px;
      margin-left: 10px;
@@ -875,9 +875,25 @@ export const DownloadArea = styled.div`
      line-height: 50px;
      overflow: hidden;
      position: relative;
+     &:hover {
+       i {
+         color: #1787fb;
+         transition: color 0.3s;
+       }
+       span {
+         color: red;
+         transition: color 0.3s;
+       }
+     }
      a {
        height: 100%;
+       display: inline-block;
        text-overflow: ellipsis;
+       margin-right: 5px;
+     }
+     i {
+       display: inline-block;
+       cursor: pointer;
      }
      span {
        display: block;

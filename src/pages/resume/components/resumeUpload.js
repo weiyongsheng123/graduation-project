@@ -36,6 +36,7 @@ class ResumeUpload extends PureComponent {
               return (
                 <div className="item" key={item.uploadContent}>
                   <a href={item.uploadHref} download>{item.uploadContent}</a>
+                  <i className="iconfont">&#xe627;</i>
                   <span className="iconfont" onClick={this.delete.bind(this,index)}>&#xe603;</span>
                 </div>
               )
