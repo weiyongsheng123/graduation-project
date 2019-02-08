@@ -262,12 +262,11 @@ export const EditDetail = styled.div`
   width: 550px;
   height: auto;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
   background: #fff;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
   padding-left: 112px;
-  padding-top: 30px;
   position: relative;
   .close {
     position: absolute;
@@ -328,6 +327,7 @@ export const IssueTitle = styled.h3`
     }
     &:hover {
       font-size: 18px;
+      transition: all 0.1s;
     }
   }
 `;

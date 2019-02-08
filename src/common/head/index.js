@@ -41,7 +41,9 @@ class Head extends PureComponent {
        <TelephoneContact>300-154-564</TelephoneContact>
        <RegisterLogin><Link to="/login">登录</Link>|<Link to="/register">注册</Link></RegisterLogin>
        { choice }
-       <RecruitInfo>招聘信息</RecruitInfo>
+       <Link to="/search">
+         <RecruitInfo>招聘信息</RecruitInfo>
+       </Link>
      </HeadWrapper>
     )
   };

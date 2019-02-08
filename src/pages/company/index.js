@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { CompanyWrapper, CompanyContent } from './style';
 import Head from '../../common/head';
+import Suspension from '../../common/suspension';
 import CompanyDesc from './components/companyDesc';
 import CompanyIssue from './components/issueResume';
 import CompanyReserive from './components/reseriveResume';
@@ -18,6 +19,7 @@ class Company extends PureComponent {
           <CompanyReserive/>
         </CompanyContent>
         <AddNewResume/>
+        <Suspension/>
       </CompanyWrapper>
     )
   }
