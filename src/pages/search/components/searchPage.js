@@ -55,7 +55,7 @@ const mapDispatch = (dispatch) => {
       if (number < 1 || number > total) {
         return;
       }
-      dispatch(changePages(number));
+      dispatch(changePages(parseInt(number)));
     },
     changeTotal (list) {
       dispatch(changeTotalPages(list));
