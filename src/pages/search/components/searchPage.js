@@ -22,7 +22,7 @@ class SearchPage extends PureComponent {
           <PageLast onClick={()=>{const newpage = page - 1;changePageOne(newpage,totalPages)}}>上一页</PageLast>
           { item }
           <PageNext onClick={()=>{const newpage = page + 1;changePageOne(newpage,totalPages)}}>下一页</PageNext>
-          <PageTotal>总共20页，到第</PageTotal>
+          <PageTotal>总共{ totalPages }页，到第</PageTotal>
           <PageInput type="number" onChange={this.changeJump.bind(this)}/>
           <PageEnd>页</PageEnd>
           <PageSumbit onClick={()=>{changePageOne(this.state.jump,totalPages)}}>跳转</PageSumbit>
@@ -32,7 +32,7 @@ class SearchPage extends PureComponent {
   };
   changeJump (e) {
     this.setState({
-      jump: e.target.value
+      jump: parseInt(e.target.value)
     })
   }
   componentDidMount () {
@@ -52,10 +52,13 @@ const mapDispatch = (dispatch) => {
       dispatch(changePages(number));
     },
     changePageOne (number, total) {
-      if (number < 1 || number > total) {
-        return;
+      if (number < 1) {
+        number = 1;
       }
-      dispatch(changePages(parseInt(number)));
+      else if (number > total) {
+        number = total;
+      }
+      dispatch(changePages(number));
     },
     changeTotal (list) {
       dispatch(changeTotalPages(list));

@@ -174,7 +174,7 @@ export const DetailItem = styled.li`
     display: block;
     float: left;
     height: 35px;
-    max-width: 300px;
+    max-width: 450px;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 35px;

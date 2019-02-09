@@ -12,7 +12,7 @@ class Header extends PureComponent {
        <HeaderImg src={logoUrl}/>
        <HeaderLine className="left">|</HeaderLine>
        <HeaderPattern>{pattern}</HeaderPattern>
-       <HeaderHelp>帮助中心</HeaderHelp>
+       <Link to="/help"><HeaderHelp>帮助中心</HeaderHelp></Link>
        <HeaderLine className="right">&nbsp;&nbsp;&nbsp;</HeaderLine>
        <Link to="/"><HeaderLogin>首页</HeaderLogin></Link>
      </HeaderWrapper>

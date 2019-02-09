@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { DetailArea, DetailTitle, DetailList, DetailItem } from '../style';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 class SearchDetail extends PureComponent {
 
@@ -30,7 +31,8 @@ class SearchDetail extends PureComponent {
           {
             list.map((item,index)=>{
               return (
-                <DetailItem key={index}>
+                <Link to="/position" key={index}>
+                <DetailItem>
                   <i className="iconfont hover">&#xe6dd;</i>
                   <h4>{item.position}</h4>
                   <p className="companyName"><i className="iconfont">&#xe647;</i>{item.company}</p>
@@ -42,8 +44,9 @@ class SearchDetail extends PureComponent {
                   </p>
                   <p className="salary"><i className="iconfont">&#xe615;</i>{item.salary}</p>
                   <p className="continue">招聘中</p>
-                  <Button type="primary">立即申请</Button>
+                  <Button type="primary" onClick={(e)=>{e.preventDefault()}}>立即申请</Button>
                 </DetailItem>
+                </Link>
               )
             })
           }

@@ -11,6 +11,8 @@ import Home from './pages/home';
 import Resume from './pages/resume';
 import Company from './pages/company';
 import Search from './pages/search';
+import Position from './pages/position';
+import Help from './pages/help';
 import UserProtocol from './pages/register/components/useServiceProtocol';
 import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
@@ -69,6 +71,18 @@ class App extends Component {
               path="/search"
               exact
               component={Search}
+            >
+            </Route>
+            <Route
+              path="/position"
+              exact
+              component={Position}
+            >
+            </Route>
+            <Route
+              path="/help"
+              exact
+              component={Help}
             >
             </Route>
           </div>

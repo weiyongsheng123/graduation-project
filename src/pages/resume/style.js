@@ -268,7 +268,7 @@ export const ResumeNameAreaProfile = styled.div`
       font-style: normal;
       float: left;
       letter-spacing: .97px;
-      line-height: 14px;
+      line-height: 16px;
     }
     .email {
       font-size: 16px;

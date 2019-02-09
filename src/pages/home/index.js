@@ -25,6 +25,9 @@ class Home extends PureComponent {
       </HomeWrapper>
     )
   }
+  componentDidMount () {
+    window.scrollTo( 0, 0);
+  }
 };
 
 export default Home;

@@ -21,6 +21,9 @@ class Search extends PureComponent {
       </SearchWrapper>
     )
   }
+  componentDidMount () {
+    window.scrollTo( 0, 0);
+  }
 };
 
 export default Search;

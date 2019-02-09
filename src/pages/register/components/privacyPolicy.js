@@ -72,6 +72,9 @@ class UseServiceProtocol extends PureComponent {
       </ServiceWrapper>
     )
   }
+  componentDidMount () {
+    window.scrollTo(0, 0);
+  }
 };
 
 const mapState = (state) => ({
