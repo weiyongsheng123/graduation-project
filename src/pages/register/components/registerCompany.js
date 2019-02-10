@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { RegisterDiv, AnimateArea, AnimatePart, InputH3, InputSpan, InputDiv, InputSubmit, IdentWContainer, BackLogin } from '../style';
+import { RegisterDiv, AnimateArea, AnimatePart, InputH3, InputSpan, InputDiv, InputSubmit, IdentContainer, BackLogin } from '../style';
 import { Input, Button, Icon, Checkbox } from 'antd';
 import Ident from '../../../common/identCode';
 import { CSSTransition } from 'react-transition-group';
@@ -124,9 +124,9 @@ class RegistrationForm extends PureComponent {
            <InputDiv>
              <label htmlFor="captcha">验证码</label>
              <Input className="input captcha" name="captcha" placeholder="请输入验证码" allowClear />
-             <IdentWContainer>
+             <IdentContainer>
                <Ident className="ident"/>
-             </IdentWContainer>
+             </IdentContainer>
            </InputDiv>
            <Checkbox className='checkRead'>
              我已阅读

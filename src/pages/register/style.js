@@ -242,7 +242,7 @@ export const InputSubmit = styled.div`
   }
 `;
 
-export const IdentWContainer = styled.div`
+export const IdentContainer = styled.div`
   display: inline-block;
   width: 105px;
   height: 32px;

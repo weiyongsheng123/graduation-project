@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { HelpWrapper } from './style';
 import Header from '../../common/header';
+import HelpHead from './components/helpHead';
+import HelpPassword from './components/helpPassword';
+import HelpInfo from './components/helpInfo';
 
 class Help extends PureComponent {
 
@@ -8,6 +11,9 @@ class Help extends PureComponent {
     return (
       <HelpWrapper>
         <Header/>
+        <HelpHead/>
+        <HelpPassword/>
+        <HelpInfo/>
       </HelpWrapper>
     )
   }
