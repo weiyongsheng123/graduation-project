@@ -3,6 +3,7 @@ import { ScrollTop, Suggest } from './style';
 import { connect } from 'react-redux';
 import { changeSuspension } from './store/actionCreators';
 import { Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
 
 class Suspension extends PureComponent {
 
@@ -19,7 +20,9 @@ class Suspension extends PureComponent {
                       <ScrollTop onClick={this.handleScrollTop}><i className="iconfont">&#xe732;</i></ScrollTop>
                     </Tooltip>
                     <Tooltip placement="left" title={suggest}>
-                      <Suggest><i className="iconfont">&#xe614;</i></Suggest>
+                      <Link to="/feedback">
+                        <Suggest><i className="iconfont">&#xe614;</i></Suggest>
+                      </Link>
                     </Tooltip>
                   </div>
                   : null

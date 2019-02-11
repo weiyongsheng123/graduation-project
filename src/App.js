@@ -13,6 +13,7 @@ import Company from './pages/company';
 import Search from './pages/search';
 import Position from './pages/position';
 import Help from './pages/help';
+import Feedback from './pages/feedback';
 import UserProtocol from './pages/register/components/useServiceProtocol';
 import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
@@ -83,6 +84,12 @@ class App extends Component {
               path="/help"
               exact
               component={Help}
+            >
+            </Route>
+            <Route
+              path="/feedback"
+              exact
+              component={Feedback}
             >
             </Route>
           </div>

@@ -14,7 +14,7 @@ export const InputDiv = styled.div`
     font-weight: 600;
     display: inline-block;
     width: 84px;
-    color: #9fadc6;
+    color: #666;
     vertical-align: middle;
   }
   &.chooseMany {

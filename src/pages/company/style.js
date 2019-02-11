@@ -8,7 +8,7 @@ export const InputDiv = styled.div`
   height: 56px;
   width: 324px;
   overflow: hidden;
-  margin-top: 25px;
+  margin-top: 18px;
   &.center {
     margin-left: 324px;
   }
@@ -20,23 +20,13 @@ export const InputDiv = styled.div`
     text-align: right;
     box-sizing: border-box;
     padding-right: 5px;
-    color: #9fadc6;
+    color: #666;
     vertical-align: middle;
   }
-  &.chooseMany {
-    height: auto;
-    .ant-checkbox-group {
-      box-sizing: border-box;
-      padding-left: 20px;
-    }
-    .ant-radio-group {
-      box-sizing: border-box;
-      padding-left: 25px;
-    }
-    textarea {
-      width: 229px;
-      vertical-align: middle;
-    }
+  .file {
+    height: 54px;
+    line-height: 50px;
+    border-radius: 50%;
   }
   .ant-input-group-compact {
     width: 229px !important;
@@ -115,16 +105,40 @@ export const InputDiv = styled.div`
       }
     }
   }
-  .file {
-    height: 54px;
-    line-height: 50px;
-    border-radius: 50%;
-  }
   .ant-btn {
     width: 117px;
     height: 54px;
     line-height: 54px;
     margin-left: 30px;
+  }
+  &.less {
+    height: 30px;
+    label {
+      height: 30px;
+      line-height: 30px;
+      vertical-align: top;
+    }
+    .file {
+      width: 195px;
+      height: 30px;
+      line-height: 24px;
+      margin-left: 30px;
+    }
+  }
+  &.chooseMany {
+    height: auto;
+    .ant-checkbox-group {
+      box-sizing: border-box;
+      padding-left: 20px;
+    }
+    .ant-radio-group {
+      box-sizing: border-box;
+      padding-left: 25px;
+    }
+    textarea {
+      width: 229px;
+      vertical-align: middle;
+    }
   }
 `;
 

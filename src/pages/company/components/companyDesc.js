@@ -62,6 +62,10 @@ class CompanyDesc extends PureComponent {
                 <label htmlFor="companyRange">规模类别</label>
                 <Input className="input" name="companyRange" placeholder="请输入人数及私/国企" allowClear />
               </InputDiv>
+              <InputDiv className="less">
+                <label htmlFor="file">头像</label>
+                <input className="file" type="file" name="file"/>
+              </InputDiv>
               <InputDiv className="chooseMany">
                 <label htmlFor="companyDesc">简介</label>
                 <TextArea rows={4} name="companyDesc" placeholder="请输入对公司的简介"/>

@@ -20,6 +20,7 @@ export const HeadArea = styled.h1`
     font-size: 35px;
     margin-right: 5px;
     color: #FFDD55;
+    margin-left: -15px;
   }
 `;
 
