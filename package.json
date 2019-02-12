@@ -2,8 +2,10 @@
   "name": "recruit",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:85",
   "dependencies": {
     "antd": "^3.13.0",
+    "axios": "^0.18.0",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

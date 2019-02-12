@@ -6,6 +6,7 @@ const defaultState = fromJS({
   rotate: [],
   fz: [],
   color: [],
+  code: [],
   refresh: false
 });
 
@@ -17,6 +18,7 @@ export default (state = defaultState,action) => {
         rotate: action.data.get('rotate'),
         fz: action.data.get('fz'),
         color: action.data.get('color'),
+        code: action.code,
         refresh: action.refresh
       });
     case CHANGE_REFRESH:

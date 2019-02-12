@@ -3,19 +3,22 @@ import { RegisterDiv, InputArea, RegisterTitle, RegisterForm, BackLogin } from '
 import {
   Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button,
 } from 'antd';
+import { connect } from 'react-redux';
 import Ident from '../../../common/identCode';
 import { Link } from 'react-router-dom';
+import { submitApplice } from '../store/actionCreators';
 
 class RegistrationForm extends PureComponent {
   state = {
-    confirmDirty: false
+    confirmDirty: false,
+    codeStr: ''
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.submit(values);
       }
     });
   }
@@ -36,13 +39,22 @@ class RegistrationForm extends PureComponent {
 
   validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
+    
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
   }
 
+  validateToCaptcha = (rule, value, callback) => {
+    if (value === this.state.codeStr) {
+      callback();
+    }
+    callback('验证码错误');
+  }
+
   render () {
+
    const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
     const formItemLayout = {
@@ -104,7 +116,9 @@ class RegistrationForm extends PureComponent {
                 {getFieldDecorator('password', {
                   rules: [{
                     required: true, message: '请输入你的密码！',
-                  }, {
+                  },{
+                    min: 6, message: '请输入六位以上密码！',
+                  },{
                     validator: this.validateToNextPassword,
                   }],
                 })(
@@ -136,8 +150,12 @@ class RegistrationForm extends PureComponent {
                   </span>
                 )}
               >
-                {getFieldDecorator('nickname', {
-                  rules: [{ required: true, message: '请输入你的称呼', whitespace: true }],
+                {getFieldDecorator('name', {
+                  rules: [{
+                   required: true, message: '请输入你的称呼',
+                   },{
+                   whitespace: true, message: '不允许空格',
+                   }],
                 })(
                   <Input />
                 )}
@@ -146,7 +164,7 @@ class RegistrationForm extends PureComponent {
                 {...formItemLayout}
                 label="手机号码"
               >
-                {getFieldDecorator('phone', {
+                {getFieldDecorator('telNumber', {
                   rules: [{ required: true, message: '请输入你的手机号!' }],
                 })(
                   <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
@@ -161,7 +179,11 @@ class RegistrationForm extends PureComponent {
                 <Row gutter={8}>
                   <Col span={12}>
                     {getFieldDecorator('captcha', {
-                      rules: [{ required: true, message: '请输入你的验证码' }],
+                      rules: [{
+                        required: true, message: '请输入你的验证码'
+                        },{
+                        validator: this.validateToCaptcha,
+                      }],
                     })(
                       <Input />
                     )}
@@ -174,9 +196,10 @@ class RegistrationForm extends PureComponent {
               <Form.Item className="decreaseMargin" {...tailFormItemLayout}>
                 {getFieldDecorator('agreement', {
                   valuePropName: 'checked',
+                  rules: [{ required: true, message: '请阅读后确认同意协议' }],
                 })(
                   <Checkbox>
-                    我已阅读
+                    我同意
                     <Link to="/register/userProtocol">
                     <p className="inline">用户服务协议</p>
                     </Link>
@@ -199,7 +222,41 @@ class RegistrationForm extends PureComponent {
       </RegisterDiv>
     )
   }
+  componentDidMount () {
+    var strCaptcha = '';
+    const newArray = this.props.code.toJS();
+    for (let i = 0; i<newArray.length; i++) {
+      strCaptcha = strCaptcha + newArray[i];
+    }
+    this.setState({
+      codeStr: strCaptcha
+    })
+  }
+  componentDidUpdate () {
+    var strCaptcha = '';
+    const newArray = this.props.code.toJS();
+    for (let i = 0; i<newArray.length; i++) {
+      strCaptcha = strCaptcha + newArray[i];
+    }
+    this.setState({
+      codeStr: strCaptcha
+    })
+  }
 };
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
-export default WrappedRegistrationForm;
+
+
+const mapState = (state) => ({
+  code: state.getIn(['ident','code'])
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+    submit (values) {
+      dispatch(submitApplice(values));
+    }
+  }
+}
+
+export default connect(mapState,mapDispatch)(WrappedRegistrationForm);

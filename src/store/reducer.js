@@ -7,6 +7,7 @@ import { reducer as loginReducer } from '../pages/login/store';
 import { reducer as homeReducer } from '../pages/home/store';
 import { reducer as companyReducer } from '../pages/company/store';
 import { reducer as searchReducer } from '../pages/search/store';
+import { reducer as registerReducer } from '../pages/register/store';
 
 export default combineReducers({
   ident: identReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   home: homeReducer,
   suspension: suspensionReducer,
   company: companyReducer,
-  search: searchReducer
+  search: searchReducer,
+  register: registerReducer
 })

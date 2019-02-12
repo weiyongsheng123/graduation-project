@@ -60,7 +60,7 @@ getRandom(max, min, num) {
     for(let i = 0; i < num; i++){
       arr.push(this.getRandom(max, min))
     }
-    return arr
+    return arr;
   };
 
 componentDidMount () {
@@ -79,7 +79,12 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => {
   return {
     changeCode (data,refresh) {
-      dispatch(getCode(data,refresh));
+      const code = [];
+      for (let i = 0 ; i < data.data.length ; i++ ) {
+        let item = data.data[i];
+        code.push(String.fromCharCode(item > 57 && item < 84 ? item + 7 : ( item < 57 ? item : item + 13 )))
+      }
+      dispatch(getCode(data,code,refresh));
     },
     changeFresh (show) {
       dispatch(getFresh(show))

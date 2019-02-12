@@ -73,6 +73,7 @@ export const RegisterForm = styled.div`
   }
   .inline {
     display: inline-block;
+    margin-bottom: 0;
   }
 `;
 
