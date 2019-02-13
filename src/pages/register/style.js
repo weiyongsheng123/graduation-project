@@ -106,44 +106,67 @@ export const AnimatePart = styled.div`
   left: 10px;
   box-shadow: 0 0 30px #ddd;
   border-radius: 3px;
+  display: none;
+  &:first-of-type {
+    display: block;
+  }
   &.fade-enter {
+    display: block;
     left: 590px;
   }
   &.fade-enter-active {
+    display: block;
     transition: all 1s ease-out;
     left: 10px;
   }
   &.fade-enter-done {
     left: 10px;
+    display: block;
   }
   &.fade-exit {
     left: 10px;
+    display: block;
   }
   &.fade-exit-active {
     left: -590px;
+    display: block;
     transition: all 1s ease-out;
   }
   &.fade-exit-done {
     left: -590px;
+    display: none;
   }
   .checkRead {
     width: 400px;
     height: 54px;
+    position: relative;
     .ant-checkbox-wrapper {
       width: 180px;
     }
     .inline {
       display: inline-block;
     }
+    .warning {
+      display: block;
+      width: 180px;
+      height: 20px;
+      line-height: 20px;
+      color: red;
+      position: absolute;
+      top: 24px;
+      left: 10px;
+    }
   }
 `;
 
 export const InputH3 = styled.h3`
   margin: auto;
-  width: 560px;
+  width: 620px;
   height: 59px;
   border-bottom: 1px solid #f0f0f0;
   margin-bottom: 15px;
+  box-sizing: border-box;
+  padding-left: 30px;
   display: block;
   font-size: 12px;
   font-weight: 400;
@@ -165,6 +188,10 @@ export const InputSpan = styled.span`
     border-bottom: 3px solid #1a8afa;
     height: 34px;
   }
+  .iconfont {
+    color: red;
+    margin-right: 3px;
+  }
 `;
 
 export const InputDiv = styled.div`
@@ -177,8 +204,8 @@ export const InputDiv = styled.div`
   padding-top: 9px;
   box-sizing: border-box;
   width: 400px;
-  overflow: hidden;
   margin-bottom: 20px;
+  position: relative;
   &.second {
     margin-top: 10px;
   }
@@ -201,10 +228,10 @@ export const InputDiv = styled.div`
     input {
       width: 100%;
       padding-right: 15px !important;
-      padding-left: 10px !important;
+      padding-left: 20px !important;
       font-size: 16px;
       line-height: 1.1;
-      color: #333 !important;
+      color: gray !important;
       border: 0;
       outline: none !important;
       box-sizing: border-box;
@@ -215,17 +242,28 @@ export const InputDiv = styled.div`
         border-radius: 0;
       }
     }
-    span {
+    .ant-input-suffix {
       display: block;
       position: absolute;
       right: -15px;
       top: 25px;
     }
   }
+  .warning {
+    display: block;
+    width: 150px;
+    height: 20px;
+    line-height: 20px;
+    color: red;
+    position: absolute;
+    top: 55px;
+    left: 100px;
+  }
 `;
 
 export const InputSubmit = styled.div`
   width: 402px;
+  position: relative;
   .ant-btn-group {
     width: 400px;
     height: 43px;
@@ -240,6 +278,16 @@ export const InputSubmit = styled.div`
       width: 200px;
       height: 43px;
     }
+  }
+  .checkout {
+    display: block;
+    width: 180px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 0px;
+    left: 112px;
+    color: red;
   }
 `;
 

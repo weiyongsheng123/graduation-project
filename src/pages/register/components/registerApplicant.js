@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import { connect } from 'react-redux';
 import Ident from '../../../common/identCode';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { submitApplice } from '../store/actionCreators';
 
 class RegistrationForm extends PureComponent {
@@ -54,7 +54,8 @@ class RegistrationForm extends PureComponent {
   }
 
   render () {
-
+   const { applicant } = this.props;
+   const redirect = applicant ? <Redirect to="/login"></Redirect> : null;
    const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
     const formItemLayout = {
@@ -219,6 +220,7 @@ class RegistrationForm extends PureComponent {
             <BackLogin>已有账号，立即登录</BackLogin>
           </Link>
         </InputArea>
+        { redirect }
       </RegisterDiv>
     )
   }
@@ -248,7 +250,8 @@ const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationFo
 
 
 const mapState = (state) => ({
-  code: state.getIn(['ident','code'])
+  code: state.getIn(['ident','code']),
+  applicant: state.getIn(['register','applicantRegiste'])
 });
 
 const mapDispatch = (dispatch) => {
