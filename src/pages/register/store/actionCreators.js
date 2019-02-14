@@ -19,7 +19,8 @@ export const submitApplice = (values) => {
       url: '/addApplice.php',
       data: qs.stringify({
         name: values.name,
-        telNumber: values.prefix + '-' + values.telNumber,
+        prefix: values.prefix,
+        telNumber: values.telNumber,
         email: values.email,
         password: values.password
       })

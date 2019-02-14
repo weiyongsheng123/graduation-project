@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, TelephoneContact } from './style';
+import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, TelephoneContact, HeadQuit } from './style';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
@@ -7,14 +7,22 @@ import { changeShow, changeCity } from './store/actionCreators';
 class Head extends PureComponent {
 
   render () {
-   const { pattern, isShow, nowCity } = this.props;
-   let choice = null;
-   const { showCityList, setCity } = this.props;
-   if (pattern === '求职者端') {
-     choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
-   }
-   else {
-     choice = <Link to="/company"><CompanyServer>企业服务</CompanyServer></Link>;
+    const { pattern, isShow, nowCity, loginOrNot, phoneNumber } = this.props;
+    let choice = null;
+    let loginRegister = null;
+    const { showCityList, setCity } = this.props;
+    if (loginOrNot) {
+      loginRegister = <HeadQuit>登出</HeadQuit>;
+      if (pattern === '求职者端') {
+        choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
+      }
+      else {
+        choice = <Link to="/company"><CompanyServer>企业服务</CompanyServer></Link>;
+      }
+    }
+    else {
+      loginRegister = <RegisterLogin><Link to="/login">登录</Link>&nbsp;|&nbsp;<Link to="/register">注册</Link></RegisterLogin>;
+      choice = null;
    }
     return (
      <HeadWrapper>
@@ -38,8 +46,8 @@ class Head extends PureComponent {
                     </CityChoose> : null
          }
        </CityChange>
-       <TelephoneContact>300-154-564</TelephoneContact>
-       <RegisterLogin><Link to="/login">登录</Link>|<Link to="/register">注册</Link></RegisterLogin>
+       <TelephoneContact>{ phoneNumber }</TelephoneContact>
+       { loginRegister }
        { choice }
        <Link to="/search">
          <RecruitInfo>招聘信息</RecruitInfo>
@@ -52,7 +60,9 @@ class Head extends PureComponent {
 const mapState = (state) => ({
   pattern: state.getIn(['header','pattern']),
   isShow: state.getIn(['head','cityListShow']),
-  nowCity: state.getIn(['head','nowCity'])
+  nowCity: state.getIn(['head','nowCity']),
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  phoneNumber: state.getIn(['login','telephonenumber'])
 });
 
 const mapDispatch = (dispatch) => {

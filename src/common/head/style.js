@@ -179,3 +179,18 @@ export const TelephoneContact = styled.div`
       transition: color 0.3s;
     }
 `;
+
+export const HeadQuit = styled.div`
+  width: 33px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  color: #fff;
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+  &:hover {
+      color: yellow;
+      transition: color 0.3s;
+    }
+`;

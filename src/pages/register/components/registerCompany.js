@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { submitCompany } from '../store/actionCreators';
 
 class RegistrationForm extends PureComponent {
- constructor (props) {
+  constructor (props) {
       super(props);
       this.state = {
        fade: 1,

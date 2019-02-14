@@ -138,6 +138,7 @@ export const InputRemerber = styled.div`
 
 export const InputSubmit = styled.div`
   width: 326px;
+  position: relative;
   button {
     margin-left: 16px;
     width: 324px;
@@ -149,6 +150,18 @@ export const InputSubmit = styled.div`
     font-size: 18px;
     text-align: center;
     cursor: pointer;
+  }
+  .warning {
+    position: absolute;
+    left: 16px;
+    top: 0px;
+    color: red;
+    display: block;
+    width: 324px;
+    text-align: center;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
   }
 `;
 
@@ -169,11 +182,14 @@ export const InputForget = styled.div`
 `;
 
 export const TelephoneShow = styled.div`
-  width: 300px;
+  clear: both;
+  width: 100%;
   font-size: 20px;
   line-height: 1.0;
-  height: 40px;
-  position: fixed;
-  right: 10px;
-  bottom: 16px;
+  overflow: hidden;
+  height: 50px;
+  text-align: right;
+  box-sizing: border-box;
+  padding-right: 30px;
+  padding-top: 30px;
 `;
