@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Header from '../../common/header';
+import Ajax from '../../common/ajax';
 import Show from './components/show';
 import LoginInput from './components/loginInput';
 import Telephone from './components/telephone';
 import { LoginWrapper } from './style';
+import { changeApplicantRegiste, changeCompanyRegiste } from '../register/store/actionCreators';
 
 class Login extends PureComponent {
 
@@ -14,9 +17,22 @@ class Login extends PureComponent {
         <Show/>
         <LoginInput/>
         <Telephone/>
+        <Ajax/>
       </LoginWrapper>
     )
   }
+  componentDidMount () {
+    this.props.revise();
+  }
 };
 
-export default Login;
+const mapDispatch= (dispatch) => {
+  return {
+    revise () {
+      dispatch(changeApplicantRegiste(false));
+      dispatch(changeCompanyRegiste(false));
+    }
+  }
+}
+
+export default connect(null,mapDispatch)(Login);

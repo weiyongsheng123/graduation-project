@@ -7,6 +7,8 @@ import AdvertiseMent from './components/advertisement';
 import NewRecruit from './components/newRecruit';
 import Suspension from '../../common/suspension';
 import SomethingElse from './components/somethingElse';
+import { changeFeedBackSuccess } from '../feedback/store/actionCreators';
+import { connect } from 'react-redux';
 
 class Home extends PureComponent {
 
@@ -27,7 +29,20 @@ class Home extends PureComponent {
   }
   componentDidMount () {
     window.scrollTo( 0, 0);
+    this.props.revise();
   }
 };
 
-export default Home;
+const mapState = (state) => ({
+  
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+    revise () {
+      dispatch(changeFeedBackSuccess(false));
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(Home);

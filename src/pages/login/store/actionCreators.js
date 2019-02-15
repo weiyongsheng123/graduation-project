@@ -1,7 +1,8 @@
-import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO } from './actionTypes';
+import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { fromJS } from 'immutable';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 export const changeWarn = (value) => ({
   type: CHANGE_WARN_INFO,
@@ -18,6 +19,10 @@ const importData1 = (array) => ({
   array: fromJS(array)
 });
 
+export const clearAndQuit = () => ({
+  type: CLEAR_AND_QUIT
+});
+
 export const checkAccount = (values,pattern) => {
   return (dispatch) => {
     axios({
@@ -27,6 +32,7 @@ export const checkAccount = (values,pattern) => {
     })
     .then((res) => {
       const data = res.data;
+      dispatch(changeAjax(false));
       if (data === 1) {
         dispatch(changeWarn("密码错误"));
       }

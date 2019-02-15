@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { submitCompany } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class RegistrationForm extends PureComponent {
   constructor (props) {
@@ -257,6 +258,7 @@ class RegistrationForm extends PureComponent {
     }
     if(sub) {
       this.props.submit(this.state.values);
+      this.props.ajaxSend();
     }
     else {
       this.setState({
@@ -418,6 +420,9 @@ const mapDispatch = (dispatch) => {
   return {
     submit (values) {
       dispatch(submitCompany(values));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
     }
   }
 }

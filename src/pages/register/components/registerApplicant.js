@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Ident from '../../../common/identCode';
 import { Link, Redirect } from 'react-router-dom';
 import { submitApplice } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class RegistrationForm extends PureComponent {
   state = {
@@ -19,6 +20,7 @@ class RegistrationForm extends PureComponent {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.submit(values);
+        this.props.ajaxSend();
       }
     });
   }
@@ -258,6 +260,9 @@ const mapDispatch = (dispatch) => {
   return {
     submit (values) {
       dispatch(submitApplice(values));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
     }
   }
 }

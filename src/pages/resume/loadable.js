@@ -17,5 +17,4 @@ const LoadableComponent = Loadable({
   return <Loading/>
  }  //返回的是临时组件，用在加载时显示
 });
-
 export default () => <LoadableComponent/>

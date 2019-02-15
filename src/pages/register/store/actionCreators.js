@@ -1,6 +1,7 @@
 import { CHANGE_APPLICANT_REGISTE, CHANGE_COMPANY_REGISTE } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 export const changeApplicantRegiste = (res) => ({
   type: CHANGE_APPLICANT_REGISTE,
@@ -27,6 +28,7 @@ export const submitApplice = (values) => {
     })
     .then((res) => {
       dispatch(changeApplicantRegiste(true));
+      dispatch(changeAjax(false));
     })
     .catch((res) => {
       console.log("传递失败");
@@ -50,6 +52,7 @@ export const submitCompany = (values) => {
     })
     .then((res) => {
       dispatch(changeCompanyRegiste(true));
+      dispatch(changeAjax(false));
     })
     .catch((res) => {
       console.log("传递失败");

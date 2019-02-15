@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO } from './actionTypes';
+import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT } from './actionTypes';
 
 const defaultState = fromJS({
   telephonenumber: '0554-231-667',
@@ -26,6 +26,12 @@ export default (state = defaultState,action) => {
       return state.merge({
         jobSeek: action.array,
         loginOrNot: true
+      });
+    case CLEAR_AND_QUIT:
+      return state.merge({
+        jobSeek: { },
+        company: { },
+        loginOrNot: false
       });
     default:
       return state;

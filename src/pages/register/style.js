@@ -1,5 +1,32 @@
 import styled from 'styled-components';
 
+export const LoadImgArea = styled.div`
+  width: 100%;
+  height: 600px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+`;
+
+export const LoadImg = styled.img`
+  display: block;
+  width: 400px;
+  height: 350px;
+  margin: auto;
+  margin-top: 50px;
+`;
+
+export const LoadTitle = styled.h2`
+  width: 300px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+`;
+
 export const RegisterWrapper = styled.div`
   overflow: hidden;
 `;

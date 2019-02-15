@@ -3,6 +3,7 @@ import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServ
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
+import { clearAndQuit } from "../../pages/login/store/actionCreators";
 
 class Head extends PureComponent {
 
@@ -12,7 +13,7 @@ class Head extends PureComponent {
     let loginRegister = null;
     const { showCityList, setCity } = this.props;
     if (loginOrNot) {
-      loginRegister = <HeadQuit>登出</HeadQuit>;
+      loginRegister = <HeadQuit onClick={this.quitLogin.bind(this)}>登出</HeadQuit>;
       if (pattern === '求职者端') {
         choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
       }
@@ -55,6 +56,9 @@ class Head extends PureComponent {
      </HeadWrapper>
     )
   };
+  quitLogin () {
+    this.props.quitAccount();
+  }
 };
 
 const mapState = (state) => ({
@@ -68,11 +72,14 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => {
   return {
     showCityList (show) {
-      dispatch(changeShow(show))
+      dispatch(changeShow(show));
     },
     setCity (show,e) {
       dispatch(changeShow(show));
-      dispatch(changeCity(e.target.innerHTML))
+      dispatch(changeCity(e.target.innerHTML));
+    },
+    quitAccount () {
+      dispatch(clearAndQuit());
     }
   }
 }

@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { ImgShow, Img } from '../style';
-import personLogin from '../../../statics/personLogin.png';
-import companyLogin from '../../../statics/companyLogin.png';
 
 class Show extends PureComponent {
   
@@ -10,10 +8,10 @@ class Show extends PureComponent {
     const { pattern } = this.props;
     let img = null;
     if (pattern === '求职者端') {
-      img = <Img src={ personLogin }/>
+      img = <Img src="./files/personLogin.png"/>
     }
     else {
-      img = <Img src={ companyLogin }/>
+      img = <Img src="./files/companyLogin.png"/>
     }
     return (
       <ImgShow>

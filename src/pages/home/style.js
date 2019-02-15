@@ -1,5 +1,32 @@
 import styled from 'styled-components';
 
+export const LoadImgArea = styled.div`
+  width: 100%;
+  height: 600px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+`;
+
+export const LoadImg = styled.img`
+  display: block;
+  width: 400px;
+  height: 350px;
+  margin: auto;
+  margin-top: 50px;
+`;
+
+export const LoadTitle = styled.h2`
+  width: 300px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+`;
+
 export const HomeWrapper = styled.div`
   overflow: hidden;
   background: #f4f6f9;
@@ -139,7 +166,6 @@ export const AdvertiseMent = styled.div `
   height: auto;
   margin-bottom: 30px;
   box-shadow: 0 0 30px #eee;
-  background: #fff;
   margin: auto;
 `;
 
@@ -147,7 +173,7 @@ export const AdvertiseItem = styled.a`
   display: block;
   width: 100%;
   height: 80px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   background: url(${(props) => props.imgUrl});
   background-size: 100% 100%;
   background-repeat: no-repeat;

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../common/header';
+import Ajax from '../../common/ajax';
 import Advertbackground from './components/advertBackground';
 import RegisterApplicant from './components/registerApplicant';
 import RegisterCompany from './components/registerCompany';
@@ -9,6 +10,7 @@ import { RegisterWrapper } from './style';
 class Register extends PureComponent {
 
   render () {
+    console.log("bbb");
     const { pattern } = this.props;
     let register = null;
     if(pattern==='求职者端'){
@@ -22,6 +24,7 @@ class Register extends PureComponent {
         <Header/>
         <Advertbackground/>
         {register}
+        <Ajax/>
       </RegisterWrapper>
     )
   }

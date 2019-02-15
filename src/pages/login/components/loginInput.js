@@ -5,6 +5,7 @@ import { changeHeaderPattern } from '../../../common/header/store/actionCreators
 import { Input, Button, Checkbox } from 'antd';
 import { Link, Redirect } from 'react-router-dom';
 import { checkAccount, changeWarn } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class LoginInput extends PureComponent {
   constructor (props) {
@@ -59,11 +60,12 @@ class LoginInput extends PureComponent {
   }
   submit (pattern) {
     const { account, password } = this.state;
+    const { changeWarning, check, ajaxSend } = this.props;
     if (!account || !password) {
-      this.props.changeWarning("请填入账号及密码");
+      changeWarning("请填入账号及密码");
     }
     else {
-      this.props.changeWarning("");
+      changeWarning("");
       var re =/@/g;
       let type = '';
       if(account.search(re) !== -1){
@@ -78,7 +80,8 @@ class LoginInput extends PureComponent {
         type: type,
         pattern: pattern
       }
-      this.props.check(values,pattern);
+      check(values,pattern);
+      ajaxSend();
     }
   }
   handleChange (e) {
@@ -112,6 +115,9 @@ const mapDispatch = (dispatch) => {
     },
     changeWarning (value) {
       dispatch(changeWarn(value));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
     }
   }
 }
