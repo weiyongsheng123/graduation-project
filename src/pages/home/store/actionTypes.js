@@ -1,0 +1,1 @@
+export const ADD_POSITION_LIST = 'add_position_list';

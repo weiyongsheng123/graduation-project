@@ -13,7 +13,6 @@ class RegistrationForm extends PureComponent {
       super(props);
       this.state = {
        fade: 1,
-       refresh: true,
        values: {
          CompanyName: '',
          RecruitArea: '',
@@ -248,10 +247,10 @@ class RegistrationForm extends PureComponent {
     )
   }
   submit () {
-    const condition = this.state.condition;
+    const newCondition = {...this.state.condition};
     let sub = true;
-    for(let item in condition) {
-      if (condition[item] !== 1) {
+    for(let item in newCondition) {
+      if (newCondition[item] !== 1) {
         sub = false;
         break;
       }
@@ -270,11 +269,10 @@ class RegistrationForm extends PureComponent {
     const value = e.target.value;
     var strCaptcha = '';
     const newArray = this.props.code.toJS();
-    const refresh = this.state.refresh;
     for (let i = 0; i<newArray.length; i++) {
       strCaptcha = strCaptcha + newArray[i];
     }
-    const newCondition = this.state.condition;
+    const newCondition = {...this.state.condition};
     if (value === strCaptcha) {
       newCondition['Captcha'] = 1;
     }
@@ -282,15 +280,13 @@ class RegistrationForm extends PureComponent {
       newCondition['Captcha'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handleResure (e) {
     const value = e.target.value;
     const password = this.state.values.Password;
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = {...this.state.condition};
     if (value === password) {
       newCondition['ResurePassword'] = 1;
     }
@@ -298,15 +294,13 @@ class RegistrationForm extends PureComponent {
       newCondition['ResurePassword'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handlePassword (e) {
     const value = e.target.value;
     var re = /[a-z0-9]{6,25}/g;
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = {...this.state.condition};
     if (re.test(value)) {
       newCondition['Password'] = 1;
     }
@@ -314,15 +308,13 @@ class RegistrationForm extends PureComponent {
       newCondition['Password'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handlePhone (e) {
     const value = e.target.value;
     var re = /\d{7,13}/g;
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = this.state.condition
     if (re.test(value)) {
       newCondition['PhoneNumber'] = 1;
     }
@@ -330,15 +322,13 @@ class RegistrationForm extends PureComponent {
       newCondition['PhoneNumber'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handleRequired (e) {
     const value = e.target.value;
     const name = e.target.name;
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = {...this.state.condition};
     if (value) {
       newCondition[name] = 1;
     }
@@ -346,15 +336,13 @@ class RegistrationForm extends PureComponent {
       newCondition[name] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handleEmail (e) {
     const value = e.target.value;
     var re = /^\w+@[0-9a-z]+\.[a-z]+$/g;
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = {...this.state.condition};
     if (re.test(value)) {
       newCondition['Email'] = 1;
     }
@@ -362,18 +350,16 @@ class RegistrationForm extends PureComponent {
       newCondition['Email'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handleChecked (e) {
-    const newArray = this.state.values;
+    const newArray = {...this.state.values};
     newArray['CheckRead'] = e.target.checked;
     this.setState({
       values: newArray
     });
-    const newCondition = this.state.condition;
-    const refresh = this.state.refresh;
+    const newCondition = {...this.state.condition};
     if (e.target.checked) {
       newCondition['CheckRead'] = 1;
     }
@@ -381,13 +367,12 @@ class RegistrationForm extends PureComponent {
       newCondition['CheckRead'] = 2;
     }
     this.setState({
-      condition: newCondition,
-      refresh: !refresh
+      condition: newCondition
     })
   }
   handleChange (e) {
     const name = e.target.name;
-    const newArray = this.state.values;
+    const newArray = {...this.state.values};
     newArray[name] = e.target.value;
     this.setState({
       values: newArray

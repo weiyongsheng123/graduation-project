@@ -44,4 +44,13 @@ export const GlobalStyle = createGlobalStyle `
    border-collapse: collapse;
    border-spacing: 0;
   }
+  body {
+    .ant-cascader-menus {
+      background: transparent;
+      .ant-cascader-menu {
+        height: auto;
+        background: #fff;
+      }
+    }
+  }
 `;

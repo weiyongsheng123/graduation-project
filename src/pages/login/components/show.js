@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { ImgShow, Img } from '../style';
 
 class Show extends PureComponent {
-  
+  constructor (props) {
+    super(props);
+    this.state = {
+      
+    };
+  }
   render () {
     const { pattern } = this.props;
     let img = null;

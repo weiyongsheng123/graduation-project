@@ -9,11 +9,11 @@ import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class LoginInput extends PureComponent {
   constructor (props) {
-      super(props);
-      this.state = {
-        account: '',
-        password: ''
-     };
+    super(props);
+    this.state = {
+      account: '',
+      password: ''
+   };
   }
   render () {
     const { changePattern, pattern, warn, loginOrNot } = this.props;

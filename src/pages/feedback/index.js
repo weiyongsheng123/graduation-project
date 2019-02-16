@@ -19,7 +19,6 @@ class Feedback extends PureComponent {
     }
   }
   render () {
-    console.log("ccc");
     const { TextArea } = Input;
     const { checkTitle, checkContent } = this.state;
     const { loginOrNot, feedbackSuccess } = this.props;

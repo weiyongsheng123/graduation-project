@@ -4,36 +4,15 @@ import { connect } from 'react-redux';
 import {
   Input, Select, Button, Cascader
 } from 'antd';
+import { getPosition } from '../store/actionCreators';
 
 class InputSearch extends PureComponent {
 
   render () {
+    const { positionList } = this.props;
     const InputGroup = Input.Group;
     const Option = Select.Option;
-    const options = [{
-       value: '销售/客服/技术支持',
-       label: '销售/客服/技术支持',
-       children: [{
-         value: '销售管理',
-         label: '销售管理',
-         children: [{
-           value: '销售经理/主管',
-           label: '销售经理/主管',
-         }],
-       }],
-     }, {
-       value: '计算机/互联网/通信/电子',
-       label: '计算机/互联网/通信/电子',
-       children: [{
-         value: '互联网',
-         label: '互联网',
-         children: [{
-           value: '手机应用开发工程师',
-           label: '手机应用开发工程师',
-         }],
-       }],
-     }];
-
+    const list = positionList.toJS();
     return (
       <InputArea>
         <InputGroup compact>
@@ -44,7 +23,7 @@ class InputSearch extends PureComponent {
           <Input placeholder="请输入关键词,例如:JAVA,销售代表,行政助理等" />
           <Button type="primary" icon="search" />
         </InputGroup>
-        <Cascader options={options} changeOnSelect placeholder="请选择职位"/>
+        <Cascader options={list} changeOnSelect placeholder="请选择职位"/>
         <Select
           showSearch
           placeholder="请选择期望工资"
@@ -70,10 +49,21 @@ class InputSearch extends PureComponent {
       </InputArea>
     )
   };
+  componentDidMount () {
+    this.props.getPositionList();
+  }
 };
 
 const mapState = (state) => ({
-  
+  positionList: state.getIn(['home','positionList'])
 });
 
-export default connect(mapState,null)(InputSearch);
+const mapDispatch = (dispatch) => {
+  return {
+    getPositionList () {
+      dispatch(getPosition());
+    }
+  }
+}
+
+export default connect(mapState,mapDispatch)(InputSearch);

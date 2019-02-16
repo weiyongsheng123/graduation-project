@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { LogoCityArea } from '../style';
 import { connect } from 'react-redux';
-
+import { getAreaSalary } from '../store/actionCreators';
 class LogoCity extends PureComponent {
 
   render () {
@@ -17,6 +17,9 @@ class LogoCity extends PureComponent {
       </LogoCityArea>
     )
   };
+  componentDidMount () {
+    this.props.getAreaSalaryList();
+  }
 };
 
 const mapState = (state) => ({
@@ -24,4 +27,12 @@ const mapState = (state) => ({
   nowCity: state.getIn(['head','nowCity'])
 });
 
-export default connect(mapState,null)(LogoCity);
+const mapDispatch = (dispatch) => {
+  return {
+    getAreaSalaryList () {
+      dispatch(getAreaSalary());
+    }
+  }
+}
+
+export default connect(mapState,mapDispatch)(LogoCity);

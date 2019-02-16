@@ -164,9 +164,12 @@ export const AnimatePart = styled.div`
     display: none;
   }
   .checkRead {
-    width: 400px;
-    height: 54px;
+    width: 240px;
+    height: 24px;
     position: relative;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    margin-right: 160px;
     .ant-checkbox-wrapper {
       width: 180px;
     }
