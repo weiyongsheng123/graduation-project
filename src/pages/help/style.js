@@ -101,12 +101,6 @@ export const PasswordInput = styled.div`
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  .ant-input-affix-wrapper {
-    width: 300px;
-    height: 40px;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
   .ant-btn-primary {
     width: 100px;
     height: 100px;
@@ -114,6 +108,18 @@ export const PasswordInput = styled.div`
     top: 50px;
     right: 50px;
     font-size: 24px;
+  }
+  .error {
+    width: 200px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    color: red;
+    display: block;
+    position: absolute;
+    top: 28px;
+    right: 0px;
+    text-align: center;
   }
   &.fade-enter {
     width: 0px;
@@ -134,6 +140,29 @@ export const PasswordInput = styled.div`
   }
   &.fade-exit-done {
     width: 0px;
+  }
+`;
+
+export const InputContanier = styled.div`
+  width: 300px;
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 50px;
+  position: relative;
+  .ant-input-affix-wrapper {
+    height: 40px;
+  }
+  .warn {
+    width: 300px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 14px;
+    color: red;
+    position: absolute;
+    left: 0px;
+    top: 40px;
+    text-align: center;
   }
 `;
 

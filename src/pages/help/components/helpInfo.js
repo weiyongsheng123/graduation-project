@@ -52,7 +52,7 @@ class HelpInfo extends PureComponent {
             unmountOnExit
           >
           <InfoInput>
-            <Input placeholder="请输入姓名" allowClear />
+            <Input placeholder="请输入称呼或公司联系人姓名" allowClear />
             <Input placeholder="请输入邮箱" allowClear />
             <Input placeholder="请输入手机号码" allowClear />
             <Button type="primary" loading={false} onClick={this.showSuccess.bind(this)}>

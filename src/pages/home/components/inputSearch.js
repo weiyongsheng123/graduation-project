@@ -7,12 +7,18 @@ import {
 import { getPosition } from '../store/actionCreators';
 
 class InputSearch extends PureComponent {
-
+  constructor (props) {
+    super(props);
+    this.state = {
+      
+   };
+  }
   render () {
-    const { positionList } = this.props;
+    const { positionList, salaryList } = this.props;
     const InputGroup = Input.Group;
     const Option = Select.Option;
-    const list = positionList.toJS();
+    const plist = positionList.toJS();
+    const slist = salaryList.toJS();
     return (
       <InputArea>
         <InputGroup compact>
@@ -23,7 +29,7 @@ class InputSearch extends PureComponent {
           <Input placeholder="请输入关键词,例如:JAVA,销售代表,行政助理等" />
           <Button type="primary" icon="search" />
         </InputGroup>
-        <Cascader options={list} changeOnSelect placeholder="请选择职位"/>
+        <Cascader options={plist} changeOnSelect placeholder="请选择职位"/>
         <Select
           showSearch
           placeholder="请选择期望工资"
@@ -31,9 +37,13 @@ class InputSearch extends PureComponent {
           filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           className="selectMoney"
         >
-          <Option value="0-2000">0-2000元</Option>
-          <Option value="2000-4000">2000-4000元</Option>
-          <Option value="4000-6000">4000-6000元</Option>
+          {
+            slist.map((item)=>{
+              return (
+                <Option key={item} value={item}>{item}</Option>
+              )
+            })
+          }
         </Select>
         <SuggestOption>
           猜你在找:
@@ -55,7 +65,8 @@ class InputSearch extends PureComponent {
 };
 
 const mapState = (state) => ({
-  positionList: state.getIn(['home','positionList'])
+  positionList: state.getIn(['home','positionList']),
+  salaryList: state.getIn(['home','salaryList'])
 });
 
 const mapDispatch = (dispatch) => {

@@ -10,6 +10,7 @@ import { reducer as companyReducer } from '../pages/company/store';
 import { reducer as searchReducer } from '../pages/search/store';
 import { reducer as registerReducer } from '../pages/register/store';
 import { reducer as feedbackReducer } from '../pages/feedback/store';
+import { reducer as helpReducer } from '../pages/help/store';
 
 export default combineReducers({
   ident: identReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   company: companyReducer,
   search: searchReducer,
   register: registerReducer,
-  feedback: feedbackReducer
+  feedback: feedbackReducer,
+  help: helpReducer
 })

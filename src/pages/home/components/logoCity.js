@@ -5,14 +5,14 @@ import { getAreaSalary } from '../store/actionCreators';
 class LogoCity extends PureComponent {
 
   render () {
-    const { logoUrl, nowCity } = this.props;
+    const { nowCity } = this.props;
     let city = nowCity;
     if ( nowCity === '城市求职') {
       city = '地区'
     }
     return (
       <LogoCityArea>
-        <img src={logoUrl} alt=""/>
+        <img src="./files/logoName.png" alt=""/>
         <h3>{ city }</h3>
       </LogoCityArea>
     )
@@ -23,7 +23,6 @@ class LogoCity extends PureComponent {
 };
 
 const mapState = (state) => ({
-  logoUrl: state.getIn(['header','logoUrl']),
   nowCity: state.getIn(['head','nowCity'])
 });
 

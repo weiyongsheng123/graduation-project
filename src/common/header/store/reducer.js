@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 import { CHANGE_HEADER_PATTERN } from './actionTypes';
 
 const defaultState = fromJS({
-  logoUrl: "//img05.51jobcdn.com/im/2016/logo/logo_blue.png",
   pattern: '求职者端'
 });
 

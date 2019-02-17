@@ -1,0 +1,1 @@
+export const GET_YOUR_PASSWORD = 'get_your_password';

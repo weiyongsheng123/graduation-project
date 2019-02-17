@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 class Header extends PureComponent {
 
   render () {
-    const { logoUrl, pattern } = this.props;
+    const { pattern } = this.props;
     return (
      <HeaderWrapper>
-       <HeaderImg src={logoUrl}/>
+       <HeaderImg src="./files/logo1.png"/>
        <HeaderLine className="left">|</HeaderLine>
        <HeaderPattern>{pattern}</HeaderPattern>
        <Link to="/help"><HeaderHelp>帮助中心</HeaderHelp></Link>
@@ -21,7 +21,6 @@ class Header extends PureComponent {
 };
 
 const mapState = (state) => ({
-  logoUrl: state.getIn(['header','logoUrl']),
   pattern: state.getIn(['header','pattern'])
 });
 

@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const HeaderImg = styled.img`
-  width: 90px;
+  width: auto;
   height: 40px;
   line-height: 56px;
   display: block;

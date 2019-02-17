@@ -8,12 +8,11 @@ import {
 class LogoCity extends PureComponent {
 
   render () {
-    const { logoUrl } = this.props;
     const InputGroup = Input.Group;
     const Option = Select.Option;
     return (
       <InputArea>
-        <LogoImg src={logoUrl}/>
+        <LogoImg src="./files/logo2.png"/>
         <InputGroup compact>
           <Select defaultValue="Option1">
             <Option value="Option1">全部</Option>
@@ -28,7 +27,7 @@ class LogoCity extends PureComponent {
 };
 
 const mapState = (state) => ({
-  logoUrl: state.getIn(['header','logoUrl'])
+  
 });
 
 export default connect(mapState,null)(LogoCity);
