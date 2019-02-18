@@ -4,7 +4,7 @@ import { InputArea, InputH3, InputSpan, InputDiv, InputRemerber, InputSubmit, In
 import { changeHeaderPattern } from '../../../common/header/store/actionCreators'
 import { Input, Button, Checkbox } from 'antd';
 import { Link, Redirect } from 'react-router-dom';
-import { checkAccount, changeWarn } from '../store/actionCreators';
+import { checkAccount, changeWarn, openAutoRemeber } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class LoginInput extends PureComponent {
@@ -12,8 +12,10 @@ class LoginInput extends PureComponent {
     super(props);
     this.state = {
       account: '',
-      password: ''
+      password: '',
+      checked: false
    };
+   this.handleRemeber = this.handleRemeber.bind(this);
   }
   render () {
     const { changePattern, pattern, warn, loginOrNot } = this.props;
@@ -39,7 +41,7 @@ class LoginInput extends PureComponent {
           <Input.Password className="input" name="loginPassword" onChange={(e)=>{this.handleChange(e)}} placeholder="请输入密码" />
         </InputDiv>
         <InputRemerber>
-          <Checkbox>记住我</Checkbox>
+          <Checkbox onClick={this.handleRemeber}>记住我</Checkbox>
         </InputRemerber>
         <InputSubmit>
           <span className="warning">{ warn }</span>
@@ -58,8 +60,26 @@ class LoginInput extends PureComponent {
       </InputArea>
     )
   }
+  handleRemeber (e) {
+    const check = e.target.checked;
+    this.setState({
+      checked: check
+    });
+  }
+  isRemeber (checked, values) {
+    var storage=window.localStorage;
+    if (checked) {
+      this.props.openAuto();
+      let data = values;
+      let d = JSON.stringify(data);
+      storage["peiqiAccount"] = d;
+    }
+    else {
+      storage.removeItem("peiqiAccount");
+    }
+  }
   submit (pattern) {
-    const { account, password } = this.state;
+    const { account, password, checked } = this.state;
     const { changeWarning, check, ajaxSend } = this.props;
     if (!account || !password) {
       changeWarning("请填入账号及密码");
@@ -80,6 +100,7 @@ class LoginInput extends PureComponent {
         type: type,
         pattern: pattern
       }
+      this.isRemeber(checked,values);
       check(values,pattern);
       ajaxSend();
     }
@@ -118,6 +139,9 @@ const mapDispatch = (dispatch) => {
     },
     ajaxSend () {
       dispatch(changeAjax(true));
+    },
+    openAuto () {
+      dispatch(openAutoRemeber(true));
     }
   }
 }

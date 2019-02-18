@@ -242,6 +242,44 @@ export const InfoArea = styled.div`
   margin-bottom: 130px;
 `;
 
+export const BackoutArea = styled.div`
+  width: 100%;
+  height: 600px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 9999;
+`;
+
+export const Backout = styled.div`
+  width: 300px;
+  height: 120px;
+  margin: auto;
+  background: #fff;
+  margin-top: 240px;
+  border: 1px solid gray;
+  h3 {
+    width: 100%;
+    height: 40px;
+    display: block;
+    color: gray;
+    line-height: 40px;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 0px;
+  }
+  .ant-btn {
+    width: 100px;
+    height: 40px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 33px;
+  }
+`;
+
+
 export const InfoTitle = styled.div`
   width: 200px;
   height: 200px;
@@ -294,6 +332,18 @@ export const InfoPassword = styled.div`
     margin-top: 20px;
     font-weight: bold;
   }
+  .warn {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    color: red;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+  }
   .ant-input-affix-wrapper {
     width: 200px;
     height: 50px;
@@ -309,6 +359,18 @@ export const InfoPassword = styled.div`
     display: block;
     margin: auto;
     margin-top:20px;
+  }
+  .error {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    color: red;
+    position: absolute;
+    top: 110px;
+    left: 0px;
   }
   &.fade-enter {
     width: 0px;
@@ -340,12 +402,6 @@ export const InfoInput = styled.div`
   box-shadow: -10px 10px 10px #333;
   overflow: hidden;
   position: relative;
-  .ant-input-affix-wrapper {
-    width: 300px;
-    height: 40px;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
   .ant-btn-primary {
     width: 70px;
     height: 60px;
@@ -353,6 +409,18 @@ export const InfoInput = styled.div`
     top: 70px;
     right: 35px;
     font-size: 16px;
+    text-align: center;
+  }
+  .error {
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    color: red;
+    display: block;
+    position: absolute;
+    top: 28px;
+    right: 20px;
     text-align: center;
   }
   &.fade-enter {
@@ -374,6 +442,30 @@ export const InfoInput = styled.div`
   }
   &.fade-exit-done {
     width: 0px;
+  }
+`;
+
+export const InputContain = styled.div`
+  width: 300px;
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 50px;
+  position: relative;
+  .ant-input-affix-wrapper {
+    width: 300px;
+    height: 40px;
+  }
+  .warn {
+    width: 300px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 14px;
+    color: red;
+    position: absolute;
+    left: 0px;
+    top: 40px;
+    text-align: center;
   }
 `;
 

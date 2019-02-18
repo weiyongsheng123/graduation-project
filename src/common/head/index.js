@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, TelephoneContact, HeadQuit } from './style';
+import { HeadWrapper, BackHome, CityChange, CityChoose, RecruitInfo, CompanyServer, PersonCenter, RegisterLogin, HeadHelp, TelephoneContact, HeadQuit } from './style';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
-import { clearAndQuit } from "../../pages/login/store/actionCreators";
+import { clearAndQuit, openAutoRemeber, checkAccount } from "../../pages/login/store/actionCreators";
+import { changeHeaderPattern } from '../header/store/actionCreators';
 
 class Head extends PureComponent {
 
@@ -50,6 +51,7 @@ class Head extends PureComponent {
          }
        </CityChange>
        <TelephoneContact>{ phoneNumber }</TelephoneContact>
+       <Link to="/help"><HeadHelp>帮助中心</HeadHelp></Link>
        { loginRegister }
        { choice }
        <Link to="/search">
@@ -60,6 +62,14 @@ class Head extends PureComponent {
   };
   quitLogin () {
     this.props.quitAccount();
+  };
+  componentDidMount () {
+    const { loginOrNot, autoLogin, openAuto } = this.props;
+    var storage=window.localStorage;
+    if (!loginOrNot && storage["peiqiAccount"] && openAuto) {
+      const accountInfo = JSON.parse(storage["peiqiAccount"]);
+      autoLogin(accountInfo,accountInfo['pattern']);
+    }
   }
 };
 
@@ -69,7 +79,8 @@ const mapState = (state) => ({
   nowCity: state.getIn(['head','nowCity']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   phoneNumber: state.getIn(['login','telephonenumber']),
-  areaList: state.getIn(['home','areaList'])
+  areaList: state.getIn(['home','areaList']),
+  openAuto: state.getIn(['login','openAuto'])
 });
 
 const mapDispatch = (dispatch) => {
@@ -83,6 +94,11 @@ const mapDispatch = (dispatch) => {
     },
     quitAccount () {
       dispatch(clearAndQuit());
+      dispatch(openAutoRemeber(false));
+    },
+    autoLogin (values,pattern) {
+      dispatch(changeHeaderPattern(pattern));
+      dispatch(checkAccount(values,pattern));
     }
   }
 }

@@ -1,4 +1,4 @@
-import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT } from './actionTypes';
+import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT, OPEN_AUTO_REMEBER } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { fromJS } from 'immutable';
@@ -22,6 +22,11 @@ const importData1 = (array) => ({
 export const clearAndQuit = () => ({
   type: CLEAR_AND_QUIT
 });
+
+export const openAutoRemeber = (value) => ({
+  type: OPEN_AUTO_REMEBER,
+  auto: value
+})
 
 export const checkAccount = (values,pattern) => {
   return (dispatch) => {

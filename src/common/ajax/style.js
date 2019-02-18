@@ -14,7 +14,7 @@ export const AjaxImg = styled.img`
   width: 400px;
   height: 300px;
   margin: auto;
-  margin-top: 0px;
+  margin-top: 20px;
 `;
 
 export const AjaxLight = styled.img`

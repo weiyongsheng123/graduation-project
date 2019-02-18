@@ -165,6 +165,21 @@ export const RegisterLogin = styled.div`
   }
 `;
 
+export const HeadHelp = styled.div`
+  width: 68px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  color: #fff;
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+  &:hover {
+    color: yellow;
+    transition: color 0.3s;
+  }
+`;
+
 export const TelephoneContact = styled.div`
   width: auto;
   height: 36px;
@@ -172,7 +187,7 @@ export const TelephoneContact = styled.div`
   font-size: 16px;
   color: #fff;
   float: right;
-  margin-right: 130px;
+  margin-right: 20px;
   cursor: pointer;
   &:hover {
       color: yellow;

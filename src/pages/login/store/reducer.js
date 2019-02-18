@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT } from './actionTypes';
+import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT, OPEN_AUTO_REMEBER } from './actionTypes';
 
 const defaultState = fromJS({
   telephonenumber: '0554-231-667',
@@ -10,7 +10,8 @@ const defaultState = fromJS({
   company: {
     
   },
-  loginOrNot: false
+  loginOrNot: false,
+  openAuto: true
 });
 
 export default (state = defaultState,action) => {
@@ -33,6 +34,8 @@ export default (state = defaultState,action) => {
         company: { },
         loginOrNot: false
       });
+    case OPEN_AUTO_REMEBER:
+      return state.set('openAuto',action.auto);
     default:
       return state;
   }

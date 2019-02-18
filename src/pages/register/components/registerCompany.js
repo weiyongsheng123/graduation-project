@@ -314,7 +314,7 @@ class RegistrationForm extends PureComponent {
   handlePhone (e) {
     const value = e.target.value;
     var re = /\d{7,13}/g;
-    const newCondition = this.state.condition
+    const newCondition = {...this.state.condition}
     if (re.test(value)) {
       newCondition['PhoneNumber'] = 1;
     }

@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPassword } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class HelpPassword extends PureComponent {
   constructor (props) {
@@ -24,10 +25,14 @@ class HelpPassword extends PureComponent {
     const Step = Steps.Step;
     const { step, stepTwo, validateInfo, submit } = this.state;
     const { password, getError } = this.props;
+    let stepNow = step;
+    if (password) {
+      stepNow = 2;
+    }
     return (
       <PasswordArea>
         <PasswordStep>
-           <Steps current={step}>
+           <Steps current={stepNow}>
              <Step title="点击找回" description="点击开启找回" />
              <Step title="输入信息等待" description="输入相关信息开始找回" />
              <Step title="成功返回" description="发现你的密码." />
@@ -95,7 +100,7 @@ class HelpPassword extends PureComponent {
     })
   };
   showPassword () {
-    const { getOwnPassword } = this.props;
+    const { getOwnPassword, ajaxSend } = this.props;
     const validateInfo = {...this.state.validateInfo};
     let goNext = true;
     for (var index in validateInfo) {
@@ -111,6 +116,7 @@ class HelpPassword extends PureComponent {
     }
     if (goNext) {
       getOwnPassword(validateInfo);
+      ajaxSend();
     }
   }
 };
@@ -124,6 +130,9 @@ const mapDispatch = (dispatch) => {
   return {
     getOwnPassword (values) {
       dispatch(getPassword(values));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
     }
   }
 }

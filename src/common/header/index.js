@@ -24,4 +24,10 @@ const mapState = (state) => ({
   pattern: state.getIn(['header','pattern'])
 });
 
-export default connect(mapState,null)(Header);
+const mapDispatch = (dispatch) => {
+  return {
+    
+  }
+}
+
+export default connect(mapState,mapDispatch)(Header);
