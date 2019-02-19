@@ -1,4 +1,4 @@
-import { ADD_POSITION_LIST, ADD_AREA_LIST, ADD_SALARY_LIST } from './actionTypes';
+import { ADD_POSITION_LIST, ADD_ARSAEX_LIST } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 
@@ -7,14 +7,11 @@ const addPositionList = (array) => ({
   array: fromJS(array)
 });
 
-const addAreaList = (array) => ({
-  type: ADD_AREA_LIST,
-  array: fromJS(array)
-});
-
-const addsalaryList = (array) => ({
-  type: ADD_SALARY_LIST,
-  array: fromJS(array)
+const addDataList = (salary,area,experience) => ({
+  type: ADD_ARSAEX_LIST,
+  salary: fromJS(salary),
+  area: fromJS(area),
+  experience: fromJS(experience)
 });
 
 export const getPosition = () => {
@@ -32,17 +29,17 @@ export const getPosition = () => {
   }
 };
 
-export const getAreaSalary = () => {
+export const getAreaSalaryExperience = () => {
   return (dispatch) => {
     axios({
       method: 'get',
-      url: 'areaSalary.php'
+      url: 'areaSalaryExperience.php'
     })
     .then((res)=>{
       const salary = res.data[0];
       const area = res.data[1];
-      dispatch(addsalaryList(salary));
-      dispatch(addAreaList(area));
+      const experience = res.data[2];
+      dispatch(addDataList(salary,area,experience));
     })
     .catch((res)=>{
       console.log("获取地区月薪失败");

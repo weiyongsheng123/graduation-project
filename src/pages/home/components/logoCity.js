@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { LogoCityArea } from '../style';
 import { connect } from 'react-redux';
-import { getAreaSalary } from '../store/actionCreators';
+
 class LogoCity extends PureComponent {
 
   render () {
@@ -12,14 +12,11 @@ class LogoCity extends PureComponent {
     }
     return (
       <LogoCityArea>
-        <img src="./files/logoName.png" alt=""/>
+        <img src="./files/image/logoName.png" alt=""/>
         <h3>{ city }</h3>
       </LogoCityArea>
     )
   };
-  componentDidMount () {
-    this.props.getAreaSalaryList();
-  }
 };
 
 const mapState = (state) => ({
@@ -28,9 +25,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
   return {
-    getAreaSalaryList () {
-      dispatch(getAreaSalary());
-    }
+
   }
 }
 

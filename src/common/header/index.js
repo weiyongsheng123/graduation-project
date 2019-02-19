@@ -9,7 +9,7 @@ class Header extends PureComponent {
     const { pattern } = this.props;
     return (
      <HeaderWrapper>
-       <HeaderImg src="./files/logo1.png"/>
+       <HeaderImg src="./files/image/logo1.png"/>
        <HeaderLine className="left">|</HeaderLine>
        <HeaderPattern>{pattern}</HeaderPattern>
        <Link to="/help"><HeaderHelp>帮助中心</HeaderHelp></Link>

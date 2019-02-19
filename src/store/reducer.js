@@ -11,6 +11,7 @@ import { reducer as searchReducer } from '../pages/search/store';
 import { reducer as registerReducer } from '../pages/register/store';
 import { reducer as feedbackReducer } from '../pages/feedback/store';
 import { reducer as helpReducer } from '../pages/help/store';
+import { reducer as resumeReducer } from '../pages/resume/store';
 
 export default combineReducers({
   ident: identReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   search: searchReducer,
   register: registerReducer,
   feedback: feedbackReducer,
-  help: helpReducer
+  help: helpReducer,
+  resume: resumeReducer
 })

@@ -12,7 +12,7 @@ class LogoCity extends PureComponent {
     const Option = Select.Option;
     return (
       <InputArea>
-        <LogoImg src="./files/logo2.png"/>
+        <LogoImg src="./files/image/logo2.png"/>
         <InputGroup compact>
           <Select defaultValue="Option1">
             <Option value="Option1">全部</Option>

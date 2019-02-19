@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
 import { clearAndQuit, openAutoRemeber, checkAccount } from "../../pages/login/store/actionCreators";
+import { getAreaSalaryExperience } from "../../pages/home/store/actionCreators";
 import { changeHeaderPattern } from '../header/store/actionCreators';
 
 class Head extends PureComponent {
@@ -64,12 +65,13 @@ class Head extends PureComponent {
     this.props.quitAccount();
   };
   componentDidMount () {
-    const { loginOrNot, autoLogin, openAuto } = this.props;
+    const { loginOrNot, autoLogin, openAuto, getAreaSalaryExperienceList } = this.props;
     var storage=window.localStorage;
     if (!loginOrNot && storage["peiqiAccount"] && openAuto) {
       const accountInfo = JSON.parse(storage["peiqiAccount"]);
       autoLogin(accountInfo,accountInfo['pattern']);
     }
+    getAreaSalaryExperienceList();
   }
 };
 
@@ -99,6 +101,9 @@ const mapDispatch = (dispatch) => {
     autoLogin (values,pattern) {
       dispatch(changeHeaderPattern(pattern));
       dispatch(checkAccount(values,pattern));
+    },
+    getAreaSalaryExperienceList () {
+      dispatch(getAreaSalaryExperience());
     }
   }
 }

@@ -228,9 +228,9 @@ export const ResumeNameAreaProfile = styled.div`
   img {
     position: absolute;
     width: 116px;
-    height: 116px;
+    height: 110px;
     display: block;
-    top: -7px;
+    top: 0px;
     left: 0;
     border: 1px solid #eaedf1;
     box-sizing: border-box;
@@ -238,8 +238,6 @@ export const ResumeNameAreaProfile = styled.div`
   .one {
     margin-left: 135px;
     margin-bottom: 24px;
-    font-size: 32px;
-    line-height: 32px;
     zoom: 1;
     display: block;
     overflow: hidden;
@@ -251,8 +249,8 @@ export const ResumeNameAreaProfile = styled.div`
       white-space: nowrap;
       height: 35px;
       float: left;
-      font-size: 32px;
-      line-height: 32px;
+      font-size: 28px;
+      line-height: 35px;
     }
   }
   .two {
@@ -282,6 +280,7 @@ export const ResumeNameAreaProfile = styled.div`
   }
   .three {
     margin-left: 135px;
+    margin-top: 15px;
     font-size: 16px;
     letter-spacing: .97px;
     line-height: 16px;
@@ -290,7 +289,7 @@ export const ResumeNameAreaProfile = styled.div`
     zoom: 1;
     display: block;
     .phone {
-      margin-right: 14px;
+      margin-right: 8px;
       font-size: 16px;
       font-style: normal;
       float: left;
@@ -299,11 +298,11 @@ export const ResumeNameAreaProfile = styled.div`
     }
     .email {
       font-size: 16px;
-      margin-right: 14px;
+      margin-right: 8px;
       font-style: normal;
       float: left;
       letter-spacing: .97px;
-      line-height: 14px;
+      line-height: 16px;
     }
     span {
       margin-right: 16px;

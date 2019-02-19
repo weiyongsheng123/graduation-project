@@ -49,6 +49,7 @@ export const modifyAccountData = (values) => {
       if (res.data) {
         dispatch(modifyDataSuccess(1));
         dispatch(clearAndQuit());
+        window.localStorage.removeItem("peiqiAccount");
       }
       else {
         dispatch(modifyDataSuccess(2));

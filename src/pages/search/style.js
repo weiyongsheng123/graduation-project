@@ -117,6 +117,9 @@ export const RadioArea = styled.div`
       line-height: 50px;
       font-size: 16px;
       color: #666;
+      &.area {
+        width: 80px;
+      }
     }
   }
 `;

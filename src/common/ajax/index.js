@@ -8,7 +8,7 @@ class Ajax extends PureComponent {
     const { ajax } = this.props;
     return (
       <Fragment>
-        {ajax ? <AjaxArea><AjaxLight src="./files/light.png"/><AjaxImg src="./files/load.gif"/></AjaxArea> : null}
+        {ajax ? <AjaxArea><AjaxLight src="./files/image/light.png"/><AjaxImg src="./files/image/load.gif"/></AjaxArea> : null}
       </Fragment>
     )
   }

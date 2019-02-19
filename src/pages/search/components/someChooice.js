@@ -9,87 +9,44 @@ class SomeChooice extends PureComponent {
 
   render () {
     const RadioGroup = Radio.Group;
+    const { areaList, salaryList, experienceList } = this.props;
     return (
       <ChooiceArea>
         <RadioArea>
           <label className="label" htmlFor="area">地区：</label>
             <RadioGroup>
-              <Radio name="area" value='在职'>在职</Radio>
-              <Radio name="area" value='离职'>离职</Radio>
-              <Radio name="area" value='a'>在校</Radio>
-              <Radio name="area" value='a职'>在职</Radio>
-              <Radio name="area" value='w职'>离职</Radio>
-              <Radio name="area" value='在e校'>在校</Radio>
-              <Radio name="area" value='awae职'>在职</Radio>
-              <Radio name="area" value='weawe职'>离职</Radio>
-              <Radio name="area" value='在waewa校'>在校</Radio>
-              <Radio name="area" value='awea职'>在职</Radio>
-              <Radio name="area" value='wwea职'>离职</Radio>
-              <Radio name="area" value='在aae校'>在校</Radio>
-              <Radio name="area" value='在职'>在职</Radio>
-              <Radio name="area" value='离职'>离职</Radio>
-              <Radio name="area" value='a'>在校</Radio>
-              <Radio name="area" value='a职'>在职</Radio>
-              <Radio name="area" value='w职'>离职</Radio>
-              <Radio name="area" value='在e校'>在校</Radio>
-              <Radio name="area" value='awae职'>在职</Radio>
-              <Radio name="area" value='weawe职'>离职</Radio>
-              <Radio name="area" value='在waewa校'>在校</Radio>
-              <Radio name="area" value='awea职'>在职</Radio>
-              <Radio name="area" value='wwea职'>离职</Radio>
-              <Radio name="area" value='在aae校'>在校</Radio>
+              {
+                areaList.map((item)=>{
+                  return (
+                    <Radio name="area" className="area" value={ item } key ={ item }>{ item }</Radio>
+                  )
+                })
+              }
+              
             </RadioGroup>
         </RadioArea>
         <RadioArea>
           <label className="label" htmlFor="salary">月薪：</label>
             <RadioGroup>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
-              <Radio name="salary" value='在职'>在职</Radio>
-              <Radio name="salary" value='离职'>离职</Radio>
-              <Radio name="salary" value='a'>在校</Radio>
+              {
+                salaryList.map((item)=>{
+                  return (
+                    <Radio name="salary" className="salary" value={ item } key ={ item }>{ item }</Radio>
+                  )
+                })
+              }
             </RadioGroup>
         </RadioArea>
         <RadioArea>
           <label className="label" htmlFor="experience">经验：</label>
             <RadioGroup>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
-              <Radio name="experience" value='在职'>在职</Radio>
-              <Radio name="experience" value='离职'>离职</Radio>
-              <Radio name="experience" value='a'>在校</Radio>
+              {
+                experienceList.map((item)=>{
+                  return (
+                    <Radio name="experience" className="experience" value={ item } key ={ item }>{ item }</Radio>
+                  )
+                })
+              }
             </RadioGroup>
         </RadioArea>
       </ChooiceArea>
@@ -98,7 +55,9 @@ class SomeChooice extends PureComponent {
 };
 
 const mapState = (state) => ({
-  
+  areaList: state.getIn(['home','areaList']),
+  salaryList: state.getIn(['home','salaryList']),
+  experienceList: state.getIn(['home','experienceList'])
 });
 
 export default connect(mapState,null)(SomeChooice);
