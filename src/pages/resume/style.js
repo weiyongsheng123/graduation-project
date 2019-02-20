@@ -32,10 +32,12 @@ export const InputDiv = styled.div`
   display: block;
   font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", "\\5FAE软雅黑", STHeitiSC-Light, simsun, "\\5B8B体", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 12px;
-  height: 56px;
-  margin-bottom: 15px;
+  height: 70px;
+  box-sizing: border-box;
+  padding-bottom: 15px;
   width: 324px;
   overflow: hidden;
+  position: relative;
   label {
     font-size: 16px;
     font-weight: 600;
@@ -43,6 +45,21 @@ export const InputDiv = styled.div`
     width: 84px;
     color: #666;
     vertical-align: middle;
+    &.many {
+      width: 170px;
+    }
+  }
+  .warn {
+    width: 324px;
+    height: 15px;
+    font-size: 14px;
+    line-height: 14px;
+    color: red;
+    display: block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
   }
   &.chooseMany {
     height: auto;
@@ -142,6 +159,10 @@ export const InputDiv = styled.div`
       margin-left: 85px;
     }
   }
+  .ant-checkbox-group {
+    width: 100%;
+    padding-top: 20px;
+  }
 `;
 
 export const ResumeWrapper = styled.div`
@@ -202,7 +223,7 @@ export const ResumeNameArea = styled.div`
     opacity: 0;
   }
   .fade-enter-active {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 1;
   }
   .fade-enter-done {
@@ -213,7 +234,7 @@ export const ResumeNameArea = styled.div`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .fade-exit-done {
     opacity: 0;
@@ -362,7 +383,7 @@ export const IntentArea = styled.div`
     opacity: 0;
   }
   .fade-enter-active {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 1;
   }
   .fade-enter-done {
@@ -373,7 +394,7 @@ export const IntentArea = styled.div`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .fade-exit-done {
     opacity: 0;
@@ -457,7 +478,7 @@ export const WorkArea = styled.div`
     opacity: 0;
   }
   .fade-enter-active {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 1;
   }
   .fade-enter-done {
@@ -468,7 +489,7 @@ export const WorkArea = styled.div`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .fade-exit-done {
     opacity: 0;
@@ -590,7 +611,7 @@ export const ProjectArea = styled.div`
     opacity: 0;
   }
   .fade-enter-active {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 1;
   }
   .fade-enter-done {
@@ -601,7 +622,7 @@ export const ProjectArea = styled.div`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .fade-exit-done {
     opacity: 0;
@@ -734,7 +755,7 @@ export const EducateArea = styled.div`
     opacity: 0;
   }
   .fade-enter-active {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 1;
   }
   .fade-enter-done {
@@ -745,7 +766,7 @@ export const EducateArea = styled.div`
   }
   .fade-exit-active {
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .fade-exit-done {
     opacity: 0;

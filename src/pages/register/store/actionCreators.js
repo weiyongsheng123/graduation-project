@@ -27,6 +27,7 @@ export const submitApplice = (values) => {
       })
     })
     .then((res) => {
+      console.log(res);
       dispatch(changeApplicantRegiste(true));
       dispatch(changeAjax(false));
     })

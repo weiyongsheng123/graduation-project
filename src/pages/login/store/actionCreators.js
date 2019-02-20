@@ -9,12 +9,12 @@ export const changeWarn = (value) => ({
   warn: value
 });
 
-const importData = (array) => ({
+export const importData = (array) => ({
   type: IMPORT_DATA,
   array: fromJS(array)
 });
 
-const importData1 = (array) => ({
+export const importData1 = (array) => ({
   type: IMPORT_DATA1,
   array: fromJS(array)
 });

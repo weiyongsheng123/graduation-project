@@ -84,10 +84,10 @@ class Feedback extends PureComponent {
       var mounth = date.getMonth() + 1;
       var day = date.getDate();
       const newArray = {
-        title: title,
-        content: content,
+        title,
+        content,
         time: year+ '-' + mounth + '-' + day,
-        name: name
+        name
       };
       submitData(newArray);
       ajaxSend();

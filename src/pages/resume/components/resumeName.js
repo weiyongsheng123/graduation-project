@@ -3,7 +3,8 @@ import { ResumeNameArea, ResumeNameAreaProfile, ResumeNameAreaEdit, InputDiv } f
 import { Input, Radio, InputNumber, Select, Button } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { test } from '../store/actionCreators';
+import { modifyJobseekName, getJobseekNameData, changeModifyName, changeNamePhoto } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class ResumeName extends PureComponent {
   constructor (props) {
@@ -13,11 +14,20 @@ class ResumeName extends PureComponent {
         modifyData: {
           name: '',
           sex: '',
-          age: '',
+          age: 23,
           area: '',
           experience: '',
           telNumber: '',
           email: ''
+        },
+        modifyTruly: {
+          name: true,
+          sex: true,
+          age: true,
+          area: true,
+          experience: true,
+          telNumber: true,
+          email: true
         },
         file: null
       };
@@ -31,22 +41,23 @@ class ResumeName extends PureComponent {
       this.uploadFile = this.uploadFile.bind(this);
   }
   render () {
-   const RadioGroup = Radio.Group;
-   const Option = Select.Option;
-   const { jobSeek, areaList, experienceList } = this.props;
-   const newJobseek = jobSeek.toJS();
-   for (let item in newJobseek) {
-     if (!newJobseek[item]) {
-       newJobseek[item] = '[空]';
-     }
-   }
-   if (newJobseek['photo'] === '[空]') {
-     newJobseek['photo'] = './files/image/headphoto.png';
-   }
+    const RadioGroup = Radio.Group;
+    const Option = Select.Option;
+    const { modifyTruly, fade } = this.state;
+    const { jobSeek, areaList, experienceList } = this.props;
+    const newJobseek = jobSeek.toJS();
+    for (let item in newJobseek) {
+      if (!newJobseek[item]) {
+        newJobseek[item] = '[空]';
+      }
+    }
+    if (newJobseek['photo'] === '[空]') {
+      newJobseek['photo'] = './files/image/headphoto.png';
+    }
     return (
       <ResumeNameArea id="resumename">
         <CSSTransition
-            in={ this.state.fade === 1 }
+            in={ fade === 1 }
             timeout={1000}
             classNames='fade'
             unmountOnExit
@@ -79,7 +90,7 @@ class ResumeName extends PureComponent {
           </ResumeNameAreaProfile>
         </CSSTransition>
         <CSSTransition
-            in={ this.state.fade === 2 }
+            in={ fade === 2 }
             timeout={1000}
             classNames='fade'
             unmountOnExit
@@ -89,6 +100,7 @@ class ResumeName extends PureComponent {
             <InputDiv>
               <label htmlFor="name">用户名</label>
               <Input className="input" name="name" onChange={this.handleChange} placeholder="请输入姓名" allowClear />
+              { !modifyTruly['name'] ? <span className="warn">用户名是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="sex">性别</label>
@@ -96,10 +108,12 @@ class ResumeName extends PureComponent {
                 <Radio name="sex" value='男'>男</Radio>
                 <Radio name="sex" value='女'>女</Radio>
               </RadioGroup>
+              { !modifyTruly['sex'] ? <span className="warn">性别是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="age">年龄</label>
               <InputNumber name="age" min={1} max={100} defaultValue={23} onChange={this.handleChangeAge}/>
+              { !modifyTruly['age'] ? <span className="warn">年龄是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="area">地区</label>
@@ -119,6 +133,7 @@ class ResumeName extends PureComponent {
                   })
                 }
               </Select>
+              { !modifyTruly['area'] ? <span className="warn">地区是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="experience">经验</label>
@@ -138,14 +153,17 @@ class ResumeName extends PureComponent {
                   })
                 }
               </Select>
+              { !modifyTruly['experience'] ? <span className="warn">经验是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="phone">手机</label>
-              <Input className="input" name="phone" placeholder="请输入手机号" onChange={this.handleChange} allowClear />
+              <Input className="input" name="telNumber" placeholder="请输入7-13位手机号" onChange={this.handleChange} allowClear />
+              { !modifyTruly['telNumber'] ? <span className="warn">手机号码不符合规范</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="email">邮箱</label>
               <Input className="input" name="email" type="email" onChange={this.handleChange} placeholder="请输入邮箱" allowClear />
+              { !modifyTruly['email'] ? <span className="warn">邮箱不符合规范</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="file">头像</label>
@@ -160,9 +178,95 @@ class ResumeName extends PureComponent {
       </ResumeNameArea>
     )
   };
+  componentDidUpdate () {
+    const { modifyName, namePhoto, getNewData, jobSeek, backState } = this.props;
+    if (modifyName === 1 && namePhoto === 1) {
+      const NewJobseek = jobSeek.toJS();
+      const id = NewJobseek['Id'];
+      getNewData(id);
+      const newModify = {...this.state.modifyData};
+      for (let item in newModify) {
+        newModify[item] = '';
+      };
+      newModify['age'] = 23;
+      this.setState({
+        fade: 1,
+        modifyData: newModify
+      });
+      backState();
+    }
+    else if (modifyName === 2 && namePhoto === 2) {
+      alert("更新出错");
+      backState();
+    }
+  }
   submitModify () {
     const newModify = {...this.state.modifyData};
-    this.props.text(this.state.file);
+    const newTruly = {...this.state.modifyTruly};
+    const { modify, jobSeek, ajaxSend } = this.props;
+    const { file } = this.state;
+    let success = true;
+    if (newModify['name']) {
+      newTruly['name'] = true;
+    }
+    else {
+      newTruly['name'] = false;
+      success = false;
+    }
+    if (newModify['sex']) {
+      newTruly['sex'] = true;
+    }
+    else {
+      newTruly['sex'] = false;
+      success = false;
+    }
+    if (newModify['age']) {
+      newTruly['age'] = true;
+    }
+    else {
+      newTruly['age'] = false;
+      success = false;
+    }
+    if (newModify['area']) {
+      newTruly['area'] = true;
+    }
+    else {
+      newTruly['area'] = false;
+      success = false;
+    }
+    if (newModify['experience']) {
+      newTruly['experience'] = true;
+    }
+    else {
+      newTruly['experience'] = false;
+      success = false;
+    }
+    var re = /\d{7,13}/g;
+    if (re.test(newModify['telNumber'])) {
+      newTruly['telNumber'] = true;
+    }
+    else {
+      newTruly['telNumber'] = false;
+      success = false;
+    }
+    var re1 = /^\w+@[0-9a-z]+\.[a-z]+$/g;
+    if (re1.test(newModify['email'])) {
+      newTruly['email'] = true;
+    }
+    else {
+      newTruly['email'] = false;
+      success = false;
+    }
+    this.setState({
+      modifyTruly: newTruly
+    })
+    if (success) {
+      const NewJobseek = jobSeek.toJS();
+      const id = NewJobseek['Id'];
+      newModify['Id'] = id;
+      modify(newModify,file);
+      ajaxSend();
+    }
   }
   handleChangeAge (e) {
     const value = e;
@@ -204,8 +308,6 @@ class ResumeName extends PureComponent {
     let file = e.target.files[0];
     let data = new FormData();
     data.append("file",file);
-    data.append("title","thisphoto");
-    /*this.props.text(data);*/
     this.setState({
       file: data
     })
@@ -225,13 +327,25 @@ class ResumeName extends PureComponent {
 const mapState = (state) => ({
   jobSeek: state.getIn(['login','jobSeek']),
   areaList: state.getIn(['home','areaList']),
-  experienceList: state.getIn(['home','experienceList'])
+  experienceList: state.getIn(['home','experienceList']),
+  modifyName: state.getIn(['resume','modifyName']),
+  namePhoto: state.getIn(['resume','namePhoto'])
 });
 
 const mapDispatch = (dispatch) => {
   return {
-    text (file) {
-      dispatch(test(file));
+    modify (values,file) {
+      dispatch(modifyJobseekName(values,file));
+    },
+    getNewData (id) {
+      dispatch(getJobseekNameData(id));
+    },
+    backState () {
+      dispatch(changeModifyName(0));
+      dispatch(changeNamePhoto(0));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
     }
   }
 };
