@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { WorkArea, WorkTitle, WorkButton, WorkList, InputDiv, WorkItem, WorkEdit } from '../style';
-import { Popconfirm, message, Button, Input, Select } from 'antd';
+import { ProjectArea, ProjectTitle, ProjectButton, ProjectList, InputDiv, ProjectItem, ProjectEdit } from '../style';
+import { Popconfirm, message, Button, Input, DatePicker } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getJobseekWorkData, changeModifyWork, modifyJobseekWorkData, deleteJobseekWorkData } from '../store/actionCreators';
+import { getJobseekProjectData, changeModifyProject, modifyJobseekProjectData, deleteJobseekProjectData } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
-class ResumeWork extends PureComponent {
+class ResumeProject extends PureComponent {
   constructor (props) {
       super(props);
       this.state = {
@@ -14,64 +14,69 @@ class ResumeWork extends PureComponent {
         first: true,
         resure: '确认要删除此条',
         modifyData: {
-          company: '',
+          project: '',
           time: '',
-          position: '',
-          salary: ''
+          duty: '',
+          desc: ''
         },
         submit: false
      };
     this.showProfile = this.showProfile.bind(this);
     this.showEdit = this.showEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeTime = this.handleChangeTime.bind(this);
     this.submitModify = this.submitModify.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
+  handleChangeDate (date, dateString) {
+    console.log(date, dateString);
+  };
   render () {
-    const Option = Select.Option;
-    const { workData } = this.props;
+    const { TextArea } = Input;
+    const { RangePicker } = DatePicker;
+    const { projectData } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
-      <WorkArea id="resumework">
-        <WorkTitle>工作经验</WorkTitle>
-        <WorkButton>
+      <ProjectArea id="resumeproject">
+        <ProjectTitle>项目经验</ProjectTitle>
+        <ProjectButton>
           <Button type="dashed" onClick={this.showEdit}>
             <i className="iconfont">&#xe601;</i>
-            添加工作经验
+            添加项目经验
           </Button>
-        </WorkButton>
+        </ProjectButton>
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}
             classNames='fade'
             unmountOnExit
-        >
-          <WorkList>
+          >
+          <ProjectList>
             {
-              workData.map((item,index)=>{
+              projectData.map((item,index)=>{
                 return (
-                  <WorkItem key={item.get('Id')}>
+                  <ProjectItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
+                    <span className="iconfont">&#xe603;</span>
                     <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
                       <span className="iconfont">&#xe603;</span>
                     </Popconfirm>
                     <div className="container">
-                      <span>公司名：</span><p>{item.get('company')}</p>
+                      <span>项目名称：</span><p>{item.get('project')}</p>
                     </div>
                     <div className="container">
-                      <span>工作时长：</span><p>{item.get('time')}</p>
+                      <span>起止时间：</span><p>{item.get('time')}</p>
                     </div>
                     <div className="container">
-                      <span>工作职位：</span><p>{item.get('position')}</p>
+                      <span>项目职责：</span><p>{item.get('duty')}</p>
                     </div>
-                    <div className="container">
-                      <span>薪资：</span><p>{item.get('salary')}</p>
+                    <div className="container twoLine">
+                      <span>项目描述：</span><p>{item.get('desc')}</p>
                     </div>
-                  </WorkItem>
+                  </ProjectItem>
                 )
               })
             }
-          </WorkList>
+          </ProjectList>
         </CSSTransition>
         <CSSTransition
             in={ this.state.fade === 2 }
@@ -79,52 +84,38 @@ class ResumeWork extends PureComponent {
             classNames='fade'
             unmountOnExit
         >
-          <WorkEdit>
+          <ProjectEdit>
             <i onClick={this.showProfile} className="iconfont close">&#xe603;</i>
             <InputDiv>
-              <label htmlFor="company">公司名</label>
-              <Input className="input" name="company" onChange={this.handleChange} placeholder="请输入公司名" allowClear />
-              { submit && !modifyData['company'] ? <span className="warn">公司名称必填</span> : null }
+              <label htmlFor="project">项目名称</label>
+              <Input className="input" name="project" onChange={this.handleChange} placeholder="请输入项目名称" allowClear />
+              { submit && !modifyData['project'] ? <span className="warn">项目名称必填</span> : null }
             </InputDiv>
             <InputDiv>
-              <label htmlFor="time">工作时长</label>
-              <Select
-                name="time"
-                showSearch
-                placeholder="请选择工作时长"
-                optionFilterProp="children"
-                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                onChange={this.handleChangeTime}
-              >
-                <Option value="1-3个月">1-3个月</Option>
-                <Option value="3-6个月">3-6个月</Option>
-                <Option value="6个月-1年">6个月-1年</Option>
-                <Option value="1年-3年">1年-3年</Option>
-                <Option value="3年-5年">3年-5年</Option>
-                <Option value="5年以上">5年以上</Option>
-              </Select>
-              { submit && !modifyData['time'] ? <span className="warn">工作时长必填</span> : null }
+              <label htmlFor="time">起止时间</label>
+              <RangePicker onChange={this.handleChangeDate} />
+              { submit && !modifyData['time'] ? <span className="warn">项目起止时间必填</span> : null }
             </InputDiv>
             <InputDiv>
-              <label htmlFor="position">工作职位</label>
-              <Input className="input" name="position" onChange={this.handleChange} placeholder="请输入工作职位" allowClear />
-              { submit && !modifyData['position'] ? <span className="warn">工作职位必填</span> : null }
+              <label htmlFor="duty">项目职责</label>
+              <Input className="input" name="duty" onChange={this.handleChange} placeholder="请输入项目中负责任务" allowClear />
+              { submit && !modifyData['duty'] ? <span className="warn">项目职责必填</span> : null }
             </InputDiv>
-            <InputDiv>
-              <label htmlFor="salary">工作薪资</label>
-              <Input className="input" name="salary" onChange={this.handleChange} placeholder="请输入工作薪资（月工资）" allowClear />
-              { submit && !modifyData['salary'] ? <span className="warn">工作薪资必填</span> : null }
+            <InputDiv className="chooseMany">
+              <label htmlFor="desc">项目描述</label>
+              <TextArea rows={4} name="desc" onChange={this.handleChange} placeholder="请输入在此项目工作中的具体描述"/>
+              { submit && !modifyData['desc'] ? <span className="warn">项目描述必填</span> : null }
             </InputDiv>
             <InputDiv>
               <Button onClick={this.submitModify}>添加</Button>
               <Button onClick={this.showProfile}>取消</Button>
             </InputDiv>
-          </WorkEdit>
+          </ProjectEdit>
         </CSSTransition>
-      </WorkArea>
+      </ProjectArea>
     )
   };
-  showWork () {
+  showProject () {
     const { getData, jobSeek } = this.props;
     const NewJobseek = jobSeek.toJS();
     const id = NewJobseek['Id'];
@@ -136,23 +127,23 @@ class ResumeWork extends PureComponent {
   componentDidMount () {
     const { loginOrNot } =this.props;
     if (loginOrNot) {
-      this.showWork();
+      this.showProject();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot, modifyWork, backState } =this.props;
+    const { loginOrNot, modifyProject, backState } =this.props;
     const { first } = this.state;
     if (loginOrNot && first) {
-      this.showWork();
+      this.showProject();
     }
-    if (modifyWork === 1) {
+    if (modifyProject === 1) {
       this.setState({
         fade: 1,
         submit: false
       });
       backState();
     }
-    else if (modifyWork === 2) {
+    else if (modifyProject === 2) {
       alert("更新出错");
       backState();
     }
@@ -164,7 +155,7 @@ class ResumeWork extends PureComponent {
     const Id = NewJobseek['Id'];
     deleteItem(Id,id);
     ajaxSend();
-  }
+  };
   submitModify () {
     this.setState({
       submit: true
@@ -187,15 +178,6 @@ class ResumeWork extends PureComponent {
       modify(newModify);
       ajaxSend();
     }
-  }
-  handleChangeTime (e) {
-    const value = `${e}`;
-    const name = 'time';
-    const newModify = {...this.state.modifyData};
-    newModify[name] = value;
-    this.setState({
-      modifyData: newModify
-    })
   };
   handleChange (e) {
     const value = e.target.value;
@@ -219,30 +201,30 @@ class ResumeWork extends PureComponent {
 };
 
 const mapState = (state) => ({
-  workData: state.getIn(['resume','workData']),
+  projectData: state.getIn(['resume','projectData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
-  modifyWork: state.getIn(['resume','modifyWork'])
+  modifyProject: state.getIn(['resume','modifyProject'])
 });
 
 const mapDispatch = (dispatch) => {
   return {
     getData (Id) {
-      dispatch(getJobseekWorkData(Id));
+      dispatch(getJobseekProjectData(Id));
     },
     modify (values) {
-      dispatch(modifyJobseekWorkData(values));
+      dispatch(modifyJobseekProjectData(values));
     },
     backState () {
-      dispatch(changeModifyWork(0));
+      dispatch(changeModifyProject(0));
     },
     ajaxSend () {
       dispatch(changeAjax(true));
     },
     deleteItem (Id,id) {
-      dispatch(deleteJobseekWorkData(Id,id));
+      dispatch(deleteJobseekProjectData(Id,id));
     }
   }
 };
 
-export default connect(mapState,mapDispatch)(ResumeWork);
+export default connect(mapState,mapDispatch)(ResumeProject);

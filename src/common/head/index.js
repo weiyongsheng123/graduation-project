@@ -10,16 +10,11 @@ import { changeHeaderPattern } from '../header/store/actionCreators';
 class Head extends PureComponent {
 
   render () {
-    const { pattern, isShow, nowCity, loginOrNot, phoneNumber, areaList, showCityList, setCity, father } = this.props;
+    const { pattern, isShow, nowCity, loginOrNot, phoneNumber, areaList, showCityList, setCity } = this.props;
     let choice = null;
     let loginRegister = null;
     if (loginOrNot) {
-      if (father === 'resume') {
-        loginRegister = null;
-      }
-      else {
-        loginRegister = <HeadQuit onClick={this.quitLogin.bind(this)}>登出</HeadQuit>;
-      }
+      loginRegister = <HeadQuit onClick={this.quitLogin.bind(this)}>登出</HeadQuit>;
       if (pattern === '求职者端') {
         choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
       }

@@ -30,8 +30,8 @@ export default (state = defaultState,action) => {
       });
     case CLEAR_AND_QUIT:
       return state.merge({
-        jobSeek: { },
-        company: { },
+        jobSeek: fromJS({ }),
+        company: fromJS({ }),
         loginOrNot: false
       });
     case OPEN_AUTO_REMEBER:

@@ -184,14 +184,8 @@ class ResumeName extends PureComponent {
       const NewJobseek = jobSeek.toJS();
       const id = NewJobseek['Id'];
       getNewData(id);
-      const newModify = {...this.state.modifyData};
-      for (let item in newModify) {
-        newModify[item] = '';
-      };
-      newModify['age'] = 23;
       this.setState({
-        fade: 1,
-        modifyData: newModify
+        fade: 1
       });
       backState();
     }

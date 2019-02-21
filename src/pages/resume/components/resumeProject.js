@@ -1,39 +1,37 @@
 import React, { PureComponent } from 'react';
 import { ProjectArea, ProjectTitle, ProjectButton, ProjectList, InputDiv, ProjectItem, ProjectEdit } from '../style';
-import { Button, Input } from 'antd';
+import { Popconfirm, message, Button, Input, DatePicker } from 'antd';
 import { CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
+import { getJobseekProjectData, changeModifyProject, modifyJobseekProjectData, deleteJobseekProjectData } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class ResumeProject extends PureComponent {
   constructor (props) {
       super(props);
       this.state = {
         fade: 1,
-        experienceList: [
-          {
-            projectName: '平头哥官网',
-            projectTime: '2018年12月至2019年1月',
-            projectDuty: '主要前端负责',
-            projectDesc: '在项目中对前端负责，由UI所给出的设计图纸并实现，另外也对。。。。'
-          },
-          {
-            projectName: '平头哥官网',
-            projectTime: '2018年12月至2019年1月',
-            projectDuty: '主要前端负责',
-            projectDesc: '在项目中对前端负责，由UI所给出的设计图纸并实在项目中对前端负责，由UI所给出的设计图在项目中对前端负责，由UI所给出的设计图纸并在项目中对前端负责，由UI所给出的设计图纸并实现，另外也对。实现，另外也对。纸并实现，另外也对。现，另外也对。。。。'
-          },
-          {
-            projectName: '平头哥官网',
-            projectTime: '2018年12月至2019年1月',
-            projectDuty: '主要前端负责',
-            projectDesc: '在项目中对前端负责，由UI所给出的设计图纸并实现，另外也对。。。。'
-          }
-        ]
+        first: true,
+        resure: '确认要删除此条',
+        modifyData: {
+          project: '',
+          time: '',
+          duty: '',
+          desc: ''
+        },
+        submit: false
      };
     this.showProfile = this.showProfile.bind(this);
     this.showEdit = this.showEdit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submitModify = this.submitModify.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
   render () {
     const { TextArea } = Input;
+    const { RangePicker } = DatePicker;
+    const { projectData } = this.props;
+    const { submit, modifyData, resure } = this.state;
     return (
       <ProjectArea id="resumeproject">
         <ProjectTitle>项目经验</ProjectTitle>
@@ -48,25 +46,28 @@ class ResumeProject extends PureComponent {
             timeout={1000}
             classNames='fade'
             unmountOnExit
-        >
+          >
           <ProjectList>
             {
-              this.state.experienceList.map((item,index)=>{
+              projectData.map((item,index)=>{
                 return (
-                  <ProjectItem key={index}>
+                  <ProjectItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
-                    <span className="iconfont" onClick={this.delete.bind(this,--index)}>&#xe603;</span>
+                    <span className="iconfont">&#xe603;</span>
+                    <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                      <span className="iconfont">&#xe603;</span>
+                    </Popconfirm>
                     <div className="container">
-                      <span>项目名称：</span><p>{item.projectName}</p>
+                      <span>项目名称：</span><p>{item.get('project')}</p>
                     </div>
                     <div className="container">
-                      <span>起止时间：</span><p>{item.projectTime}</p>
+                      <span>起止时间：</span><p>{item.get('time')}</p>
                     </div>
                     <div className="container">
-                      <span>项目职责：</span><p>{item.projectDuty}</p>
+                      <span>项目职责：</span><p>{item.get('duty')}</p>
                     </div>
                     <div className="container twoLine">
-                      <span>项目描述：</span><p>{item.projectDesc}</p>
+                      <span>项目描述：</span><p>{item.get('desc')}</p>
                     </div>
                   </ProjectItem>
                 )
@@ -83,23 +84,27 @@ class ResumeProject extends PureComponent {
           <ProjectEdit>
             <i onClick={this.showProfile} className="iconfont close">&#xe603;</i>
             <InputDiv>
-              <label htmlFor="projectName">项目名称</label>
-              <Input className="input" name="projectName" placeholder="请输入项目名称" allowClear />
+              <label htmlFor="project">项目名称</label>
+              <Input className="input" name="project" onChange={this.handleChange} placeholder="请输入项目名称" allowClear />
+              { submit && !modifyData['project'] ? <span className="warn">项目名称必填</span> : null }
             </InputDiv>
             <InputDiv>
-              <label htmlFor="projecttime">起止时间</label>
-              <Input className="input" name="projecttime" placeholder="请输入项目起止时间" allowClear />
+              <label htmlFor="time">起止时间</label>
+              <RangePicker name="time" onChange={this.handleChangeDate} placeholder={['起始日期', '结束日期']}/>
+              { submit && !modifyData['time'] ? <span className="warn">项目起止时间必填</span> : null }
             </InputDiv>
             <InputDiv>
-              <label htmlFor="projectduty">项目职责</label>
-              <Input className="input" name="projectduty" placeholder="请输入项目中负责任务" allowClear />
+              <label htmlFor="duty">项目职责</label>
+              <Input className="input" name="duty" onChange={this.handleChange} placeholder="请输入项目中负责任务" allowClear />
+              { submit && !modifyData['duty'] ? <span className="warn">项目职责必填</span> : null }
             </InputDiv>
             <InputDiv className="chooseMany">
-              <label htmlFor="projectdesc">项目描述</label>
-              <TextArea rows={4} name="projectdesc" placeholder="请输入在此项目工作中的具体描述"/>
+              <label htmlFor="desc">项目描述</label>
+              <TextArea rows={4} name="desc" onChange={this.handleChange} placeholder="请输入在此项目工作中的具体描述"/>
+              { submit && !modifyData['desc'] ? <span className="warn">项目描述必填</span> : null }
             </InputDiv>
             <InputDiv>
-              <Button onClick={this.showProfile}>添加</Button>
+              <Button onClick={this.submitModify}>添加</Button>
               <Button onClick={this.showProfile}>取消</Button>
             </InputDiv>
           </ProjectEdit>
@@ -107,12 +112,89 @@ class ResumeProject extends PureComponent {
       </ProjectArea>
     )
   };
-  delete (index) {
-    const list = [...this.state.experienceList];
-    list.splice(index,1);
+  showProject () {
+    const { getData, jobSeek } = this.props;
+    const NewJobseek = jobSeek.toJS();
+    const id = NewJobseek['Id'];
+    getData(id);
     this.setState({
-      experienceList: list
+      first: false
+    })
+  };
+  componentDidMount () {
+    const { loginOrNot } =this.props;
+    if (loginOrNot) {
+      this.showProject();
+    }
+  };
+  componentDidUpdate () {
+    const { loginOrNot, modifyProject, backState } =this.props;
+    const { first } = this.state;
+    if (loginOrNot && first) {
+      this.showProject();
+    }
+    if (modifyProject === 1) {
+      this.setState({
+        fade: 1,
+        submit: false
+      });
+      backState();
+    }
+    else if (modifyProject === 2) {
+      alert("更新出错");
+      backState();
+    }
+  };
+  handleDelete (id) {
+    message.info('删除中...');
+    const { jobSeek, deleteItem, ajaxSend } = this.props;
+    const NewJobseek = jobSeek.toJS();
+    const Id = NewJobseek['Id'];
+    deleteItem(Id,id);
+    ajaxSend();
+  };
+  submitModify () {
+    this.setState({
+      submit: true
     });
+    const newModify = {...this.state.modifyData};
+    const { jobSeek, modify, ajaxSend } =this.props;
+    let success = true;
+    for (let item in newModify) {
+      if (newModify[item]) {
+        continue;
+      }
+      else {
+        success = false;
+      }
+    }
+    if (success) {
+      const NewJobseek = jobSeek.toJS();
+      const id = NewJobseek['Id'];
+      newModify['Id'] = id;
+      modify(newModify);
+      ajaxSend();
+    }
+  };
+  handleChange (e) {
+    const value = e.target.value;
+    const name = e.target.name;
+    const newModify = {...this.state.modifyData};
+    newModify[name] = value;
+    this.setState({
+      modifyData: newModify
+    })
+  };
+  handleChangeDate (date, dateString) {
+    let timeString = '';
+    timeString = dateString[0] + ' 至 ' + dateString[1];
+    const value = timeString;
+    const name = 'time';
+    const newModify = {...this.state.modifyData};
+    newModify[name] = value;
+    this.setState({
+      modifyData: newModify
+    })
   };
   showEdit () {
     this.setState({
@@ -126,4 +208,31 @@ class ResumeProject extends PureComponent {
   };
 };
 
-export default ResumeProject;
+const mapState = (state) => ({
+  projectData: state.getIn(['resume','projectData']),
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  jobSeek: state.getIn(['login','jobSeek']),
+  modifyProject: state.getIn(['resume','modifyProject'])
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+    getData (Id) {
+      dispatch(getJobseekProjectData(Id));
+    },
+    modify (values) {
+      dispatch(modifyJobseekProjectData(values));
+    },
+    backState () {
+      dispatch(changeModifyProject(0));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
+    },
+    deleteItem (Id,id) {
+      dispatch(deleteJobseekProjectData(Id,id));
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(ResumeProject);

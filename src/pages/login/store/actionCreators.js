@@ -3,6 +3,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { fromJS } from 'immutable';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
+import { changeCity } from '../../../common/head/store/actionCreators';
 
 export const changeWarn = (value) => ({
   type: CHANGE_WARN_INFO,
@@ -47,9 +48,11 @@ export const checkAccount = (values,pattern) => {
       else {
         if (pattern === '企业端') {
           dispatch(importData(res.data));
+          dispatch(changeCity(res.data['area']));
         }
         else {
           dispatch(importData1(res.data));
+          dispatch(changeCity(res.data['area']));
         }
       }
     })

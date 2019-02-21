@@ -176,15 +176,8 @@ class ResumeIntent extends PureComponent {
     }
     if (modifyIntent === 1) {
       this.setState({
-        submit: false
-      });
-      const newModify = {...this.state.modifyData};
-      for (let item in newModify) {
-        newModify[item] = '';
-      };
-      this.setState({
         fade: 1,
-        modifyData: newModify
+        submit: false
       });
       backState();
     }

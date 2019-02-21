@@ -163,6 +163,29 @@ export const InputDiv = styled.div`
     width: 100%;
     padding-top: 20px;
   }
+  .ant-calendar-picker {
+    width: 229px !important;
+    height: 52px;
+    line-height: 52px;
+    margin-top: 2px;
+    vertical-align: middle;
+    display: inline-block;
+    .ant-calendar-picker-input {
+      height: 52px;
+      line-height: 52px;
+      padding: 0px;
+      .ant-calendar-range-picker-input {
+        height: 52px;
+        line-height: 52px;
+        font-size: 15px;
+      }
+      .ant-calendar-range-picker-separator {
+        height: 52px;
+        line-height: 52px;
+        font-size: 15px;
+      }
+    }
+  }
 `;
 
 export const ResumeWrapper = styled.div`
@@ -927,10 +950,6 @@ export const DownloadArea = styled.div`
          color: #1787fb;
          transition: color 0.3s;
        }
-       span {
-         color: red;
-         transition: color 0.3s;
-       }
      }
      a {
        height: 100%;
@@ -948,6 +967,10 @@ export const DownloadArea = styled.div`
        right: 0px;
        top: 0px;
        cursor: pointer;
+       &:hover {
+         color: red;
+         transition: color 0.3s;
+       }
      }
   }
 `;

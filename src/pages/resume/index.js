@@ -12,7 +12,7 @@ class Resume extends PureComponent {
   render () {
     return (
       <ResumeWrapper>
-        <Head father='resume'/>
+        <Head/>
         <ResumeHeader/>
         <ResumeContent>
           <ResumeDetail/>
