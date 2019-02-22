@@ -935,9 +935,9 @@ export const DownloadArea = styled.div`
   .item {
      display: inline-block;
      width: auto;
-     margin-right: 50px;
+     margin-right: 30px;
      margin-left: 50px !important;
-     padding-right: 65px;
+     padding-right: 35px;
      box-sizing: border-box;
      height: 50px;
      margin-left: 10px;
@@ -945,12 +945,6 @@ export const DownloadArea = styled.div`
      line-height: 50px;
      overflow: hidden;
      position: relative;
-     &:hover {
-       i {
-         color: #1787fb;
-         transition: color 0.3s;
-       }
-     }
      a {
        height: 100%;
        display: inline-block;
@@ -960,6 +954,10 @@ export const DownloadArea = styled.div`
      i {
        display: inline-block;
        cursor: pointer;
+       &:hover {
+         color: #1787fb;
+         transition: color 0.3s;
+       }
      }
      span {
        display: block;
@@ -975,11 +973,11 @@ export const DownloadArea = styled.div`
   }
 `;
 
-export const Upload = styled.div`
+export const Uploading = styled.div`
   width: 100%;
-  height: auto;
-  overflow: hidden;
-  .tips {
+  height: auto;;
+  line-height: 60px;
+  .title {
     width: 140px;
     font-weight: 550;
     font-size: 16px;
@@ -987,8 +985,37 @@ export const Upload = styled.div`
     height: 50px;
     display: block;
   }
-  input {
-    margin-left: 145px;
+  .upload {
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    line-height: 60px;
+    display: block;
+    .ant-upload-list {
+      width: 30%;
+      height: auto;
+      display: block;
+      line-height: 25px;
+      margin: auto;
+    }
+    .ant-upload {
+      width: 30%;
+      height: 60px;
+      display: block;
+      line-height: 60px;
+      margin: auto;
+      .ant-upload {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        font-size: 16px;
+        .ant-btn {
+          width: 100%;
+          height: 60px;
+          line-height: 60px;
+        }
+      }
+    }
   }
 `;
 

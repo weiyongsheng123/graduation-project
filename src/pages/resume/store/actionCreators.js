@@ -1,4 +1,4 @@
-import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_FILE_DATA } from './actionTypes';
+import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import qs from 'qs';
@@ -56,23 +56,23 @@ export const getProjectData = (value) => ({
   value: fromJS(value)
 });
 
-export const getFileData = (value) => ({
-  type: GET_FILE_DATA,
+export const getUploadData = (value) => ({
+  type: GET_UPLOAD_DATA,
   value: fromJS(value)
 });
 
-export const getJobseekFileData = (Id) => {
+export const getJobseekUploadData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekFileData.php',
+        url: 'getJobseekUploadData.php',
         data: qs.stringify({
           Id: Id
         })
       })
       .then((res)=>{
         if (res.data) {
-          dispatch(getFileData(res.data));
+          dispatch(getUploadData(res.data));
         }
         else {
           console.log('出错了哈哈哈');
@@ -190,6 +190,12 @@ export const getJobseekNameData = (id) => {
       if (res.data) {
         dispatch(importData1(res.data));
         dispatch(changeCity(res.data['area']));
+        var storage=window.localStorage;
+        const newAccount = JSON.parse(storage["peiqiAccount"]);
+        newAccount['account'] = res.data['telNumber'];
+        newAccount['type'] = 'telNumber';
+        let d = JSON.stringify(newAccount);
+        storage["peiqiAccount"] = d;
       }
       else {
         console.log("更新出错");
@@ -197,6 +203,30 @@ export const getJobseekNameData = (id) => {
     })
     .catch((res) => {
       console.log("获得求职人信息列表失败");
+    })
+  }
+};
+
+export const deleteJobseekUploadData = (Id,id) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'deleteJobseekUploadData.php',
+      data: qs.stringify({
+        Id: id
+      })
+    })
+    .then((res)=>{
+      dispatch(changeAjax(false));
+      if (res.data) {
+        dispatch(getJobseekUploadData(Id));
+      }
+      else {
+        console.log("删除上传表数据失败");
+      }
+    })
+    .catch((res)=>{
+      console.log("删除上传表连接失败");
     })
   }
 };
@@ -383,28 +413,31 @@ export const modifyJobseekName = (values,file) => {
     .catch((res) => {
       console.log("传递失败");
     })
-    axios({
-      method: 'post',
-      url: 'addFiles.php',
-      data: file,
-      params: {
-        Id: values['Id']
-      },
-    })
-    .then((res) => {
-      switch (res.data) {
-        case 0:
-          dispatch(changeNamePhoto(0));break;
-        case 1:
-          dispatch(changeNamePhoto(1));break;
-        case 2:
-          dispatch(changeNamePhoto(2));break;
-        default:
-          dispatch(changeNamePhoto(0));
-      }
-    })
-    .catch((res) => {
-      console.log("传递失败");
-    })
+    if (file) {
+      axios({
+        method: 'post',
+        url: 'addFiles.php',
+        data: file,
+        params: {
+          Id: values['Id']
+        },
+      })
+      .then((res) => {
+        switch (res.data) {
+          case 1:
+            dispatch(changeNamePhoto(1));break;
+          case 2:
+            dispatch(changeNamePhoto(2));break;
+          default:
+            dispatch(changeNamePhoto(0));
+        }
+      })
+      .catch((res) => {
+        console.log("传递失败");
+      })
+    }
+    else {
+      dispatch(changeNamePhoto(1));
+    }
   }
 }

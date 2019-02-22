@@ -1,28 +1,52 @@
 import React, { PureComponent } from 'react';
 import { AdvertiseMent, AdvertiseItem, AdvertiseOne, AdvertiseTwo } from '../style';
 import { connect } from 'react-redux';
-
+import { getAdvertisement } from '../store/actionCreators';
 
 class Advertisement extends PureComponent {
 
   render () {
+    const { advertisementList } = this.props;
+    const newAdvertisement = advertisementList.toJS();
+    let adv1 = [];
+    let adv2 = [];
+    let side = null;
+    if (newAdvertisement.length) {
+      adv1 = newAdvertisement[0];
+      adv2 = newAdvertisement[1];
+      side = <div>
+               <AdvertiseOne><a href={adv2[0]['href']} title={adv2[0]['title']}><img src={adv2[0]['imgUrl']} alt=""/></a></AdvertiseOne>
+               <AdvertiseTwo><a href={adv2[1]['href']} title={adv2[1]['title']}><img src={adv2[1]['imgUrl']} alt=""/></a></AdvertiseTwo>
+             </div>;
+    }
     return (
       <AdvertiseMent>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/dztl.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/1000_61.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/cy_sytl.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/dztl.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/cy_sytl.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseItem imgUrl="https://static.ahjob.com.cn/img/files/dztl.jpg" href="http://www.baidu.com"></AdvertiseItem>
-        <AdvertiseOne><a href="http://special.zhaopin.com/2019/nh/11237/ahyx013152/careers.html"><img src="https://img02.zhaopin.cn/img_button/201901/31/01_120047558691.gif" alt=""/></a></AdvertiseOne>
-        <AdvertiseTwo><a href="https://xiaoyuan.zhaopin.com/"><img src="https://img00.zhaopin.cn/img_button/201901/18/02_180934127172.jpg" alt=""/></a></AdvertiseTwo>
+        {
+          adv1.map((item)=>{
+            return (
+              <AdvertiseItem imgUrl={item['imgUrl']} key={item['Id']} href={item['href']} title={item['title']}></AdvertiseItem>
+            )
+          })
+        }
+        {side}
       </AdvertiseMent>
     )
   };
+  componentDidMount () {
+    this.props.getAdver();
+  }
 };
 
 const mapState = (state) => ({
-
+  advertisementList: state.getIn(['home','advertisementList'])
 });
 
-export default connect(mapState,null)(Advertisement);
+const mapDispatch = (dispatch) => {
+  return {
+    getAdver () {
+      dispatch(getAdvertisement());
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(Advertisement);

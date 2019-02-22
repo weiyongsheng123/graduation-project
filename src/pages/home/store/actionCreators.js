@@ -1,4 +1,4 @@
-import { ADD_POSITION_LIST, ADD_ARSAEX_LIST } from './actionTypes';
+import { ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 
@@ -13,6 +13,66 @@ const addDataList = (salary,area,experience) => ({
   area: fromJS(area),
   experience: fromJS(experience)
 });
+
+const addAdvertisementList = (value) => ({
+  type: ADD_ADVERTISEMENT_LIST,
+  value: fromJS(value)
+});
+
+const addRecommendWorkList = (value) => ({
+  type: ADD_RECOMMENDWORK_LIST,
+  value: fromJS(value)
+});
+
+const addRecommendSkillList = (value) => ({
+  type: ADD_RECOMMENDSKILL_LIST,
+  value: fromJS(value)
+});
+
+export const getRecommendSkill = () => {
+  return (dispatch) => {
+    axios({
+      method: 'get',
+      url: 'getRecommendSkill.php'
+    })
+    .then((res)=>{
+      dispatch(addRecommendSkillList(res.data));
+    })
+    .catch((res)=>{
+      console.log("连接面试技巧列表失败");
+    })
+  }
+}
+
+export const getRecommendWork = () => {
+  return (dispatch) => {
+    axios({
+      method: 'get',
+      url: 'getRecommendWork.php'
+    })
+    .then((res)=>{
+      dispatch(addRecommendWorkList(res.data));
+    })
+    .catch((res)=>{
+      console.log("连接工作资讯列表失败");
+    })
+  }
+};
+
+export const getAdvertisement = () => {
+  return (dispatch) => {
+    axios({
+      method: 'get',
+      url: 'getAdvertise.php'
+    })
+    .then((res)=>{
+      dispatch(addAdvertisementList(res.data));
+    })
+    .catch((res)=>{
+      console.log("连接广告列表失败");
+    })
+  }
+};
 
 export const getPosition = () => {
   return (dispatch) => {

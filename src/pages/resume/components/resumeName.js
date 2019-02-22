@@ -29,7 +29,8 @@ class ResumeName extends PureComponent {
           telNumber: true,
           email: true
         },
-        file: null
+        file: null,
+        first: true
       };
       this.showProfile = this.showProfile.bind(this);
       this.showEdit = this.showEdit.bind(this);
@@ -43,7 +44,7 @@ class ResumeName extends PureComponent {
   render () {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
-    const { modifyTruly, fade } = this.state;
+    const { modifyTruly, fade, modifyData } = this.state;
     const { jobSeek, areaList, experienceList } = this.props;
     const newJobseek = jobSeek.toJS();
     for (let item in newJobseek) {
@@ -99,12 +100,12 @@ class ResumeName extends PureComponent {
             <i onClick={this.showProfile} className="iconfont close">&#xe603;</i>
             <InputDiv>
               <label htmlFor="name">用户名</label>
-              <Input className="input" name="name" onChange={this.handleChange} placeholder="请输入姓名" allowClear />
+              <Input className="input" value={modifyData['name']} name="name" onChange={this.handleChange} placeholder="请输入姓名" allowClear />
               { !modifyTruly['name'] ? <span className="warn">用户名是必填的</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="sex">性别</label>
-              <RadioGroup name="sex" onChange={this.handleChange} >
+              <RadioGroup name="sex" value={modifyData['sex']} onChange={this.handleChange} >
                 <Radio name="sex" value='男'>男</Radio>
                 <Radio name="sex" value='女'>女</Radio>
               </RadioGroup>
@@ -112,7 +113,7 @@ class ResumeName extends PureComponent {
             </InputDiv>
             <InputDiv>
               <label htmlFor="age">年龄</label>
-              <InputNumber name="age" min={1} max={100} defaultValue={23} onChange={this.handleChangeAge}/>
+              <InputNumber name="age" value={modifyData['age']} min={1} max={100} defaultValue={23} onChange={this.handleChangeAge}/>
               { !modifyTruly['age'] ? <span className="warn">年龄是必填的</span> : null }
             </InputDiv>
             <InputDiv>
@@ -124,6 +125,7 @@ class ResumeName extends PureComponent {
                 optionFilterProp="children"
                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 onChange={this.handleChangeArea}
+                value={modifyData['area']}
               >
                 {
                   areaList.map((item)=>{
@@ -144,6 +146,7 @@ class ResumeName extends PureComponent {
                 optionFilterProp="children"
                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 onChange={this.handleChangeExperience}
+                value={modifyData['experience']}
               >
                 {
                   experienceList.map((item)=>{
@@ -157,12 +160,12 @@ class ResumeName extends PureComponent {
             </InputDiv>
             <InputDiv>
               <label htmlFor="phone">手机</label>
-              <Input className="input" name="telNumber" placeholder="请输入7-13位手机号" onChange={this.handleChange} allowClear />
+              <Input className="input" value={modifyData['telNumber']} name="telNumber" placeholder="请输入7-13位手机号" onChange={this.handleChange} allowClear />
               { !modifyTruly['telNumber'] ? <span className="warn">手机号码不符合规范</span> : null }
             </InputDiv>
             <InputDiv>
               <label htmlFor="email">邮箱</label>
-              <Input className="input" name="email" type="email" onChange={this.handleChange} placeholder="请输入邮箱" allowClear />
+              <Input className="input" name="email" value={modifyData['email']} type="email" onChange={this.handleChange} placeholder="请输入邮箱" allowClear />
               { !modifyTruly['email'] ? <span className="warn">邮箱不符合规范</span> : null }
             </InputDiv>
             <InputDiv>
@@ -178,20 +181,41 @@ class ResumeName extends PureComponent {
       </ResumeNameArea>
     )
   };
+  placeholder () {
+    const { jobSeek } = this.props;
+    const NewJobseek = jobSeek.toJS();
+    const placeholderModify = {};
+    placeholderModify['name'] = NewJobseek['name'];
+    placeholderModify['sex'] = NewJobseek['sex'];
+    placeholderModify['age'] = NewJobseek['age'];
+    placeholderModify['area'] = NewJobseek['area'];
+    placeholderModify['experience'] = NewJobseek['experience'];
+    placeholderModify['telNumber'] = NewJobseek['telNumber'];
+    placeholderModify['email'] = NewJobseek['email'];
+    this.setState({
+      modifyData: placeholderModify,
+      first: false
+    })
+  }
   componentDidUpdate () {
-    const { modifyName, namePhoto, getNewData, jobSeek, backState } = this.props;
+    const { modifyName, namePhoto, getNewData, jobSeek, backState, loginOrNot } = this.props;
+    const { first } = this.state;
     if (modifyName === 1 && namePhoto === 1) {
       const NewJobseek = jobSeek.toJS();
       const id = NewJobseek['Id'];
       getNewData(id);
       this.setState({
-        fade: 1
+        fade: 1,
+        first: true
       });
       backState();
     }
     else if (modifyName === 2 && namePhoto === 2) {
       alert("更新出错");
       backState();
+    }
+    if ( first && loginOrNot ) {
+      this.placeholder();
     }
   }
   submitModify () {
@@ -319,6 +343,7 @@ class ResumeName extends PureComponent {
 };
 
 const mapState = (state) => ({
+  loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
   areaList: state.getIn(['home','areaList']),
   experienceList: state.getIn(['home','experienceList']),

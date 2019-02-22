@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_FILE_DATA } from './actionTypes';
+import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA } from './actionTypes';
 
 const defaultState = fromJS({
   modifyName: 0,
@@ -12,7 +12,7 @@ const defaultState = fromJS({
   workData: [ ],
   projectData: [ ],
   educateData: [ ],
-  fileData: [ ]
+  uploadData: [ ]
 });
 
 export default (state = defaultState,action) => {
@@ -37,8 +37,8 @@ export default (state = defaultState,action) => {
       return state.set('projectData',action.value);
     case GET_EDUCATE_DATA:
       return state.set('educateData',action.value);
-    case GET_FILE_DATA:
-      return state.set('fileData',action.value);
+    case GET_UPLOAD_DATA:
+      return state.set('uploadData',action.value);
     default:
       return state;
   }

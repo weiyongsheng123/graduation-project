@@ -362,6 +362,8 @@ export const WorkInfo = styled.div`
   height: auto;
   overflow: hidden;
   color: #666;
+  box-sizing: border-box;
+  padding-bottom: 20px;
   .tle {
     display: block;
     font-size: 16px;
@@ -458,6 +460,8 @@ export const InterviewSkill = styled.div`
   overflow: hidden;
   font-size: 12px;
   color: #666;
+  box-sizing: border-box;
+  padding-bottom: 15px;
   .tle {
     display: block;
     font-size: 16px;
