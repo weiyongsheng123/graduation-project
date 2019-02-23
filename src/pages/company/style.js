@@ -32,12 +32,29 @@ export const InputDiv = styled.div`
   display: inline-block;
   font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", "\\5FAE软雅黑", STHeitiSC-Light, simsun, "\\5B8B体", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 12px;
-  height: 56px;
+  height: 70px;
+  box-sizing: border-box;
+  padding-bottom: 15px;
   width: 324px;
   overflow: hidden;
-  margin-top: 18px;
+  position: relative;
   &.center {
     margin-left: 324px;
+  }
+  &.marTop {
+    margin-top: 20px;
+  }
+  .warn {
+    width: 324px;
+    height: 15px;
+    font-size: 14px;
+    line-height: 14px;
+    color: red;
+    display: block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
   }
   label {
     font-size: 16px;
@@ -46,7 +63,7 @@ export const InputDiv = styled.div`
     width: 84px;
     text-align: right;
     box-sizing: border-box;
-    padding-right: 5px;
+    padding-right: 15px;
     color: #666;
     vertical-align: middle;
   }
@@ -303,7 +320,7 @@ export const EditDetail = styled.div`
   width: 550px;
   height: auto;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 10px;
   background: #fff;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
@@ -485,7 +502,7 @@ export const ReseriveItem = styled.li`
 
 export const NewArea = styled.div`
   width: 100%;
-  height: 600px;
+  height: 620px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
   position: fixed;
@@ -541,8 +558,10 @@ export const InputTitle = styled.h3`
 
 export const NewInputs = styled.div`
   width: 1050px;
-  height: 600px;
+  height: 620px;
   overflow: auto;
   margin: auto;
   background: #fff;
+  box-sizing: border-box;
+  padding-left: 30px;
 `;

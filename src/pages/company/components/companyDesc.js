@@ -1,34 +1,65 @@
 import React, { PureComponent } from 'react';
 import { DescArea, DescImg, DescInfo, DescDetail, EditArea, EditDetail, InputDiv } from '../style';
-import { Button, Input, DatePicker } from 'antd';
+import { Select, Button, Input, DatePicker } from 'antd';
+import moment from 'moment';
 import { CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
+import { modifyCompanyDetail, changeModifyCompany } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class CompanyDesc extends PureComponent {
   constructor (props) {
     super(props);
     this.state={
-      changeShow: false
-    }
+      changeShow: false,
+      modifyData: {
+        name: '',
+        area: '',
+        direction: '',
+        beginTime: '',
+        scale: '',
+        desc: ''
+      },
+      file: null,
+      submit: false,
+      first: true
+    };
+    this.hideEdit = this.hideEdit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeArea = this.handleChangeArea.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.submitModify = this.submitModify.bind(this);
   }
   render () {
     const { TextArea } = Input;
+    const Option = Select.Option;
     const InputGroup = Input.Group;
+    const { company, areaList } = this.props;
+    const { submit, modifyData } = this.state;
+    const newCompany = company.toJS();
+    const dateFormat = 'YYYY-MM-DD';
+    for (let item in newCompany) {
+      if (!newCompany[item]) {
+        newCompany[item] = '[空]';
+      }
+    }
+    if (newCompany['logoUrl'] === '[空]') {
+      newCompany['logoUrl'] = './files/image/companyLogoUrl.jpg';
+    }
     return (
       <DescArea>
-        <DescImg src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549481521177&di=7bb55657ed3eb2e9d76a51be6372c0e8&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170621%2F19f3f9d487c1409f9c45f0771cb1a72e_th.jpg" alt=""/>
+        <DescImg src={newCompany['logoUrl']} alt={newCompany['name']}/>
         <DescInfo>
-          <p><span>公司名称：</span>阿里巴巴网络科技</p>
-          <p><span>从业方向：</span>互联网，计算机软件</p>
-          <p><span>创办时间：</span>2000年2月</p>
-          <p><span>规模类别：</span>民营/人数3000+</p>
+          <p><span>公司名称：</span>{newCompany['name']}</p>
+          <p><span>从业方向：</span>{newCompany['direction']}</p>
+          <p><span>创办时间：</span>{newCompany['beginTime']}</p>
+          <p><span>规模类别：</span>{newCompany['scale']}</p>
         </DescInfo>
         <DescDetail>
           <p>简介：</p>
           <div>
-            阿里巴巴网络技术有限公司（简称：阿里巴巴集团）是以曾担任英语教师的马云为首的18人于1999年在浙江杭州创立的公司。 [1-2] 
-            阿里巴巴集团经营多项业务，另外也从关联公司的业务和服务中取得经营商业生态系统上的支援。业务和关联公司的业务包括：淘宝网、天猫、聚划算、全球速卖通、阿里巴巴国际交易市场、1688、阿里妈妈、阿里云、蚂蚁金服、菜鸟网络等。 [3] 
-            2014年9月19日，阿里巴巴集团在纽约证券交易所正式挂牌上市，股票代码“BABA”，创始人和董事局主席为马云。
-            2018年7月19日，全球同步《财富》世界500强排行榜发布，阿里巴巴集团排名300位。 [4]  2018年12月，阿里巴巴入围2018世界品牌500强。
+            {newCompany['desc']}
           </div>
         </DescDetail>
         <span className="edit" onClick={this.showEdit.bind(this)}>
@@ -43,42 +74,155 @@ class CompanyDesc extends PureComponent {
         >
           <EditArea>
             <EditDetail>
-              <i className="iconfont close" onClick={this.hideEdit.bind(this)}>&#xe603;</i>
-              <InputDiv>
-                <label htmlFor="companyName">公司名称</label>
-                <Input className="input" name="companyName" placeholder="请输入公司名称" allowClear />
+              <i className="iconfont close" onClick={this.hideEdit}>&#xe603;</i>
+              <InputDiv className="marTop">
+                <label htmlFor="name">公司名称</label>
+                <Input className="input" value={modifyData['name']} onChange={this.handleChange} name="name" placeholder="请输入公司名称" allowClear />
+                { submit && !modifyData['name'] ? <span className="warn">公司名称必填</span> : null }
               </InputDiv>
               <InputDiv>
-                <label htmlFor="companyDirection">从业方向</label>
-                <Input className="input" name="companyDirection" placeholder="请输入从业方向" allowClear />
+                <label htmlFor="area">地区</label>
+                <Select
+                  name="area"
+                  showSearch
+                  placeholder="请选择地区"
+                  optionFilterProp="children"
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  onChange={this.handleChangeArea}
+                  value={modifyData['area']}
+                >
+                {
+                  areaList.map((item)=>{
+                    return (
+                      <Option value={item} key={item}>{item}</Option>
+                    )
+                  })
+                }
+              </Select>
+              { submit && !modifyData['area'] ? <span className="warn">地区必填</span> : null }
               </InputDiv>
               <InputDiv>
-                <label htmlFor="companyBegin">创办时间</label>
+                <label htmlFor="direction">从业方向</label>
+                <Input className="input" value={modifyData['direction']} onChange={this.handleChange} name="direction" placeholder="请输入从业方向" allowClear />
+                { submit && !modifyData['direction'] ? <span className="warn">从业方向必填</span> : null }
+              </InputDiv>
+              <InputDiv>
+                <label htmlFor="beginTime">创办时间</label>
                 <InputGroup compact>
-                  <DatePicker name="companyBegin" placeholder="请选择时间"/>
+                  <DatePicker name="beginTime" value={moment(modifyData['beginTime'], dateFormat)} format={dateFormat} onChange={this.handleChangeDate} placeholder="请选择时间"/>
                 </InputGroup>
+                { submit && !modifyData['beginTime'] ? <span className="warn">创办时间必填</span> : null }
               </InputDiv>
               <InputDiv>
-                <label htmlFor="companyRange">规模类别</label>
-                <Input className="input" name="companyRange" placeholder="请输入人数及私/国企" allowClear />
+                <label htmlFor="scale">规模类别</label>
+                <Input className="input" value={modifyData['scale']} onChange={this.handleChange} name="scale" placeholder="请输入人数及私/国企" allowClear />
+                { submit && !modifyData['scale'] ? <span className="warn">规模类别必填</span> : null }
               </InputDiv>
               <InputDiv className="less">
                 <label htmlFor="file">头像</label>
-                <input className="file" type="file" name="file"/>
+                <input className="file" onChange={this.uploadFile} type="file" name="file"/>
               </InputDiv>
               <InputDiv className="chooseMany">
-                <label htmlFor="companyDesc">简介</label>
-                <TextArea rows={4} name="companyDesc" placeholder="请输入对公司的简介"/>
+                <label htmlFor="desc">简介</label>
+                <TextArea rows={3} value={modifyData['desc']} onChange={this.handleChange} name="desc" placeholder="请输入对公司的简介"/>
+                { submit && !modifyData['desc'] ? <span className="warn">简介必填</span> : null }
               </InputDiv>
               <InputDiv>
-                <Button onClick={this.hideEdit.bind(this)}>提交</Button>
-                <Button onClick={this.hideEdit.bind(this)}>取消</Button>
+                <Button onClick={this.submitModify}>提交</Button>
+                <Button onClick={this.hideEdit}>取消</Button>
               </InputDiv>
             </EditDetail>
           </EditArea>
         </CSSTransition>
       </DescArea>
     )
+  };
+  placeholder () {
+    const { company } = this.props;
+    const NewCompany = company.toJS();
+    const placeholderModify = {};
+    placeholderModify['name'] = NewCompany['name'];
+    placeholderModify['area'] = NewCompany['area'];
+    placeholderModify['direction'] = NewCompany['direction'];
+    placeholderModify['area'] = NewCompany['area'];
+    placeholderModify['beginTime'] = NewCompany['beginTime'];
+    placeholderModify['scale'] = NewCompany['scale'];
+    placeholderModify['desc'] = NewCompany['desc'];
+    this.setState({
+      modifyData: placeholderModify,
+      first: false
+    })
+  };
+  componentDidUpdate () {
+    const { loginOrNot, modifyCompany, backState } = this.props;
+    const { first } = this.state;
+    if ( first && loginOrNot ) {
+      this.placeholder();
+    }
+    if (modifyCompany) {
+      this.setState({
+        changeShow: false
+      });
+      backState();
+    }
+  }
+  submitModify () {
+    this.setState({
+      submit: true
+    });
+    const newModify = {...this.state.modifyData};
+    const { company, modify, ajaxSend } =this.props;
+    const { file } = this.state;
+    let success = true;
+    for (let item in newModify) {
+      if (newModify[item]) {
+        continue;
+      }
+      else {
+        success = false;
+      }
+    }
+    if (success) {
+      const NewCompany = company.toJS();
+      const id = NewCompany['Id'];
+      newModify['Id'] = id;
+      modify(newModify,file);
+      ajaxSend();
+    }
+  };
+  handleChange (e) {
+    const value = e.target.value;
+    const name = e.target.name;
+    const newModify = {...this.state.modifyData};
+    newModify[name] = value;
+    this.setState({
+      modifyData: newModify
+    })
+  };
+  handleChangeDate (date, dateString) {
+    const name = 'beginTime';
+    const newModify = {...this.state.modifyData};
+    newModify[name] = dateString;
+    this.setState({
+      modifyData: newModify
+    })
+  };
+  handleChangeArea (e) {
+    const value = `${e}`;
+    const name = 'area';
+    const newModify = {...this.state.modifyData};
+    newModify[name] = value;
+    this.setState({
+      modifyData: newModify
+    })
+  };
+  uploadFile (e) {
+    let file = e.target.files[0];
+    let data = new FormData();
+    data.append("file",file);
+    this.setState({
+      file: data
+    })
   };
   showEdit () {
     this.setState({
@@ -92,4 +236,26 @@ class CompanyDesc extends PureComponent {
   };
 }
 
-export default CompanyDesc;
+
+const mapState = (state) => ({
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  company: state.getIn(['login','company']),
+  areaList: state.getIn(['home','areaList']),
+  modifyCompany: state.getIn(['company','modifyCompany'])
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+    modify (values,file) {
+      dispatch(modifyCompanyDetail(values,file));
+    },
+    backState () {
+     dispatch(changeModifyCompany(false));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(CompanyDesc);

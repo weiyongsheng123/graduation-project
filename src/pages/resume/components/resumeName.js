@@ -205,8 +205,7 @@ class ResumeName extends PureComponent {
       const id = NewJobseek['Id'];
       getNewData(id);
       this.setState({
-        fade: 1,
-        first: true
+        fade: 1
       });
       backState();
     }

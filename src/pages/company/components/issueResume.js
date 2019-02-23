@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { IssueArea, IssueTitle, IssueList, IssueItem } from '../style';
+import { Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
 import { showOrHide } from '../store/actionCreators';
 
@@ -7,6 +8,7 @@ class CompanyIssue extends PureComponent {
   constructor (props) {
       super(props);
       this.state = {
+        resure: '确认要删除此条',
         list: [
           {
             resumeName: 'web前端高级开发',
@@ -29,6 +31,7 @@ class CompanyIssue extends PureComponent {
     }
   render () {
     const { showEdit } = this.props;
+    const { resure } = this.state;
     return (
       <IssueArea>
         <IssueTitle>
@@ -47,7 +50,9 @@ class CompanyIssue extends PureComponent {
               return (
                 <IssueItem key={index}>
                   <span className="left">{item.resumeName}</span>
-                  <span className="iconfont">&#xe603;</span>
+                  <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                    <span className="iconfont">&#xe603;</span>
+                  </Popconfirm>
                   <span className="right">{item.issueTime}</span>
                 </IssueItem>
               )
@@ -56,6 +61,10 @@ class CompanyIssue extends PureComponent {
         </IssueList>
       </IssueArea>
     )
+  };
+  handleDelete (id) {
+    message.info('删除中...');
+    
   };
 };
 

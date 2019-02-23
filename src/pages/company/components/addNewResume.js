@@ -24,11 +24,11 @@ class AddNewResume extends PureComponent {
                 发布新的招聘启事
                 <i className="iconfont" onClick={()=>showEdit(false)}>&#xe603;</i>
               </InputTitle>
-              <InputDiv>
+              <InputDiv className="marTop">
                 <label htmlFor="positionName">职位名</label>
                 <Input className="input" name="companyName" placeholder="请输入所需职位" allowClear />
               </InputDiv>
-              <InputDiv>
+              <InputDiv className="marTop">
                 <label htmlFor="positionSalary">薪资</label>
                 <Select
                   name="positionSalary"
@@ -43,7 +43,7 @@ class AddNewResume extends PureComponent {
                   <Option value="4000-6000">4000-6000元</Option>
                 </Select>
               </InputDiv>
-              <InputDiv>
+              <InputDiv className="marTop">
                 <label htmlFor="education">学历</label>
                 <Select
                   name="education"
@@ -57,7 +57,7 @@ class AddNewResume extends PureComponent {
                   <Option value="研究生">研究生</Option>
                 </Select>
               </InputDiv>
-              <InputDiv>
+              <InputDiv className="marTop">
                   <label htmlFor="experience">经验</label>
                   <Select
                     name="experience"
@@ -71,11 +71,11 @@ class AddNewResume extends PureComponent {
                     <Option value="6个月-1年">6个月-1年</Option>
                   </Select>
                 </InputDiv>
-                <InputDiv>
+                <InputDiv className="marTop">
                   <label htmlFor="numberPeople">人数</label>
                   <InputNumber name="numberPeople" min={1} max={100} defaultValue={1}/>
                 </InputDiv>
-                <InputDiv>
+                <InputDiv className="marTop">
                   <label htmlFor="area">地区</label>
                   <Select
                     name="area"
@@ -89,20 +89,20 @@ class AddNewResume extends PureComponent {
                     <Option value="蚌埠">蚌埠</Option>
                   </Select>
                 </InputDiv>
-                <InputDiv className="center">
+                <InputDiv className="center marTop">
                   <label htmlFor="areaDetail">详细地址</label>
                   <Input className="input" name="areaDetail" placeholder="请输入工作详细地址" allowClear />
                 </InputDiv>
                 <br/>
-                <InputDiv className="chooseMany">
+                <InputDiv className="chooseMany marTop">
                   <label htmlFor="projectdesc">职位信息</label>
                   <TextArea rows={6} name="projectdesc" placeholder="请输入在此项目工作中的具体描述"/>
                 </InputDiv>
-                <InputDiv className="chooseMany">
+                <InputDiv className="chooseMany marTop">
                   <label htmlFor="projectdesc">职位要求</label>
                   <TextArea rows={6} name="projectdesc" placeholder="请输入在此项目工作中的具体描述"/>
                 </InputDiv>
-                <InputDiv className="chooseMany">
+                <InputDiv className="chooseMany marTop">
                   <label htmlFor="projectdesc">公司福利</label>
                   <TextArea rows={6} name="projectdesc" placeholder="请输入在此项目工作中的具体描述"/>
                 </InputDiv>
