@@ -47,9 +47,11 @@ export const GlobalStyle = createGlobalStyle `
   body {
     .ant-cascader-menus {
       background: transparent;
+      box-shadow: none;
       .ant-cascader-menu {
         height: auto;
         background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       }
     }
   }

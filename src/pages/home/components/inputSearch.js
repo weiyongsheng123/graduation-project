@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import {
   Input, Select, Button, Cascader
 } from 'antd';
-import { getPosition } from '../store/actionCreators';
+import {  } from '../store/actionCreators';
 
 class InputSearch extends PureComponent {
   constructor (props) {
     super(props);
     this.state = {
       
-   };
+    };
   }
   render () {
     const { positionList, salaryList } = this.props;
@@ -24,7 +24,7 @@ class InputSearch extends PureComponent {
         <InputGroup compact>
           <Select defaultValue="Option1">
             <Option value="Option1">全部</Option>
-            <Option value="Option2">城市</Option>
+            <Option value="Option2">公司名</Option>
           </Select>
           <Input placeholder="请输入关键词,例如:JAVA,销售代表,行政助理等" />
           <Button type="primary" icon="search" />
@@ -60,7 +60,7 @@ class InputSearch extends PureComponent {
     )
   };
   componentDidMount () {
-    this.props.getPositionList();
+    
   }
 };
 
@@ -71,9 +71,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
   return {
-    getPositionList () {
-      dispatch(getPosition());
-    }
+    
   }
 }
 

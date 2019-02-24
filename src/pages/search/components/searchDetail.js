@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class SearchDetail extends PureComponent {
 
   render () {
-    const { positionList, page } = this.props;
+    const { positionList, page, pattern } = this.props;
     const newList = positionList.toJS();
     const list = [];
     if(newList.length) {
@@ -44,7 +44,7 @@ class SearchDetail extends PureComponent {
                   </p>
                   <p className="salary"><i className="iconfont">&#xe615;</i>{item.salary}</p>
                   <p className="continue">招聘中</p>
-                  <Button type="primary" onClick={(e)=>{e.preventDefault()}}>立即申请</Button>
+                  <Button type="primary" disabled={pattern === '求职者端' ? false : true} onClick={(e)=>{e.preventDefault()}}>立即申请</Button>
                 </DetailItem>
                 </Link>
               )
@@ -58,7 +58,8 @@ class SearchDetail extends PureComponent {
 
 const mapState = (state) => ({
   positionList: state.getIn(['search','positionList']),
-  page: state.getIn(['search','page'])
+  page: state.getIn(['search','page']),
+  pattern: state.getIn(['header','pattern'])
 });
 
 export default connect(mapState,null)(SearchDetail);

@@ -32,7 +32,7 @@ export const getPassword = (values) => {
       }
     })
     .catch ((res)=>{
-      console.log("连接获取密码失败");
+      alert("连接获取密码失败");
     })
   }
 };
@@ -56,7 +56,7 @@ export const modifyAccountData = (values) => {
       }
     })
     .catch ((res)=>{
-      console.log("修改信息失败");
+      alert("修改信息失败");
     })
   }
 }

@@ -75,11 +75,11 @@ export const getJobseekUploadData = (Id) => {
           dispatch(getUploadData(res.data));
         }
         else {
-          console.log('出错了哈哈哈');
+          alert('获取失败');
         }
       })
       .catch((res)=>{
-        console.log("获取期待表失败");
+        alert("获取期待表失败");
       })
   }
 }
@@ -98,11 +98,11 @@ export const getJobseekEducateData = (Id) => {
           dispatch(getEducateData(res.data));
         }
         else {
-          console.log('出错了哈哈哈');
+          alert('获取失败');
         }
       })
       .catch((res)=>{
-        console.log("获取期待表失败");
+        alert("获取期待表失败");
       })
   }
 }
@@ -121,11 +121,11 @@ export const getJobseekProjectData = (Id) => {
           dispatch(getProjectData(res.data));
         }
         else {
-          console.log('出错了哈哈哈');
+          alert('获取失败');
         }
       })
       .catch((res)=>{
-        console.log("获取期待表失败");
+        alert("获取期待表失败");
       })
   }
 };
@@ -144,11 +144,11 @@ export const getJobseekWorkData = (Id) => {
           dispatch(getWorkData(res.data));
         }
         else {
-          console.log('出错了哈哈哈');
+          alert('获取失败');
         }
       })
       .catch((res)=>{
-        console.log("获取期待表失败");
+        alert("获取期待表失败");
       })
   }
 }
@@ -167,11 +167,11 @@ export const getJobseekIntentData = (Id) => {
           dispatch(getIntentData(res.data));
         }
         else {
-          console.log('出错了哈哈哈');
+          alert('获取失败');
         }
       })
       .catch((res)=>{
-        console.log("获取期待表失败");
+        alert("获取期待表失败");
       })
   }
 };
@@ -198,11 +198,11 @@ export const getJobseekNameData = (id) => {
         storage["peiqiAccount"] = d;
       }
       else {
-        console.log("更新出错");
+        alert("更新出错");
       }
     })
     .catch((res) => {
-      console.log("获得求职人信息列表失败");
+      alert("获得求职人信息列表失败");
     })
   }
 };
@@ -222,11 +222,11 @@ export const deleteJobseekUploadData = (Id,id) => {
         dispatch(getJobseekUploadData(Id));
       }
       else {
-        console.log("删除上传表数据失败");
+        alert("删除上传表数据失败");
       }
     })
     .catch((res)=>{
-      console.log("删除上传表连接失败");
+      alert("删除上传表连接失败");
     })
   }
 };
@@ -246,11 +246,11 @@ export const deleteJobseekEducateData = (Id,id) => {
         dispatch(getJobseekEducateData(Id));
       }
       else {
-        console.log("删除学历表数据失败");
+        alert("删除学历表数据失败");
       }
     })
     .catch((res)=>{
-      console.log("删除学历表连接失败");
+      alert("删除学历表连接失败");
     })
   }
 };
@@ -270,11 +270,11 @@ export const deleteJobseekProjectData = (Id,id) => {
         dispatch(getJobseekProjectData(Id));
       }
       else {
-        console.log("删除经验表数据失败");
+        alert("删除经验表数据失败");
       }
     })
     .catch((res)=>{
-      console.log("删除经验表连接失败");
+      alert("删除经验表连接失败");
     })
   }
 };
@@ -294,11 +294,11 @@ export const deleteJobseekWorkData = (Id,id) => {
         dispatch(getJobseekWorkData(Id));
       }
       else {
-        console.log("删除工作表数据失败");
+        alert("删除工作表数据失败");
       }
     })
     .catch((res)=>{
-      console.log("删除工作表连接失败");
+      alert("删除工作表连接失败");
     })
   }
 };
@@ -321,7 +321,7 @@ export const modifyJobseekEducateData = (values) => {
       }
     })
     .catch((res) => {
-      console.log("更新教育列表连接失败");
+      alert("更新教育列表连接失败");
     })
   }
 };
@@ -344,7 +344,7 @@ export const modifyJobseekProjectData = (values) => {
       }
     })
     .catch((res) => {
-      console.log("更新项目列表连接失败");
+      alert("更新项目列表连接失败");
     })
   }
 };
@@ -367,7 +367,7 @@ export const modifyJobseekWorkData = (values) => {
       }
     })
     .catch((res) => {
-      console.log("更新工作列表连接失败");
+      alert("更新工作列表连接失败");
     })
   }
 };
@@ -390,7 +390,7 @@ export const modifyJobseekIntentData = (values) => {
       }
     })
     .catch((res) => {
-      console.log("更新期待列表连接失败");
+      alert("更新期待列表连接失败");
     })
   }
 };
@@ -411,7 +411,7 @@ export const modifyJobseekName = (values,file) => {
       }
     })
     .catch((res) => {
-      console.log("传递失败");
+      alert("传递失败");
     })
     if (file) {
       axios({
@@ -433,7 +433,7 @@ export const modifyJobseekName = (values,file) => {
         }
       })
       .catch((res) => {
-        console.log("传递失败");
+        alert("传递失败");
       })
     }
     else {

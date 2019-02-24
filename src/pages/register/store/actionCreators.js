@@ -27,12 +27,12 @@ export const submitApplice = (values) => {
       })
     })
     .then((res) => {
-      console.log(res);
+      alert(res);
       dispatch(changeApplicantRegiste(true));
       dispatch(changeAjax(false));
     })
     .catch((res) => {
-      console.log("传递失败");
+      alert("传递失败");
     })
   }
 }
@@ -56,7 +56,7 @@ export const submitCompany = (values) => {
       dispatch(changeAjax(false));
     })
     .catch((res) => {
-      console.log("传递失败");
+      alert("传递失败");
     })
   }
 }

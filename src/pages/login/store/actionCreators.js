@@ -57,7 +57,7 @@ export const checkAccount = (values,pattern) => {
       }
     })
     .catch((res) => {
-      console.log("连接失败");
+      alert("连接失败");
     })
   }
 }

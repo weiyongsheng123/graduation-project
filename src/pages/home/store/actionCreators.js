@@ -39,7 +39,7 @@ export const getRecommendSkill = () => {
       dispatch(addRecommendSkillList(res.data));
     })
     .catch((res)=>{
-      console.log("连接面试技巧列表失败");
+      alert("连接面试技巧列表失败");
     })
   }
 }
@@ -54,7 +54,7 @@ export const getRecommendWork = () => {
       dispatch(addRecommendWorkList(res.data));
     })
     .catch((res)=>{
-      console.log("连接工作资讯列表失败");
+      alert("连接工作资讯列表失败");
     })
   }
 };
@@ -69,7 +69,7 @@ export const getAdvertisement = () => {
       dispatch(addAdvertisementList(res.data));
     })
     .catch((res)=>{
-      console.log("连接广告列表失败");
+      alert("连接广告列表失败");
     })
   }
 };
@@ -84,7 +84,7 @@ export const getPosition = () => {
       dispatch(addPositionList(res.data));
     })
     .catch((res)=>{
-      console.log("连接职位列表失败");
+      alert("连接职位列表失败");
     })
   }
 };
@@ -102,7 +102,7 @@ export const getAreaSalaryExperience = () => {
       dispatch(addDataList(salary,area,experience));
     })
     .catch((res)=>{
-      console.log("获取地区月薪失败");
+      alert("获取地区月薪失败");
     })
   }
 };

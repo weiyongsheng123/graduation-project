@@ -127,7 +127,7 @@ class CompanyDesc extends PureComponent {
                 <TextArea rows={3} value={modifyData['desc']} onChange={this.handleChange} name="desc" placeholder="请输入对公司的简介"/>
                 { submit && !modifyData['desc'] ? <span className="warn">简介必填</span> : null }
               </InputDiv>
-              <InputDiv>
+              <InputDiv className="toRight">
                 <Button onClick={this.submitModify}>提交</Button>
                 <Button onClick={this.hideEdit}>取消</Button>
               </InputDiv>
@@ -163,6 +163,7 @@ class CompanyDesc extends PureComponent {
       this.setState({
         changeShow: false
       });
+      window.onmousewheel = document.onmousewheel= () => {return true};
       backState();
     }
   }
@@ -227,12 +228,14 @@ class CompanyDesc extends PureComponent {
   showEdit () {
     this.setState({
       changeShow: true
-    })
+    });
+    window.onmousewheel = document.onmousewheel= () => {return false};
   };
   hideEdit () {
     this.setState({
       changeShow: false
-    })
+    });
+    window.onmousewheel = document.onmousewheel= () => {return true};
   };
 }
 

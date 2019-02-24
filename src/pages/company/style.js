@@ -27,6 +27,60 @@ export const LoadTitle = styled.h2`
   margin-top: 80px;
 `;
 
+export const PositionPicker = styled.div`
+  color: rgb(159, 173, 198);
+  display: inline-block;
+  font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", "\\5FAE软雅黑", STHeitiSC-Light, simsun, "\\5B8B体", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 12px;
+  height: 70px;
+  box-sizing: border-box;
+  padding-bottom: 15px;
+  width: 648px;
+  margin-top: 20px;
+  overflow: hidden;
+  position: relative;
+  .warn {
+    width: 648px;
+    height: 15px;
+    font-size: 14px;
+    line-height: 14px;
+    color: red;
+    display: block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+  }
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    width: 84px;
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: 15px;
+    color: #666;
+    vertical-align: middle;
+  }
+  .ant-cascader-picker {
+    width: 553px !important;
+    height: 52px;
+    line-height: 52px;
+    margin-top: 2px;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    .ant-cascader-picker-label {
+      
+    }
+    .ant-cascader-input {
+      height: 52px;
+      line-height: 52px;
+    }
+  }
+`;
+
 export const InputDiv = styled.div`
   color: rgb(159, 173, 198);
   display: inline-block;
@@ -38,11 +92,21 @@ export const InputDiv = styled.div`
   width: 324px;
   overflow: hidden;
   position: relative;
-  &.center {
-    margin-left: 324px;
-  }
   &.marTop {
     margin-top: 20px;
+  }
+  &.center {
+    display: block;
+    margin: auto;
+  }
+  &.toRight {
+    padding-left: 50px;
+    .ant-btn {
+      width: 102px;
+      height: 54px;
+      line-height: 54px;
+      margin-left: 30px;
+    }
   }
   .warn {
     width: 324px;
@@ -108,7 +172,7 @@ export const InputDiv = styled.div`
       width: 100%;
       padding-right: 15px !important;
       padding-left: 10px !important;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.1;
       color: #333 !important;
       outline: none !important;
@@ -263,8 +327,8 @@ export const DescDetail = styled.div`
   height: 200px;
   p {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 43px;
+    line-height: 43px;
     font-size: 16px;
     font-weight: 550;
     margin-bottom: 0;
@@ -273,11 +337,13 @@ export const DescDetail = styled.div`
     width: 100%;
     height: 150px;
     overflow: hidden;
+    box-sizing: border-box;
+    padding-left: 20px;
     position: relative;
     &:after {
       content:"......";
       height: 21px;
-      width: 38px;
+      width: 33px;
       line-height: 21px;
       position:absolute;
       bottom:0;
@@ -318,8 +384,9 @@ export const EditArea = styled.div`
 
 export const EditDetail = styled.div`
   width: 550px;
-  height: auto;
+  height: 600px;
   margin: auto;
+  overflow: auto;
   margin-top: 10px;
   background: #fff;
   border: 1px solid #f0f0f0;
@@ -364,6 +431,7 @@ export const IssueTitle = styled.h3`
   box-sizing: border-box;
   padding-left: 20px;
   padding-right: 20px;
+  margin-bottom: 0px;
   line-height: 50px;
   border-bottom: 1px solid #f0f0f0;
   overflow: hidden;
@@ -412,6 +480,10 @@ export const IssueItem = styled.li`
     line-height: 50px;
     font-size: 18px;
     font-weight: 550;
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .right { 
     float: right;
@@ -441,6 +513,7 @@ export const ReseriveTitle = styled.h3`
   width: 100%;
   box-sizing: border-box;
   padding-left: 20px;
+  margin-bottom: 0px;
   font-size: 18px;
   font-weight: 550;
   line-height: 50px;

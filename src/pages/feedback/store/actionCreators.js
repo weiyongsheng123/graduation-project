@@ -20,7 +20,7 @@ export const submitSuggest = (values) =>{
       dispatch(changeAjax(false));
     })
     .catch(()=> {
-      console.log("连接失败");
+      alert("连接失败");
     })
   }
 }

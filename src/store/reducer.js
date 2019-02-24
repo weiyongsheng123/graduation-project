@@ -12,6 +12,7 @@ import { reducer as registerReducer } from '../pages/register/store';
 import { reducer as feedbackReducer } from '../pages/feedback/store';
 import { reducer as helpReducer } from '../pages/help/store';
 import { reducer as resumeReducer } from '../pages/resume/store';
+import { reducer as positionReducer } from '../pages/position/store';
 
 export default combineReducers({
   ident: identReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
   register: registerReducer,
   feedback: feedbackReducer,
   help: helpReducer,
-  resume: resumeReducer
+  resume: resumeReducer,
+  position: positionReducer
 })

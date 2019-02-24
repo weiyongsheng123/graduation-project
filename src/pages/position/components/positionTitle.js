@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { TitleArea, TitleContinue, TitleTitle, TitleCompany, TitleButton } from '../style';
 import { Button } from 'antd';
+import { connect } from 'react-redux';
 
 class PositionTitle extends PureComponent {
 
   render () {
+    const { pattern } = this.props;
     return (
       <TitleArea>
         <TitleContinue>
@@ -25,11 +27,21 @@ class PositionTitle extends PureComponent {
           </p>
         </TitleCompany>
         <TitleButton>
-          <Button type="primary">立即申请</Button>
+          <Button disabled={pattern === '求职者端' ? false: true} type="primary">立即申请</Button>
         </TitleButton>
       </TitleArea>
     )
   }
 };
 
-export default PositionTitle;
+const mapState = (state) => ({
+  pattern: state.getIn(['header','pattern'])
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+   
+  }
+};
+
+export default connect(mapState,mapDispatch)(PositionTitle);
