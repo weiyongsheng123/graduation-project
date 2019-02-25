@@ -27,7 +27,7 @@ class PositionTitle extends PureComponent {
           </p>
         </TitleCompany>
         <TitleButton>
-          <Button disabled={pattern === '求职者端' ? false: true} type="primary">立即申请</Button>
+          <Button disabled={pattern === '求职者端' ? false: true} title={pattern === '求职者端' ? "立刻申请" : "企业端不可选"} type="primary">立即申请</Button>
         </TitleButton>
       </TitleArea>
     )

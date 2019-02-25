@@ -11,7 +11,7 @@ import Home from './pages/home/loadable';
 import Resume from './pages/resume/loadable';
 import Company from './pages/company/loadable';
 import Search from './pages/search/loadable';
-import Position from './pages/position/loadable';
+import Positions from './pages/positions/loadable';
 import Help from './pages/help/loadable';
 import Feedback from './pages/feedback/loadable';
 import UserProtocol from './pages/register/components/useServiceProtocol';
@@ -75,9 +75,9 @@ class App extends Component {
             >
             </Route>
             <Route
-              path="/position"
+              path="/positions/:id"
               exact
-              component={Position}
+              component={Positions}
             >
             </Route>
             <Route

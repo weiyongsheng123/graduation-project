@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PageArea, Pages, PageLast, PageItem, PageNext, PageTotal, PageInput, PageEnd, PageSumbit } from '../style';
 import { connect } from 'react-redux';
-import { changePages, changeTotalPages } from '../store/actionCreators';
+import { changePages } from '../store/actionCreators';
 
 class SearchPage extends PureComponent {
   constructor (props) {
@@ -35,14 +35,10 @@ class SearchPage extends PureComponent {
       jump: parseInt(e.target.value)
     })
   }
-  componentDidMount () {
-    this.props.changeTotal(this.props.positionList.toJS());
-  }
 };
 
 const mapState = (state) => ({
   totalPages: state.getIn(['search','totalPages']),
-  positionList: state.getIn(['search','positionList']),
   page: state.getIn(['search','page'])
 });
 
@@ -50,6 +46,7 @@ const mapDispatch = (dispatch) => {
   return {
     changePage (number) {
       dispatch(changePages(number));
+      window.scrollTo( 0, 480);
     },
     changePageOne (number, total) {
       if (number < 1) {
@@ -59,9 +56,6 @@ const mapDispatch = (dispatch) => {
         number = total;
       }
       dispatch(changePages(number));
-    },
-    changeTotal (list) {
-      dispatch(changeTotalPages(list));
     }
   }
 }

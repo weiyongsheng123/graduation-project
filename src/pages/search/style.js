@@ -173,6 +173,14 @@ export const DetailList = styled.ul`
   margin-bottom: 0;
 `;
 
+export const DetailEmpty =styled.div`
+  width: 100%;
+  height: 200px;
+  background: url(${(props)=>props.imgUrl});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+`;
+
 export const DetailItem = styled.li`
   width: 100%;
   height: 120px;
@@ -241,6 +249,13 @@ export const DetailItem = styled.li`
       &:first-of-type {
         padding-left: 0px;
         border-left: 0;
+      }
+      &.right {
+        border-left: none;
+        padding-right: 0;
+        padding-left: 0;
+        float: right;
+        font-size: 12px;
       }
     }
   }

@@ -10,7 +10,6 @@ import { RegisterWrapper } from './style';
 class Register extends PureComponent {
 
   render () {
-    console.log("bbb");
     const { pattern } = this.props;
     let register = null;
     if(pattern==='求职者端'){

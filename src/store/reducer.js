@@ -12,7 +12,7 @@ import { reducer as registerReducer } from '../pages/register/store';
 import { reducer as feedbackReducer } from '../pages/feedback/store';
 import { reducer as helpReducer } from '../pages/help/store';
 import { reducer as resumeReducer } from '../pages/resume/store';
-import { reducer as positionReducer } from '../pages/position/store';
+import { reducer as positionsReducer } from '../pages/positions/store';
 
 export default combineReducers({
   ident: identReducer,
@@ -28,5 +28,5 @@ export default combineReducers({
   feedback: feedbackReducer,
   help: helpReducer,
   resume: resumeReducer,
-  position: positionReducer
+  positions: positionsReducer
 })

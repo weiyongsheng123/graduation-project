@@ -50,6 +50,8 @@ export const GlobalStyle = createGlobalStyle `
       box-shadow: none;
       .ant-cascader-menu {
         height: auto;
+        max-height: 400px;
+        overflow: auto;
         background: #fff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       }

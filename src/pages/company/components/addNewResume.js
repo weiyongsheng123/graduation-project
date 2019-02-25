@@ -191,6 +191,7 @@ class AddNewResume extends PureComponent {
     if (success) {
       newResume['companyName'] = newCompany['name'];
       newResume['companyId'] = newCompany['Id'];
+      newResume['numbers'] = newResume['numbers'] + '人';
       let date1 = new Date();
       let dateString = date1.getFullYear() + '-' + (date1.getMonth()+1) + '-' + date1.getDate();
       newResume['time'] = dateString;
