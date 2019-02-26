@@ -28,7 +28,7 @@ class SearchInput extends PureComponent {
             <Option value="全部">全部</Option>
             <Option value="公司">公司</Option>
           </Select>
-          <Input placeholder="请输入关键词,例如:JAVA,销售代表,行政助理等" onChange={this.handleChange}/>
+          <Input placeholder="请输入关键词,例如:公司名,职位名等" onChange={this.handleChange}/>
           <Button type="primary" onClick={this.handleSearch} icon="search" />
         </InputGroup>
       </InputArea>
@@ -36,11 +36,8 @@ class SearchInput extends PureComponent {
   };
   handleSearch () {
     const { option, value } = this.state;
-    const { positionList, changeSort, areaNeed, salaryNeed, experienceNeed } = this.props;
-    console.log(areaNeed);
-    console.log(salaryNeed);
-    console.log(experienceNeed);
-    const newPosition = positionList.toJS();
+    const { positionResumeList, changeSort, areaNeed, salaryNeed, experienceNeed } = this.props;
+    const newPosition = positionResumeList.toJS();
     let filterPosition = [];
     if (option === '全部') {
       filterPosition = newPosition.filter((item)=>{
@@ -50,13 +47,13 @@ class SearchInput extends PureComponent {
         let request1 = true;
         let request2 = true;
         let request3 = true;
-        if (areaNeed !== '不限' && item['area'] !== '不限') {
+        if (areaNeed && areaNeed !== '不限' && item['area'] !== '不限') {
           request1 = item['area'] === areaNeed;
         };
-        if (salaryNeed !== '不限' && item['salary'] !== '不限') {
+        if (salaryNeed && salaryNeed !== '不限' && item['salary'] !== '不限') {
           request2 = item['salary'] === salaryNeed;
         };
-        if (experienceNeed !== '不限' && item['experience'] !== '不限') {
+        if (experienceNeed && experienceNeed !== '不限' && item['experience'] !== '不限') {
           request3 = item['experience'] === experienceNeed;
         };
         let result = result1 || result2 || result3;
@@ -67,7 +64,20 @@ class SearchInput extends PureComponent {
     else {
       filterPosition = newPosition.filter((item)=>{
         let result = item['companyName'].indexOf(value) !== -1;
-        return result;
+        let request1 = true;
+        let request2 = true;
+        let request3 = true;
+        if (areaNeed && areaNeed !== '不限' && item['area'] !== '不限') {
+          request1 = item['area'] === areaNeed;
+        };
+        if (salaryNeed && salaryNeed !== '不限' && item['salary'] !== '不限') {
+          request2 = item['salary'] === salaryNeed;
+        };
+        if (experienceNeed && experienceNeed !== '不限' && item['experience'] !== '不限') {
+          request3 = item['experience'] === experienceNeed;
+        };
+        let request = request1 && request2 && request3;
+        return result && request;
       })
     }
     changeSort(filterPosition);
@@ -87,7 +97,7 @@ class SearchInput extends PureComponent {
 };
 
 const mapState = (state) => ({
-  positionList: state.getIn(['search','positionList']),
+  positionResumeList: state.getIn(['search','positionResumeList']),
   areaNeed: state.getIn(['search','areaNeed']),
   salaryNeed: state.getIn(['search','salaryNeed']),
   experienceNeed: state.getIn(['search','experienceNeed'])

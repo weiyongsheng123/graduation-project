@@ -7,11 +7,12 @@ const addPositionList = (array) => ({
   array: fromJS(array)
 });
 
-const addDataList = (salary,area,experience) => ({
+const addDataList = (salary,area,experience,guessSearch) => ({
   type: ADD_ARSAEX_LIST,
   salary: fromJS(salary),
   area: fromJS(area),
-  experience: fromJS(experience)
+  experience: fromJS(experience),
+  guessSearch: fromJS(guessSearch)
 });
 
 const addAdvertisementList = (value) => ({
@@ -32,8 +33,8 @@ const addRecommendSkillList = (value) => ({
 export const getRecommendSkill = () => {
   return (dispatch) => {
     axios({
-      method: 'get',
-      url: 'getRecommendSkill.php'
+      method: 'post',
+      url: 'http://127.0.0.1:85/getRecommendSkill.php'
     })
     .then((res)=>{
       dispatch(addRecommendSkillList(res.data));
@@ -47,8 +48,8 @@ export const getRecommendSkill = () => {
 export const getRecommendWork = () => {
   return (dispatch) => {
     axios({
-      method: 'get',
-      url: 'getRecommendWork.php'
+      method: 'post',
+      url: 'http://127.0.0.1:85/getRecommendWork.php'
     })
     .then((res)=>{
       dispatch(addRecommendWorkList(res.data));
@@ -62,8 +63,8 @@ export const getRecommendWork = () => {
 export const getAdvertisement = () => {
   return (dispatch) => {
     axios({
-      method: 'get',
-      url: 'getAdvertise.php'
+      method: 'post',
+      url: 'http://127.0.0.1:85/getAdvertise.php'
     })
     .then((res)=>{
       dispatch(addAdvertisementList(res.data));
@@ -77,8 +78,8 @@ export const getAdvertisement = () => {
 export const getPosition = () => {
   return (dispatch) => {
     axios({
-      method: 'get',
-      url: 'positionList.php'
+      method: 'post',
+      url: 'http://127.0.0.1:85/positionList.php'
     })
     .then((res)=>{
       dispatch(addPositionList(res.data));
@@ -92,14 +93,15 @@ export const getPosition = () => {
 export const getAreaSalaryExperience = () => {
   return (dispatch) => {
     axios({
-      method: 'get',
-      url: 'areaSalaryExperience.php'
+      method: 'post',
+      url: 'http://127.0.0.1:85/areaSalaryExperience.php'
     })
     .then((res)=>{
       const salary = res.data[0];
       const area = res.data[1];
       const experience = res.data[2];
-      dispatch(addDataList(salary,area,experience));
+      const guessSearch = res.data[3];
+      dispatch(addDataList(salary,area,experience,guessSearch));
     })
     .catch((res)=>{
       alert("获取地区月薪失败");

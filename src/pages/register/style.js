@@ -92,6 +92,7 @@ export const RegisterForm = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.421;
+  margin-left: -100px;
   .ant-btn-primary {
     width: 267px;
   }
@@ -101,6 +102,22 @@ export const RegisterForm = styled.div`
   .inline {
     display: inline-block;
     margin-bottom: 0;
+  }
+  .btnSubmit {
+    position: relative;
+    margin-left: 30px;
+    .error {
+      width: 100%;
+      height: 25px;
+      line-height: 25px;
+      font-size: 15px;
+      color: red;
+      display: block;
+      text-align: center;
+      position: absolute;
+      top: -30px;
+      left: 0px;
+    }
   }
 `;
 

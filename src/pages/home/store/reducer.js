@@ -6,6 +6,7 @@ const defaultState = fromJS({
   areaList: [],
   salaryList: [],
   experienceList: [],
+  guessSearch: [],
   advertisementList: [],
   recommendWorkList: [],
   recommendSkillList: []
@@ -19,7 +20,8 @@ export default (state = defaultState,action) => {
       return state.merge({
         areaList: action.area,
         salaryList: action.salary,
-        experienceList: action.experience
+        experienceList: action.experience,
+        guessSearch: action.guessSearch
       });
     case ADD_ADVERTISEMENT_LIST:
       return state.set('advertisementList',action.value);

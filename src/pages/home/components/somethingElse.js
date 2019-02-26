@@ -81,7 +81,12 @@ class SomethingElse extends PureComponent {
     )
   };
   componentDidMount () {
-    this.props.getRecommend();
+    const { recommendWorkList, recommendSkillList, getRecommend } = this.props;
+    let existWlist = recommendWorkList.toJS();
+    let existSlist = recommendSkillList.toJS();
+    if (!existSlist.length || !existWlist.length) {
+      getRecommend();
+    }
   }
 };
 

@@ -11,8 +11,7 @@ import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class RegistrationForm extends PureComponent {
   state = {
-    confirmDirty: false,
-    codeStr: ''
+    confirmDirty: false
   };
 
   handleSubmit = (e) => {
@@ -49,14 +48,19 @@ class RegistrationForm extends PureComponent {
   }
 
   validateToCaptcha = (rule, value, callback) => {
-    if (value === this.state.codeStr) {
+    let strCaptcha = '';
+    const newArray = this.props.code.toJS();
+    for (let i = 0; i<newArray.length; i++) {
+      strCaptcha = strCaptcha + newArray[i];
+    }
+    if (value === strCaptcha) {
       callback();
     }
     callback('验证码错误');
   }
 
   render () {
-   const { applicant } = this.props;
+   const { applicant, errorInfo } = this.props;
    const redirect = applicant ? <Redirect to="/login"></Redirect> : null;
    const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
@@ -213,7 +217,8 @@ class RegistrationForm extends PureComponent {
                   </Checkbox>
                 )}
               </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
+              <Form.Item {...tailFormItemLayout} className="btnSubmit">
+                <span className="error">{errorInfo}</span>
                 <Button type="primary" htmlType="submit">注册</Button>
               </Form.Item>
             </Form>
@@ -237,14 +242,7 @@ class RegistrationForm extends PureComponent {
     })
   }
   componentDidUpdate () {
-    var strCaptcha = '';
-    const newArray = this.props.code.toJS();
-    for (let i = 0; i<newArray.length; i++) {
-      strCaptcha = strCaptcha + newArray[i];
-    }
-    this.setState({
-      codeStr: strCaptcha
-    })
+    
   }
 };
 
@@ -253,7 +251,8 @@ const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationFo
 
 const mapState = (state) => ({
   code: state.getIn(['ident','code']),
-  applicant: state.getIn(['register','applicantRegiste'])
+  applicant: state.getIn(['register','applicantRegiste']),
+  errorInfo: state.getIn(['register','errorInfo'])
 });
 
 const mapDispatch = (dispatch) => {

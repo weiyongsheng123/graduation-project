@@ -33,7 +33,11 @@ class Advertisement extends PureComponent {
     )
   };
   componentDidMount () {
-    this.props.getAdver();
+    const { advertisementList, getAdver } = this.props;
+    let existAList = advertisementList.toJS();
+    if (!existAList.lentgh) {
+      getAdver();
+    }
   }
 };
 

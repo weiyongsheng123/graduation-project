@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { CHANGE_PAGE, CHANGE_NEEDS, CHANGE_TOTAL_PAGE, GET_NEW_POSITION_ARRAY, GET_RESUME_POSITION_ARRAY } from './actionTypes';
 
 const defaultState = fromJS({
-  positionList: [ ],
+  positionResumeList: [ ],
   showPositionList: [ ],
   totalPages: 1,
   page: 1,
@@ -26,7 +26,7 @@ export default (state = defaultState,action) => {
     case GET_NEW_POSITION_ARRAY:
       return state.set('showPositionList',action.values);
     case GET_RESUME_POSITION_ARRAY:
-      return state.set('positionList',action.values);
+      return state.set('positionResumeList',action.values);
     default:
       return state;
   }

@@ -65,7 +65,7 @@ export const getJobseekUploadData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekUploadData.php',
+        url: 'http://127.0.0.1:85/getJobseekUploadData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -88,7 +88,7 @@ export const getJobseekEducateData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekEducateData.php',
+        url: 'http://127.0.0.1:85/getJobseekEducateData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -111,7 +111,7 @@ export const getJobseekProjectData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekProjectData.php',
+        url: 'http://127.0.0.1:85/getJobseekProjectData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -134,7 +134,7 @@ export const getJobseekWorkData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekWorkData.php',
+        url: 'http://127.0.0.1:85/getJobseekWorkData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -157,7 +157,7 @@ export const getJobseekIntentData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'getJobseekIntentData.php',
+        url: 'http://127.0.0.1:85/getJobseekIntentData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -180,7 +180,7 @@ export const getJobseekNameData = (id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'getJobseekNameData.php',
+      url: 'http://127.0.0.1:85/getJobseekNameData.php',
       data: qs.stringify({
         Id: id
       })
@@ -211,7 +211,7 @@ export const deleteJobseekUploadData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'deleteJobseekUploadData.php',
+      url: 'http://127.0.0.1:85/deleteJobseekUploadData.php',
       data: qs.stringify({
         Id: id
       })
@@ -235,7 +235,7 @@ export const deleteJobseekEducateData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'deleteJobseekEducateData.php',
+      url: 'http://127.0.0.1:85/deleteJobseekEducateData.php',
       data: qs.stringify({
         Id: id
       })
@@ -259,7 +259,7 @@ export const deleteJobseekProjectData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'deleteJobseekProjectData.php',
+      url: 'http://127.0.0.1:85/deleteJobseekProjectData.php',
       data: qs.stringify({
         Id: id
       })
@@ -283,7 +283,7 @@ export const deleteJobseekWorkData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'deleteJobseekWorkData.php',
+      url: 'http://127.0.0.1:85/deleteJobseekWorkData.php',
       data: qs.stringify({
         Id: id
       })
@@ -307,7 +307,7 @@ export const modifyJobseekEducateData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyJobseekEducateData.php',
+      url: 'http://127.0.0.1:85/modifyJobseekEducateData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -330,7 +330,7 @@ export const modifyJobseekProjectData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyJobseekProjectData.php',
+      url: 'http://127.0.0.1:85/modifyJobseekProjectData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -353,7 +353,7 @@ export const modifyJobseekWorkData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyJobseekWorkData.php',
+      url: 'http://127.0.0.1:85/modifyJobseekWorkData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -376,7 +376,7 @@ export const modifyJobseekIntentData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyJobseekIntentData.php',
+      url: 'http://127.0.0.1:85/modifyJobseekIntentData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -399,7 +399,7 @@ export const modifyJobseekName = (values,file) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyJobseekName.php',
+      url: 'http://127.0.0.1:85/modifyJobseekName.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -416,7 +416,7 @@ export const modifyJobseekName = (values,file) => {
     if (file) {
       axios({
         method: 'post',
-        url: 'addFiles.php',
+        url: 'http://127.0.0.1:85/addFiles.php',
         data: file,
         params: {
           Id: values['Id']

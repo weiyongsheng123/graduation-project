@@ -98,7 +98,7 @@ export const TitleTitle = styled.p`
     color: #13256A;
     height: 50px;
     line-height: 50px;
-    margin-left: 50px;
+    margin-left: 10px;
     max-width: 450px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -130,7 +130,7 @@ export const TitleCompany = styled.div`
     color: #9497A1;;
     height: 30px;
     line-height: 30px;
-    margin-left: 50px;
+    margin-left: 10px;
     max-width: 450px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -245,7 +245,7 @@ export const CompanyDetail = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
-  padding-right: 10px;
+  padding-right: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: STXingkai,"华文行楷","华文新魏";

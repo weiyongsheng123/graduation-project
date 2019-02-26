@@ -7,6 +7,7 @@ import Suspension from '../../common/suspension';
 import WarnInfo from './components/warnInfo';
 import PositionTitle from './components/positionTitle';
 import PositionDetail from './components/positionDetail';
+import { showPositionId } from './store/actionCreators';
 
 class Positions extends PureComponent {
 
@@ -22,8 +23,9 @@ class Positions extends PureComponent {
     )
   }
   componentDidMount () {
-    window.scrollTo( 0, 0);
-    console.log(this.props.match.params.Id);
+    window.scrollTo(0, 0);
+    let Id = this.props.match.params.Id;
+    this.props.getId(Id);
   }
 };
 
@@ -33,7 +35,9 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
  return {
-   
+   getId (Id) {
+     dispatch(showPositionId(Id));
+   }
  }
 }
 

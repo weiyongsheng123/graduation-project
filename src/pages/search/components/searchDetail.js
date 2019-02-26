@@ -104,11 +104,16 @@ class SearchDetail extends PureComponent {
     changeSort(newsPositionList);
   };
   componentDidMount () {
-    this.props.getList();
+   const { positionResumeList, getList } = this.props;
+    let existPlist = positionResumeList.toJS();
+    if (!existPlist.length) {
+      getList();
+    }
   };
 };
 
 const mapState = (state) => ({
+  positionResumeList: state.getIn(['search','positionResumeList']),
   showPositionList: state.getIn(['search','showPositionList']),
   page: state.getIn(['search','page']),
   pattern: state.getIn(['header','pattern'])

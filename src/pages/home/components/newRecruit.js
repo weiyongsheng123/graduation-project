@@ -1,93 +1,70 @@
 import React, { PureComponent } from 'react';
 import { NewsArea, NewsH3, NewsItem } from '../style';
 import { connect } from 'react-redux';
-
+import { getResumePositionList } from '../../search/store/actionCreators';
 
 class NewRecruit extends PureComponent {
 
   render () {
+    const { positionResumeList } = this.props;
+    let newList = positionResumeList.toJS();
+    let bestNewList = [];
+    if(newList.length) {
+      newList.sort(this.compared);
+      for (let i=0;i<9;i++) {
+        bestNewList.push(newList[i]);
+      }
+    }
     return (
       <NewsArea>
         <NewsH3>最新岗位</NewsH3>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
-        <NewsItem>
-          <h3>销售管理培训生</h3>
-          <span className="salary">3000-5000</span>
-          <p className="areaStudyExper"><span className="area">合肥</span>&nbsp;&nbsp;&nbsp;<span className="study">本科</span>&nbsp;&nbsp;&nbsp;<span className="experience">两年经验</span></p>
-          <hr className="hr"/>
-          <h4>蚌埠平头哥学院</h4>
-          <p className="desc">民营0-50人</p>
-        </NewsItem>
+        {
+          bestNewList.map((item)=>{
+            return (
+              <NewsItem key={item['Id']}>
+                <h3 title={item['title']}>{item['title']}</h3>
+                <span className="salary">{item['salary']}</span>
+                <p className="areaStudyExper"><span className="area">{item['area']}</span>&nbsp;&nbsp;&nbsp;<span className="study">{item['education']}</span>&nbsp;&nbsp;&nbsp;<span className="experience">{item['experience']}</span></p>
+                <hr className="hr"/>
+                <h4>{item['companyName']}</h4>
+                <p className="desc">{item['scale']}</p>
+              </NewsItem>
+            )
+          })
+        }
       </NewsArea>
     )
+  };
+  componentDidMount () {
+    const { positionResumeList, getList } = this.props;
+    let existPlist = positionResumeList.toJS();
+    if (!existPlist.length) {
+      getList();
+    }
+  }
+  compared (obj1, obj2) {
+    var val1 = obj1.time;
+    var val2 = obj2.time;
+    if (val1 < val2) {
+        return 1;
+    } else if (val1 > val2) {
+        return -1;
+    } else {
+        return 0;
+    }
   };
 };
 
 const mapState = (state) => ({
-
+  positionResumeList: state.getIn(['search','positionResumeList'])
 });
 
-export default connect(mapState,null)(NewRecruit);
+const mapDispatch = (dispatch) => {
+  return {
+    getList () {
+      dispatch(getResumePositionList());
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(NewRecruit);

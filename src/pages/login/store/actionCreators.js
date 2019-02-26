@@ -33,7 +33,7 @@ export const checkAccount = (values,pattern) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'checkAccount.php',
+      url: 'http://127.0.0.1:85/checkAccount.php',
       data: qs.stringify(values)
     })
     .then((res) => {

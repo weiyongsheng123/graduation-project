@@ -103,9 +103,14 @@ export const getCompanyDetail = (Id) => {
       })
     })
     .then((res) => {
-      dispatch(changeAjax(false));
-      dispatch(changeCity(res.data['area']));
-      dispatch(importData(res.data));
+     if (res.data) {
+       dispatch(changeAjax(false));
+       dispatch(changeCity(res.data['area']));
+       dispatch(importData(res.data));
+     }
+     else {
+       alert("获取公司详细信息失败");
+     }
     })
     .catch((res) => {
       alert("获取公司信息表，连接失败");

@@ -32,7 +32,7 @@ export const getResumePositionList = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'getResumePositionList.php'
+      url: 'http://127.0.0.1:85/getResumePositionList.php'
     })
     .then((res)=>{
       if (res.data) {

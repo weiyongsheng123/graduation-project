@@ -75,7 +75,7 @@ class App extends Component {
             >
             </Route>
             <Route
-              path="/positions/:id"
+              path="/positions/:Id"
               exact
               component={Positions}
             >

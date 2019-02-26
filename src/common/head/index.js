@@ -65,14 +65,18 @@ class Head extends PureComponent {
     this.props.quitAccount();
   };
   componentDidMount () {
-    const { loginOrNot, autoLogin, openAuto, getAreaSalaryExperienceList, getPositionList } = this.props;
+    const { loginOrNot, autoLogin, openAuto, getAreaSalaryExperienceList, getPositionList, positionList, areaList } = this.props;
     var storage=window.localStorage;
     if (!loginOrNot && storage["peiqiAccount"] && openAuto) {
       const accountInfo = JSON.parse(storage["peiqiAccount"]);
       autoLogin(accountInfo,accountInfo['pattern']);
     }
-    getAreaSalaryExperienceList();
-    getPositionList();
+    let existPlist = positionList.toJS();
+    let existAlist = areaList.toJS();
+    if (!existPlist.length || !existAlist.length) {
+      getAreaSalaryExperienceList();
+      getPositionList();
+    }
   }
 };
 
@@ -83,7 +87,8 @@ const mapState = (state) => ({
   loginOrNot: state.getIn(['login','loginOrNot']),
   phoneNumber: state.getIn(['login','telephonenumber']),
   areaList: state.getIn(['home','areaList']),
-  openAuto: state.getIn(['login','openAuto'])
+  openAuto: state.getIn(['login','openAuto']),
+  positionList: state.getIn(['home','positionList'])
 });
 
 const mapDispatch = (dispatch) => {
