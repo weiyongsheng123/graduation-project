@@ -26,6 +26,9 @@ class Register extends PureComponent {
         <Ajax/>
       </RegisterWrapper>
     )
+  };
+  componentDidMount () {
+    
   }
 };
 

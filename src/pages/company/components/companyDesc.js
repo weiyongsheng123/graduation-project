@@ -153,6 +153,12 @@ class CompanyDesc extends PureComponent {
       first: false
     })
   };
+  componentDidMount () {
+    const { loginOrNot } = this.props;
+    if ( loginOrNot ) {
+      this.placeholder();
+    }
+  }
   componentDidUpdate () {
     const { loginOrNot, modifyCompany, backState } = this.props;
     const { first } = this.state;

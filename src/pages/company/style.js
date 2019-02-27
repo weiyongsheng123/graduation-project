@@ -550,6 +550,14 @@ export const ReseriveItem = styled.li`
       font-weight: 550;
     }
   }
+  .max {
+    max-width: 230px;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
   .right { 
     float: right;
     display: block;

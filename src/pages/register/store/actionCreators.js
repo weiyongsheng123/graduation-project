@@ -1,4 +1,4 @@
-import { CHANGE_APPLICANT_REGISTE, CHANGE_COMPANY_REGISTE , CHANGE_ERROR_INFO} from './actionTypes';
+import { CHANGE_APPLICANT_REGISTE, CHANGE_COMPANY_REGISTE , CHANGE_APPLICE_ERROR_INFO, CHANGE_COMPANY_ERROR_INFO } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
@@ -13,8 +13,13 @@ export const changeCompanyRegiste = (res) => ({
   res
 });
 
-export const changeErrorInfo = (value) => ({
-  type: CHANGE_ERROR_INFO,
+export const changeAppliceErrorInfo = (value) => ({
+  type: CHANGE_APPLICE_ERROR_INFO,
+  value
+});
+
+export const changeCompanyErrorInfo = (value) => ({
+  type: CHANGE_COMPANY_ERROR_INFO,
   value
 });
 
@@ -35,20 +40,20 @@ export const submitApplice = (values) => {
       dispatch(changeAjax(false));
       switch(res.data) {
         case 'TE':
-          dispatch(changeErrorInfo('手机号及邮箱已被注册'));break;
+          dispatch(changeAppliceErrorInfo('手机号及邮箱已被注册'));break;
         case 'T':
-          dispatch(changeErrorInfo('手机号已被注册'));break;
+          dispatch(changeAppliceErrorInfo('手机号已被注册'));break;
         case 'E':
-          dispatch(changeErrorInfo('邮箱已被注册'));break;
+          dispatch(changeAppliceErrorInfo('邮箱已被注册'));break;
         case 'F':
-          dispatch(changeErrorInfo('注册账号导入失败，请重试'));break;
+          dispatch(changeAppliceErrorInfo('注册账号导入失败，请重试'));break;
         default:
-          dispatch(changeErrorInfo(''));
+          dispatch(changeAppliceErrorInfo(''));
           dispatch(changeApplicantRegiste(true));
       }
     })
     .catch((res) => {
-      alert("传递失败");
+      alert("注册连接网络失败");
     })
   }
 }
@@ -68,11 +73,23 @@ export const submitCompany = (values) => {
       })
     })
     .then((res) => {
-      dispatch(changeCompanyRegiste(true));
       dispatch(changeAjax(false));
+      switch(res.data) {
+        case 'TE':
+          dispatch(changeCompanyErrorInfo('手机号及邮箱已被注册'));break;
+        case 'T':
+          dispatch(changeCompanyErrorInfo('手机号已被注册'));break;
+        case 'E':
+          dispatch(changeCompanyErrorInfo('邮箱已被注册'));break;
+        case 'F':
+          dispatch(changeCompanyErrorInfo('注册账号导入失败，请重试'));break;
+        default:
+          dispatch(changeCompanyErrorInfo(''));
+          dispatch(changeCompanyRegiste(true));
+      }
     })
     .catch((res) => {
-      alert("传递失败");
+      alert("注册连接网络失败");
     })
   }
 }

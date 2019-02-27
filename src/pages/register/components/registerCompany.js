@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { RegisterDiv, AnimateArea, AnimatePart, InputH3, InputSpan, InputDiv, InputSubmit, IdentContainer, BackLogin } from '../style';
+import { RegisterDiv, AnimateArea, AnimatePart, SubmitButton, InputH3, InputSpan, InputDiv, InputSubmit, IdentContainer, BackLogin } from '../style';
 import { Input, Button, Icon, Checkbox } from 'antd';
 import Ident from '../../../common/identCode';
 import { CSSTransition } from 'react-transition-group';
@@ -50,12 +50,13 @@ class RegistrationForm extends PureComponent {
      };
      this.prevOne = this.prevOne.bind(this);
      this.nextOne = this.nextOne.bind(this);
+     this.submit = this.submit.bind(this);
   }
 
   render () {
     const ButtonGroup = Button.Group;
     const { condition, warnInfo, success } = this.state;
-    const { company } = this.props;
+    const { company, companyErrorInfo } = this.props;
     const redirect = company ? <Redirect to="/login"></Redirect> : null;
     let headOne = true;
     let headTwo = true;
@@ -162,7 +163,7 @@ class RegistrationForm extends PureComponent {
              <Input className="input" name="Email" onBlur={(e)=>{this.handleEmail(e)}} onChange={(e)=>{this.handleChange(e)}} placeholder="请输入联系邮箱" allowClear />
              <span className="warning">{condition.Email === 2 ? warnInfo.Email : ''}</span>
            </InputDiv>
-           <InputSubmit>
+           <InputSubmit className="short">
              <ButtonGroup>
                <Button type="primary" onClick={this.prevOne}>
                  <Icon type="left" />上一步
@@ -172,6 +173,9 @@ class RegistrationForm extends PureComponent {
                </Button>
              </ButtonGroup>
            </InputSubmit>
+           <Link to="/login">
+             <BackLogin>已有账号，立即登录</BackLogin>
+           </Link>
          </AnimatePart>
        </CSSTransition>
        <CSSTransition
@@ -200,6 +204,9 @@ class RegistrationForm extends PureComponent {
                </Button>
              </ButtonGroup>
            </InputSubmit>
+           <Link to="/login">
+             <BackLogin>已有账号，立即登录</BackLogin>
+           </Link>
          </AnimatePart>
        </CSSTransition>
        <CSSTransition
@@ -227,8 +234,11 @@ class RegistrationForm extends PureComponent {
              </Link>
              <span className="warning">{condition.CheckRead === 2 ? warnInfo.CheckRead : ''}</span>
            </Checkbox>
-           <Button type="primary" block onClick={this.submit.bind(this)}>注册</Button>
-           <InputSubmit>
+           <SubmitButton>
+             <Button type="primary" block onClick={this.submit}>注册</Button>
+             <span className="error">{companyErrorInfo}</span>
+           </SubmitButton>
+           <InputSubmit className="short">
              {success || successed ? null : <span className="checkout">请仔细检查，存在不合格项!</span>}
              <ButtonGroup>
                <Button type="primary" onClick={this.prevOne}>
@@ -239,6 +249,9 @@ class RegistrationForm extends PureComponent {
                </Button>
              </ButtonGroup>
            </InputSubmit>
+           <Link to="/login">
+             <BackLogin>已有账号，立即登录</BackLogin>
+           </Link>
          </AnimatePart>
        </CSSTransition>
         </AnimateArea>
@@ -398,7 +411,8 @@ class RegistrationForm extends PureComponent {
 
 const mapState = (state) => ({
   code: state.getIn(['ident','code']),
-  company: state.getIn(['register','companyRegiste'])
+  company: state.getIn(['register','companyRegiste']),
+  companyErrorInfo: state.getIn(['register','companyErrorInfo'])
 });
 
 const mapDispatch = (dispatch) => {

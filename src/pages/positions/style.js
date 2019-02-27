@@ -81,6 +81,7 @@ export const TitleContinue = styled.span`
   line-height: 30px;
   font-size: 14px;
   color: #666;
+  color: #1890ff;
   i {
     margin-right: 3px;
   }

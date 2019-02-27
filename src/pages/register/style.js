@@ -40,6 +40,59 @@ export const AdvertBackground = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #fff;
+  position: relative;
+`;
+
+export const IconItem = styled.div`
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  line-height: 130px;
+  font-size: 18px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  z-index: 999;
+  &.jobseek {
+    top: -80px;
+    left: -100px;
+    border: 1px solid gray;
+    box-shadow: 0px 0px 20px 3px gray inset;
+  }
+  &.company {
+    top: 60px;
+    left: -100px;
+    border: 1px solid gray;
+    box-shadow: 0px 0px 20px 3px gray inset;
+  }
+  .iconfont {
+    height: 130px;
+    line-height: 130px;
+    font-size: 32px;
+  }
+  &:hover {
+    color: #1890ff;
+    transition: all 0.3s;
+    &.jobseek {
+      border-color: #1890ff;
+      box-shadow: 0px 0px 20px 3px #1890ff inset;
+    }
+    &.company {
+      border-color: #1890ff;
+      box-shadow: 0px 0px 20px 3px #1890ff inset;
+    }
+  }
+  &.active {
+    color: #1890ff;
+    &.jobseek {
+      border-color: #1890ff;
+      box-shadow: 0px 0px 20px 3px #1890ff inset;
+    }
+    &.company {
+      border-color: #1890ff;
+      box-shadow: 0px 0px 20px 3px #1890ff inset;
+    }
+  }
 `;
 
 export const RegisterDiv = styled.div`
@@ -206,6 +259,21 @@ export const AnimatePart = styled.div`
   }
 `;
 
+export const SubmitButton = styled.div`
+  position: relative;
+  .error {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+    color: red;
+    text-align: center;
+    position: absolute;
+    left: 0px;
+    top: -25px;
+  }
+`;
+
 export const InputH3 = styled.h3`
   margin: auto;
   width: 620px;
@@ -311,6 +379,10 @@ export const InputDiv = styled.div`
 export const InputSubmit = styled.div`
   width: 402px;
   position: relative;
+  &.short {
+    height: 55px;
+    margin-bottom: 28px;
+  }
   .ant-btn-group {
     width: 400px;
     height: 43px;
@@ -328,12 +400,13 @@ export const InputSubmit = styled.div`
   }
   .checkout {
     display: block;
-    width: 180px;
+    width: 100%;
     height: 20px;
     line-height: 20px;
+    text-align: center;
     position: absolute;
     top: 0px;
-    left: 112px;
+    left: 0px;
     color: red;
   }
 `;

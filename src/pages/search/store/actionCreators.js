@@ -1,6 +1,7 @@
 import { CHANGE_PAGE, CHANGE_NEEDS,  CHANGE_TOTAL_PAGE, GET_NEW_POSITION_ARRAY, GET_RESUME_POSITION_ARRAY } from './actionTypes';
 import axios from 'axios';
-/*import qs from 'qs';*/
+import qs from 'qs';
+import { message } from 'antd';
 import { fromJS } from 'immutable';
 
 export const changeTotalPages = (list) => ({
@@ -28,6 +29,30 @@ export const getResumePositionArray = (values) => ({
   values: fromJS(values)
 });
 
+export const addNewApply = (values) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/addApply.php',
+      data: qs.stringify(values)
+    })
+    .then((res)=>{
+      switch (res.data) {
+        case 'E':
+          message.warning('已经申请过了');break;
+        case 'T':
+          message.success('申请成功');break;
+        default:
+          message.error('申请出错失败');
+      }
+    })
+    .catch((res)=>{
+      alert("连接网络出错");
+      console.log(res);
+    })
+  }
+}
+
 export const getResumePositionList = () => {
   return (dispatch) => {
     axios({
@@ -48,4 +73,4 @@ export const getResumePositionList = () => {
       alert("获取招聘职位列表连接网络失败");
     })
   }
-}
+};

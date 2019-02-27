@@ -1,36 +1,22 @@
 import React, { PureComponent } from 'react';
 import { ReseriveArea, ReseriveTitle, ReseriveList, ReseriveItem } from '../style';
+import { connect } from 'react-redux';
+import { Popconfirm, message } from 'antd';
+import { getReseriveResumeList, deleteReseriveResumeItem } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class CompanyReserive extends PureComponent {
   constructor (props) {
       super(props);
       this.state = {
-        list: [
-          {
-            reseriveName: '张三',
-            reserivePosition: 'web前端高级开发',
-            reseriveTime: '2017-9-12'
-          },
-          {
-            reseriveName: '李四',
-            reserivePosition: 'web前端高级开发',
-            reseriveTime: '2017-9-12'
-          },
-          {
-            reseriveName: '王五',
-            reserivePosition: 'web前端高级开发',
-            reseriveTime: '2017-9-12'
-          },
-          {
-            reseriveName: '赵六',
-            reserivePosition: 'web前端高级开发',
-            reseriveTime: '2017-9-12'
-          }
-        ]
+        resure: '确认要删除此条',
+        first: true
       }
     }
   render () {
-  
+    const { reseriveList } = this.props;
+    const { resure } = this.state;
+    const newList = reseriveList.toJS();
     return (
       <ReseriveArea>
         <ReseriveTitle>
@@ -39,13 +25,15 @@ class CompanyReserive extends PureComponent {
         </ReseriveTitle>
         <ReseriveList>
           {
-            this.state.list.map((item,index)=>{
+            newList.map((item,index)=>{
               return (
                 <ReseriveItem key={index}>
-                  <span className="left">{item.reseriveName}</span>
-                  <span className="left">{item.reserivePosition}</span>
-                  <span className="iconfont">&#xe603;</span>
-                  <span className="right">{item.reseriveTime}</span>
+                  <span className="left">{item['jobseekName']}</span>
+                  <span className="left max">{item['resumeName']}</span>
+                  <Popconfirm placement="top" title={resure} onConfirm={()=>{this.handleDelete(item['Id'])}} okText="Yes" cancelText="No">
+                    <span className="iconfont">&#xe603;</span>
+                  </Popconfirm>
+                  <span className="right">{item['time']}</span>
                 </ReseriveItem>
               )
             })
@@ -54,6 +42,56 @@ class CompanyReserive extends PureComponent {
       </ReseriveArea>
     )
   };
+  handleDelete (id) {
+    message.info('删除中...');
+    const { company, deleteItem, ajaxSend } = this.props;
+    const NewCompany = company.toJS();
+    const Id = NewCompany['Id'];
+    deleteItem(Id,id);
+    ajaxSend();
+  };
+  getReserive () {
+    const { company, getReseriveResume } = this.props;
+    const newCompany = company.toJS();
+    let companyId = newCompany['Id'];
+    getReseriveResume(companyId);
+    this.setState({
+      first: false
+    })
+  };
+  componentDidMount () {
+    const { loginOrNot } = this.props;
+    if ( loginOrNot ) {
+      this.getReserive();
+    }
+  };
+  componentDidUpdate () {
+    const { loginOrNot } = this.props;
+    const { first } = this.state;
+    if ( first && loginOrNot ) {
+      this.getReserive();
+    }
+  };
 }
 
-export default CompanyReserive;
+const mapState = (state) => ({
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  company: state.getIn(['login','company']),
+  reseriveList: state.getIn(['company','reseriveList'])
+});
+
+const mapDispatch = (dispatch) => {
+  return {
+    getReseriveResume (companyId) {
+      dispatch(getReseriveResumeList(companyId));
+    },
+    deleteItem (Id,id) {
+      dispatch(deleteReseriveResumeItem(Id,id));
+    },
+    ajaxSend () {
+      dispatch(changeAjax(true));
+    }
+  }
+};
+
+export default connect(mapState,mapDispatch)(CompanyReserive);

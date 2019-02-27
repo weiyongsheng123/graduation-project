@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { DetailArea, DetailTitle, DetailList, DetailItem, DetailEmpty } from '../style';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
-import { Link } from 'react-router-dom';
-import { getResumePositionList, getNewPositionArray } from '../store/actionCreators';
+import { Modal, message, Button } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import { getResumePositionList, getNewPositionArray, addNewApply } from '../store/actionCreators';
 
 class SearchDetail extends PureComponent {
   constructor (props) {
@@ -54,7 +54,7 @@ class SearchDetail extends PureComponent {
                   </p>
                   <p className="salary"><i className="iconfont">&#xe615;</i>{item.salary}</p>
                   <p className="continue">招聘中</p>
-                  <Button type="primary" disabled={pattern === '求职者端' ? false : true} title={pattern === '求职者端' ? "立刻申请" : "企业端不可选"} onClick={(e)=>{e.preventDefault()}}>立即申请</Button>
+                  <Button type="primary" disabled={pattern === '求职者端' ? false : true} title={pattern === '求职者端' ? "立刻申请" : "企业端不可选"} onClick={(e)=>{this.handleApply(item,e)}}>立即申请</Button>
                 </DetailItem>
                 </Link>
               )
@@ -69,6 +69,36 @@ class SearchDetail extends PureComponent {
       </DetailArea>
     )
   };
+  handleApply (resume,e) {
+    e.preventDefault();
+    const { loginOrNot, jobSeek, submitNewApply } = this.props;
+    if (!loginOrNot) {
+      const _this = this;
+      Modal.confirm({
+        title: '申请失败',
+        content: '还未登录账号，现在去登录',
+        okText: '好的',
+        cancelText: '稍等',
+        onOk () {
+          _this.props.history.push('/login');
+        }
+      });
+    }
+    else {
+      let applyData = { };
+      const newJobSeek = jobSeek.toJS();
+      applyData['resumeId'] = resume['Id'];
+      applyData['jobseekId'] = newJobSeek['Id'];
+      applyData['companyId'] = resume['companyId'];
+      applyData['resumeName'] = resume['title'];
+      applyData['jobseekName'] = newJobSeek['name'];
+      applyData['companyName'] = resume['companyName'];
+      let date = new Date();
+      let time = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+      applyData['time'] = time;
+      submitNewApply(applyData);
+    }
+  }
   sortTime () {
     const { showPositionList, changeSort } =this.props;
     let newsPositionList = showPositionList.toJS();
@@ -116,7 +146,9 @@ const mapState = (state) => ({
   positionResumeList: state.getIn(['search','positionResumeList']),
   showPositionList: state.getIn(['search','showPositionList']),
   page: state.getIn(['search','page']),
-  pattern: state.getIn(['header','pattern'])
+  pattern: state.getIn(['header','pattern']),
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  jobSeek: state.getIn(['login','jobSeek'])
 });
 
 const mapDispatch = (dispatch) => {
@@ -126,8 +158,11 @@ const mapDispatch = (dispatch) => {
     },
     changeSort (values) {
       dispatch(getNewPositionArray(values));
+    },
+    submitNewApply (values) {
+      dispatch(addNewApply(values,message));
     }
   }
 };
 
-export default connect(mapState,mapDispatch)(SearchDetail);
+export default connect(mapState,mapDispatch)(withRouter(SearchDetail));

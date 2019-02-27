@@ -60,7 +60,7 @@ class RegistrationForm extends PureComponent {
   }
 
   render () {
-   const { applicant, errorInfo } = this.props;
+   const { applicant, appliceErrorInfo } = this.props;
    const redirect = applicant ? <Redirect to="/login"></Redirect> : null;
    const { getFieldDecorator } = this.props.form;
     const { Option } = Select;
@@ -218,7 +218,7 @@ class RegistrationForm extends PureComponent {
                 )}
               </Form.Item>
               <Form.Item {...tailFormItemLayout} className="btnSubmit">
-                <span className="error">{errorInfo}</span>
+                <span className="error">{appliceErrorInfo}</span>
                 <Button type="primary" htmlType="submit">注册</Button>
               </Form.Item>
             </Form>
@@ -241,18 +241,14 @@ class RegistrationForm extends PureComponent {
       codeStr: strCaptcha
     })
   }
-  componentDidUpdate () {
-    
-  }
 };
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
 
-
 const mapState = (state) => ({
   code: state.getIn(['ident','code']),
   applicant: state.getIn(['register','applicantRegiste']),
-  errorInfo: state.getIn(['register','errorInfo'])
+  appliceErrorInfo: state.getIn(['register','appliceErrorInfo'])
 });
 
 const mapDispatch = (dispatch) => {
