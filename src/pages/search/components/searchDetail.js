@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Modal, message, Button } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { getResumePositionList, getNewPositionArray, addNewApply } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class SearchDetail extends PureComponent {
   constructor (props) {
@@ -71,7 +72,7 @@ class SearchDetail extends PureComponent {
   };
   handleApply (resume,e) {
     e.preventDefault();
-    const { loginOrNot, jobSeek, submitNewApply } = this.props;
+    const { loginOrNot, jobSeek, submitNewApply, ajaxSend } = this.props;
     if (!loginOrNot) {
       const _this = this;
       Modal.confirm({
@@ -97,6 +98,7 @@ class SearchDetail extends PureComponent {
       let time = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
       applyData['time'] = time;
       submitNewApply(applyData);
+      ajaxSend();
     }
   }
   sortTime () {
@@ -161,6 +163,9 @@ const mapDispatch = (dispatch) => {
     },
     submitNewApply (values) {
       dispatch(addNewApply(values,message));
+    },
+    ajaxSend () {
+      dispatch(changeAjax('send'));
     }
   }
 };

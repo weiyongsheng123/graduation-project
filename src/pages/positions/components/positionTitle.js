@@ -4,6 +4,7 @@ import { Modal, Button } from 'antd';
 import { connect } from 'react-redux';
 import { getResumePositionList, addNewApply } from '../../search/store/actionCreators';
 import { getPositionCompanyData } from '../store/actionCreators';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class PositionTitle extends PureComponent {
 
@@ -54,7 +55,7 @@ class PositionTitle extends PureComponent {
   };
   handleApply (resume,e) {
     e.preventDefault();
-    const { loginOrNot, jobSeek, submitNewApply } = this.props;
+    const { loginOrNot, jobSeek, submitNewApply, ajaxSend } = this.props;
     if (!loginOrNot) {
       const _this = this;
       Modal.confirm({
@@ -80,6 +81,7 @@ class PositionTitle extends PureComponent {
       let time = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
       applyData['time'] = time;
       submitNewApply(applyData);
+      ajaxSend();
     }
   };
   componentDidMount () {
@@ -109,6 +111,9 @@ const mapDispatch = (dispatch) => {
     },
     submitNewApply (values) {
       dispatch(addNewApply(values));
+    },
+    ajaxSend () {
+      dispatch(changeAjax('send'));
     }
   }
 };

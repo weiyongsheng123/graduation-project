@@ -262,7 +262,7 @@ const mapDispatch = (dispatch) => {
      dispatch(changeModifyCompany(false));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 };

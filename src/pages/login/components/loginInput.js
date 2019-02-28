@@ -138,7 +138,7 @@ const mapDispatch = (dispatch) => {
       dispatch(changeWarn(value));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     },
     openAuto () {
       dispatch(openAutoRemeber(true));

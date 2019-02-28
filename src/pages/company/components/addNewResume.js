@@ -261,7 +261,7 @@ const mapDispatch = (dispatch) => {
       dispatch(addNewResumeData(values));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 };

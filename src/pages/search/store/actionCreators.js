@@ -3,6 +3,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
 import { fromJS } from 'immutable';
+import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 export const changeTotalPages = (list) => ({
   type: CHANGE_TOTAL_PAGE,
@@ -37,21 +38,22 @@ export const addNewApply = (values) => {
       data: qs.stringify(values)
     })
     .then((res)=>{
+      dispatch(changeAjax(''));
       switch (res.data) {
         case 'E':
           message.warning('已经申请过了');break;
         case 'T':
           message.success('申请成功');break;
         default:
-          message.error('申请出错失败');
+          message.error('申请出错,失败');
       }
     })
     .catch((res)=>{
-      alert("连接网络出错");
+      message.warning('申请失败，连接网络出错');
       console.log(res);
     })
   }
-}
+};
 
 export const getResumePositionList = () => {
   return (dispatch) => {
@@ -66,11 +68,11 @@ export const getResumePositionList = () => {
         dispatch(changeTotalPages(res.data));
       }
       else {
-        alert("获取招聘职位列表失败");
+        message.error('获取招聘职位列表失败');
       }
     })
     .catch((res)=>{
-      alert("获取招聘职位列表连接网络失败");
+      message.warning('获取招聘职位列表连接网络失败');
     })
   }
 };

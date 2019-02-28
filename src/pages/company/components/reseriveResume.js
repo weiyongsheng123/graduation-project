@@ -89,7 +89,7 @@ const mapDispatch = (dispatch) => {
       dispatch(deleteReseriveResumeItem(Id,id));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('throw'));
     }
   }
 };

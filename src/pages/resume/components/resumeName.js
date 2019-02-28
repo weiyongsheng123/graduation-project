@@ -363,7 +363,7 @@ const mapDispatch = (dispatch) => {
       dispatch(changeNamePhoto(0));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 };

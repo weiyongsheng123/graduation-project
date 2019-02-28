@@ -132,7 +132,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getPassword(values));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 }

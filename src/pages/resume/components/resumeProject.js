@@ -227,7 +227,7 @@ const mapDispatch = (dispatch) => {
       dispatch(changeModifyProject(0));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     },
     deleteItem (Id,id) {
       dispatch(deleteJobseekProjectData(Id,id));

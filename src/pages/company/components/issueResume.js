@@ -99,7 +99,7 @@ const mapDispatch = (dispatch) => {
       dispatch(deleteReleaseResumeItem(Id,id));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('throw'));
     }
   }
 };

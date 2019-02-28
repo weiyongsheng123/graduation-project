@@ -1,5 +1,7 @@
 import { ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
 import axios from 'axios';
+import { message } from 'antd';
+
 import { fromJS } from 'immutable';
 
 const addPositionList = (array) => ({
@@ -40,7 +42,7 @@ export const getRecommendSkill = () => {
       dispatch(addRecommendSkillList(res.data));
     })
     .catch((res)=>{
-      alert("连接面试技巧列表失败");
+      message.warning('获取面试技巧列表连接网络失败');
     })
   }
 }
@@ -55,7 +57,7 @@ export const getRecommendWork = () => {
       dispatch(addRecommendWorkList(res.data));
     })
     .catch((res)=>{
-      alert("连接工作资讯列表失败");
+      message.warning('获取工作资讯列表连接网络失败');
     })
   }
 };
@@ -70,7 +72,7 @@ export const getAdvertisement = () => {
       dispatch(addAdvertisementList(res.data));
     })
     .catch((res)=>{
-      alert("连接广告列表失败");
+      message.warning('获取广告列表连接网络失败');
     })
   }
 };
@@ -85,7 +87,7 @@ export const getPosition = () => {
       dispatch(addPositionList(res.data));
     })
     .catch((res)=>{
-      alert("连接职位列表失败");
+      message.warning('获取职位列表连接网络失败');
     })
   }
 };
@@ -104,7 +106,7 @@ export const getAreaSalaryExperience = () => {
       dispatch(addDataList(salary,area,experience,guessSearch));
     })
     .catch((res)=>{
-      alert("获取地区月薪失败");
+      message.warning('获取地区月薪等数据连接网络失败');
     })
   }
 };

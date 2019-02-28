@@ -278,6 +278,7 @@ export const NewsItem = styled.div`
   }
   .hr {
     clear: both;
+    color: #9b9b9b;
   }
   h4 {
     clear: both;
@@ -286,6 +287,7 @@ export const NewsItem = styled.div`
     color: #666;
     margin-left: 25px;
     margin-bottom: 5px;
+    margin-top: 10px;
     background: none;
     outline: none;
     border: none;

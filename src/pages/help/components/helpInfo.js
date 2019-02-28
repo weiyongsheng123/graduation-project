@@ -235,7 +235,7 @@ const mapDispatch = (dispatch) => {
       dispatch(modifyAccountData(values));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 };

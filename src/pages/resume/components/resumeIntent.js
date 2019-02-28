@@ -271,7 +271,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getJobseekIntentData(Id));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 };

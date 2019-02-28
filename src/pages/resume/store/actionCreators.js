@@ -2,6 +2,7 @@ import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MOD
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import qs from 'qs';
+import { message } from 'antd';
 import { importData1 } from '../../login/store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 import { changeCity } from '../../../common/head/store/actionCreators';
@@ -75,11 +76,11 @@ export const getJobseekUploadData = (Id) => {
           dispatch(getUploadData(res.data));
         }
         else {
-          alert('获取失败');
+          message.error('获取上传表失败');
         }
       })
       .catch((res)=>{
-        alert("获取期待表失败");
+        message.warning('获取上传表网络连接失败');
       })
   }
 }
@@ -98,11 +99,11 @@ export const getJobseekEducateData = (Id) => {
           dispatch(getEducateData(res.data));
         }
         else {
-          alert('获取失败');
+          message.error('获取教育表失败');
         }
       })
       .catch((res)=>{
-        alert("获取期待表失败");
+        message.warning('获取教育表网络连接失败');
       })
   }
 }
@@ -121,11 +122,11 @@ export const getJobseekProjectData = (Id) => {
           dispatch(getProjectData(res.data));
         }
         else {
-          alert('获取失败');
+          message.error('获取项目表失败');
         }
       })
       .catch((res)=>{
-        alert("获取期待表失败");
+        message.warning('获取项目表网络连接失败');
       })
   }
 };
@@ -144,11 +145,11 @@ export const getJobseekWorkData = (Id) => {
           dispatch(getWorkData(res.data));
         }
         else {
-          alert('获取失败');
+          message.error('获取工作经验表失败');
         }
       })
       .catch((res)=>{
-        alert("获取期待表失败");
+        message.warning('获取工作经验表网络连接失败');
       })
   }
 }
@@ -167,11 +168,11 @@ export const getJobseekIntentData = (Id) => {
           dispatch(getIntentData(res.data));
         }
         else {
-          alert('获取失败');
+          message.error('获取期望表失败');
         }
       })
       .catch((res)=>{
-        alert("获取期待表失败");
+        message.error('获取期望表网络连接失败');
       })
   }
 };
@@ -186,7 +187,7 @@ export const getJobseekNameData = (id) => {
       })
     })
     .then((res) => {
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(importData1(res.data));
         dispatch(changeCity(res.data['area']));
@@ -198,11 +199,11 @@ export const getJobseekNameData = (id) => {
         storage["peiqiAccount"] = d;
       }
       else {
-        alert("更新出错");
+        message.error('获得求职人信息列表失败');
       }
     })
     .catch((res) => {
-      alert("获得求职人信息列表失败");
+      message.warning('获得求职人信息列表网络连接失败');
     })
   }
 };
@@ -217,16 +218,17 @@ export const deleteJobseekUploadData = (Id,id) => {
       })
     })
     .then((res)=>{
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(getJobseekUploadData(Id));
+        message.success('删除成功');
       }
       else {
-        alert("删除上传表数据失败");
+        message.error('删除上传表数据失败');
       }
     })
     .catch((res)=>{
-      alert("删除上传表连接失败");
+      message.warning('删除上传表网络连接失败');
     })
   }
 };
@@ -241,16 +243,17 @@ export const deleteJobseekEducateData = (Id,id) => {
       })
     })
     .then((res)=>{
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(getJobseekEducateData(Id));
+        message.success('删除成功');
       }
       else {
-        alert("删除学历表数据失败");
+        message.error('删除学历表表数据失败');
       }
     })
     .catch((res)=>{
-      alert("删除学历表连接失败");
+      message.warning("删除学历表网络连接失败");
     })
   }
 };
@@ -265,16 +268,17 @@ export const deleteJobseekProjectData = (Id,id) => {
       })
     })
     .then((res)=>{
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(getJobseekProjectData(Id));
+        message.success('删除成功');
       }
       else {
-        alert("删除经验表数据失败");
+        message.error("删除经验表数据失败");
       }
     })
     .catch((res)=>{
-      alert("删除经验表连接失败");
+      message.warning("删除经验表网络连接失败");
     })
   }
 };
@@ -289,16 +293,17 @@ export const deleteJobseekWorkData = (Id,id) => {
       })
     })
     .then((res)=>{
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(getJobseekWorkData(Id));
+        message.success('删除成功');
       }
       else {
-        alert("删除工作表数据失败");
+        message.error("删除工作表数据失败");
       }
     })
     .catch((res)=>{
-      alert("删除工作表连接失败");
+      message.warning("删除工作表网络连接失败");
     })
   }
 };
@@ -311,17 +316,19 @@ export const modifyJobseekEducateData = (values) => {
       data: qs.stringify(values)
     })
     .then((res) => {
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(changeModifyEducate(1));
         dispatch(getJobseekEducateData(values['Id']));
+        message.success('更新教育经历成功');
       }
       else {
         dispatch(changeModifyEducate(2));
+        message.error("更新教育经历失败");
       }
     })
     .catch((res) => {
-      alert("更新教育列表连接失败");
+      message.warning("更新教育经历列表网络连接失败");
     })
   }
 };
@@ -334,17 +341,19 @@ export const modifyJobseekProjectData = (values) => {
       data: qs.stringify(values)
     })
     .then((res) => {
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(changeModifyProject(1));
         dispatch(getJobseekProjectData(values['Id']));
+        message.success('更新项目成功');
       }
       else {
         dispatch(changeModifyProject(2));
+        message.error("更新项目失败");
       }
     })
     .catch((res) => {
-      alert("更新项目列表连接失败");
+      message.warning("更新项目列表网络连接失败");
     })
   }
 };
@@ -357,17 +366,19 @@ export const modifyJobseekWorkData = (values) => {
       data: qs.stringify(values)
     })
     .then((res) => {
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(changeModifyWork(1));
         dispatch(getJobseekWorkData(values['Id']));
+        message.success('更新工作成功');
       }
       else {
         dispatch(changeModifyWork(2));
+        message.error("更新工作失败");
       }
     })
     .catch((res) => {
-      alert("更新工作列表连接失败");
+      message.warning("更新工作列表网络连接失败");
     })
   }
 };
@@ -380,17 +391,19 @@ export const modifyJobseekIntentData = (values) => {
       data: qs.stringify(values)
     })
     .then((res) => {
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
       if (res.data) {
         dispatch(changeModifyIntent(1));
         dispatch(getJobseekIntentData(values['Id']));
+        message.success('更新期待成功');
       }
       else {
         dispatch(changeModifyIntent(2));
+        message.error("更新期待失败");
       }
     })
     .catch((res) => {
-      alert("更新期待列表连接失败");
+      message.warning("更新期待网络连接失败");
     })
   }
 };
@@ -405,13 +418,15 @@ export const modifyJobseekName = (values,file) => {
     .then((res) => {
       if (res.data) {
         dispatch(changeModifyName(1));
+        message.success('更新个人信息成功');
       }
       else {
         dispatch(changeModifyName(2));
+        message.error("更新个人信息失败");
       }
     })
     .catch((res) => {
-      alert("传递失败");
+      message.warning("更新个人信息网络连接失败");
     })
     if (file) {
       axios({
@@ -425,19 +440,19 @@ export const modifyJobseekName = (values,file) => {
       .then((res) => {
         switch (res.data) {
           case 1:
-            dispatch(changeNamePhoto(1));break;
+            dispatch(changeNamePhoto(1));message.success('更新头像成功');break;
           case 2:
-            dispatch(changeNamePhoto(2));break;
+            dispatch(changeNamePhoto(2));message.error('更新头像失败');break;
           default:
             dispatch(changeNamePhoto(0));
         }
       })
       .catch((res) => {
-        alert("传递失败");
+        message.warning("更新个人头像网络连接失败");
       })
     }
     else {
       dispatch(changeNamePhoto(1));
     }
   }
-}
+};

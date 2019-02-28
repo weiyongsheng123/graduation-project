@@ -421,7 +421,7 @@ const mapDispatch = (dispatch) => {
       dispatch(submitCompany(values));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { NewsArea, NewsH3, NewsItem } from '../style';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getResumePositionList } from '../../search/store/actionCreators';
 
 class NewRecruit extends PureComponent {
@@ -21,6 +22,7 @@ class NewRecruit extends PureComponent {
         {
           bestNewList.map((item)=>{
             return (
+              <Link to={"/positions/" + item['Id']} key={item['Id']}>
               <NewsItem key={item['Id']}>
                 <h3 title={item['title']}>{item['title']}</h3>
                 <span className="salary">{item['salary']}</span>
@@ -29,6 +31,7 @@ class NewRecruit extends PureComponent {
                 <h4>{item['companyName']}</h4>
                 <p className="desc">{item['scale']}</p>
               </NewsItem>
+              </Link>
             )
           })
         }

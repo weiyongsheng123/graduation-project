@@ -3,6 +3,7 @@ import { PositionWrapper } from './style';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Head from '../../common/head';
+import Ajax from '../../common/ajax';
 import Suspension from '../../common/suspension';
 import WarnInfo from './components/warnInfo';
 import PositionTitle from './components/positionTitle';
@@ -19,6 +20,7 @@ class Positions extends PureComponent {
         <PositionTitle/>
         <PositionDetail/>
         <Suspension/>
+        <Ajax/>
       </PositionWrapper>
     )
   }

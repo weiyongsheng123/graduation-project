@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SearchWrapper } from './style';
 import Head from '../../common/head';
+import Ajax from '../../common/ajax';
 import Suspension from '../../common/suspension';
 import SearchInput from './components/searchInput';
 import SomeChooice from './components/someChooice';
@@ -18,6 +19,7 @@ class Search extends PureComponent {
         <SearchDetail/>
         <SearchPage/>
         <Suspension/>
+        <Ajax/>
       </SearchWrapper>
     )
   }

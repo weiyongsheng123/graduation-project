@@ -1,6 +1,7 @@
 import { SUBMIT_SUGGEST_INFO } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
+import { message } from 'antd';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 export const changeFeedBackSuccess = (value) => ({
@@ -12,15 +13,21 @@ export const submitSuggest = (values) =>{
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'addSuggest.php',
+      url: 'http://127.0.0.1:85/addSuggest.php',
       data: qs.stringify(values)
     })
     .then((res) => {
-      dispatch(changeFeedBackSuccess(true));
-      dispatch(changeAjax(false));
+      dispatch(changeAjax(''));
+      if (res.data) {
+        dispatch(changeFeedBackSuccess(true));
+        message.success('提交成功，收到你的建议');
+      }
+      else {
+        message.error('提交建议失败');
+      }
     })
     .catch(()=> {
-      alert("连接失败");
+      message.warning('提交建议，连接网络失败');
     })
   }
 }

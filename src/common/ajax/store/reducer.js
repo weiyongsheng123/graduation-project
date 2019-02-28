@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { AJAX_HAPPENING } from './actionTypes';
 
 const defaultState = fromJS({
-  ajax: false
+  ajax: true
 });
 
 export default (state = defaultState,action) => {

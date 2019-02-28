@@ -1,8 +1,8 @@
 import { SHOW_POSITION_ID, CHANGE_POSITION_COMPANY } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
+import { message } from 'antd';
 import { fromJS } from 'immutable';
-/*import { changeAjax } from '../../../common/ajax/store/actionCreators';*/
 
 export const showPositionId = (Id) => ({
   type: SHOW_POSITION_ID,
@@ -28,11 +28,11 @@ export const getPositionCompanyData = (Id) => {
         dispatch(changePositionCompanyData(res.data));
       }
       else {
-        alert("获取相关企业信息失败");
+        message.error('获取相关企业信息失败');
       }
     })
     .catch((res)=>{
-      alert("获取相关企业信息连接网络失败");
+      message.warning('获取相关企业信息连接网络失败');
     })
   }
-}
+};

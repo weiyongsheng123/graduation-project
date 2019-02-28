@@ -113,7 +113,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getJobseekUploadData(Id));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     },
     deleteItem (Id,id) {
       dispatch(deleteJobseekUploadData(Id,id));

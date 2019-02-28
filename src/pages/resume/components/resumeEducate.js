@@ -250,7 +250,7 @@ const mapDispatch = (dispatch) => {
       dispatch(changeModifyEducate(0));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('load'));
     },
     deleteItem (Id,id) {
       dispatch(deleteJobseekEducateData(Id,id));

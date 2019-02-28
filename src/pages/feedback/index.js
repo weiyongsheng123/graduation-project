@@ -140,7 +140,7 @@ const mapDispatch = (dispatch) => {
       dispatch(submitSuggest(value));
     },
     ajaxSend () {
-      dispatch(changeAjax(true));
+      dispatch(changeAjax('send'));
     }
   }
 };
