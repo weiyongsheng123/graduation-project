@@ -57,13 +57,13 @@ class App extends Component {
             >
             </Route>
             <Route
-              path="/resume"
+              path="/resume/:Id"
               exact
               component={Resume}
             >
             </Route>
             <Route
-              path="/company"
+              path="/company/:Id"
               exact
               component={Company}
             >

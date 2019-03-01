@@ -30,17 +30,20 @@ class ResumeProject extends PureComponent {
   render () {
     const { TextArea } = Input;
     const { RangePicker } = DatePicker;
-    const { projectData } = this.props;
+    const { projectData, routerId } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
       <ProjectArea id="resumeproject">
         <ProjectTitle>项目经验</ProjectTitle>
-        <ProjectButton>
-          <Button type="dashed" onClick={this.showEdit}>
-            <i className="iconfont">&#xe601;</i>
-            添加项目经验
-          </Button>
-        </ProjectButton>
+        {
+          routerId === '0' ? <ProjectButton>
+                               <Button type="dashed" onClick={this.showEdit}>
+                                 <i className="iconfont">&#xe601;</i>
+                                 添加项目经验
+                               </Button>
+                             </ProjectButton> :
+                              null
+        }
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}
@@ -53,10 +56,12 @@ class ResumeProject extends PureComponent {
                 return (
                   <ProjectItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
-                    <span className="iconfont">&#xe603;</span>
-                    <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
-                      <span className="iconfont">&#xe603;</span>
-                    </Popconfirm>
+                    {
+                      routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                                           <span className="iconfont">&#xe603;</span>
+                                         </Popconfirm> :
+                                         null
+                    }
                     <div className="container">
                       <span>项目名称：</span><p>{item.get('project')}</p>
                     </div>
@@ -122,15 +127,19 @@ class ResumeProject extends PureComponent {
     })
   };
   componentDidMount () {
-    const { loginOrNot } =this.props;
-    if (loginOrNot) {
+    const { loginOrNot, jobSeek } =this.props;
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && len.length) {
       this.showProject();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot, modifyProject, backState } =this.props;
+    const { loginOrNot, modifyProject, jobSeek, backState } =this.props;
     const { first } = this.state;
-    if (loginOrNot && first) {
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && first && len.length) {
       this.showProject();
     }
     if (modifyProject === 1) {
@@ -212,7 +221,8 @@ const mapState = (state) => ({
   projectData: state.getIn(['resume','projectData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
-  modifyProject: state.getIn(['resume','modifyProject'])
+  modifyProject: state.getIn(['resume','modifyProject']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

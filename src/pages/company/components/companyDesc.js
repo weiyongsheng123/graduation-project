@@ -35,7 +35,7 @@ class CompanyDesc extends PureComponent {
     const { TextArea } = Input;
     const Option = Select.Option;
     const InputGroup = Input.Group;
-    const { company, areaList } = this.props;
+    const { company, areaList, routerId } = this.props;
     const { submit, modifyData } = this.state;
     const newCompany = company.toJS();
     const dateFormat = 'YYYY-MM-DD';
@@ -62,10 +62,13 @@ class CompanyDesc extends PureComponent {
             {newCompany['desc']}
           </div>
         </DescDetail>
-        <span className="edit" onClick={this.showEdit.bind(this)}>
-          <span className="iconfont">&#xe609;</span>
-          编辑
-        </span>
+        {
+          routerId === '0' ? <span className="edit" onClick={this.showEdit.bind(this)}>
+                               <span className="iconfont">&#xe609;</span>
+                               编辑
+                             </span> :
+                             null
+        }
         <CSSTransition
             in={ this.state.changeShow }
             timeout={1000}
@@ -250,7 +253,8 @@ const mapState = (state) => ({
   loginOrNot: state.getIn(['login','loginOrNot']),
   company: state.getIn(['login','company']),
   areaList: state.getIn(['home','areaList']),
-  modifyCompany: state.getIn(['company','modifyCompany'])
+  modifyCompany: state.getIn(['company','modifyCompany']),
+  routerId: state.getIn(['company','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

@@ -16,10 +16,10 @@ class Head extends PureComponent {
     if (loginOrNot) {
       loginRegister = <HeadQuit onClick={this.quitLogin.bind(this)}>登出</HeadQuit>;
       if (pattern === '求职者端') {
-        choice = <Link to="/resume"><PersonCenter>个人中心</PersonCenter></Link>;
+        choice = <Link to="/resume/0"><PersonCenter>个人中心</PersonCenter></Link>;
       }
       else {
-        choice = <Link to="/company"><CompanyServer>企业服务</CompanyServer></Link>;
+        choice = <Link to="/company/0"><CompanyServer>企业服务</CompanyServer></Link>;
       }
     }
     else {

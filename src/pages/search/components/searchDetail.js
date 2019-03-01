@@ -45,7 +45,7 @@ class SearchDetail extends PureComponent {
                 <DetailItem>
                   <i className="iconfont hover">&#xe6dd;</i>
                   <h4>{item['title']}</h4>
-                  <p className="companyName"><i className="iconfont">&#xe647;</i>{item['companyName']}</p>
+                  <p className="companyName" onClick={(e)=>this.routerToCompany(item['compantId'],e)}><i className="iconfont">&#xe647;</i>{item['companyName']}</p>
                   <p className="need">
                     <span>{item['area']}</span>
                     <span>{item['education']}</span>
@@ -69,6 +69,25 @@ class SearchDetail extends PureComponent {
         }
       </DetailArea>
     )
+  };
+  routerToCompany (Id,e) {
+    e.stopPropagation();
+    const { loginOrNot } = this.props;
+    if (!loginOrNot) {
+      const _this = this;
+      Modal.confirm({
+        title: '查看公司失败',
+        content: '还未登录账号，登录后即可查看',
+        okText: '好的',
+        cancelText: '稍等',
+        onOk () {
+          _this.props.history.push('/login');
+        }
+      });
+    }
+    else {
+      this.props.history.push('/company/'+Id);
+    }
   };
   handleApply (resume,e) {
     e.preventDefault();

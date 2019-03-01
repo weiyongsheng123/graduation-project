@@ -6,7 +6,7 @@ const Loading = (props) => {
   return (
     <LoadImgArea>
       <LoadTitle>正在努力加载中....</LoadTitle>
-      <LoadImg src="./files/image/load.gif"/>
+      <LoadImg src="http://localhost:3000/files/image/load.gif"/>
     </LoadImgArea>
   )
 }

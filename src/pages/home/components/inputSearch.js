@@ -133,7 +133,6 @@ class InputSearch extends PureComponent {
     changeSort(filterPosition);
   };
   guessFind (value) {
-    console.log(value);
     const { positionResumeList, changeSort } = this.props;
     const newPosition = positionResumeList.toJS();
     let filterPosition = [];

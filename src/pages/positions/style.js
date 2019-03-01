@@ -136,6 +136,10 @@ export const TitleCompany = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: "微软雅黑" !important;
+    cursor: pointer;
+    &:hover {
+      color: #1890ff;
+    }
   }
   .right {
     display: block;

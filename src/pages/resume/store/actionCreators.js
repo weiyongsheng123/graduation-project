@@ -1,4 +1,4 @@
-import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA } from './actionTypes';
+import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import qs from 'qs';
@@ -60,6 +60,11 @@ export const getProjectData = (value) => ({
 export const getUploadData = (value) => ({
   type: GET_UPLOAD_DATA,
   value: fromJS(value)
+});
+
+export const getRouterJobseekId = (value) => ({
+  type: GET_ROUTER_JOBSEEK_ID,
+  value
 });
 
 export const getJobseekUploadData = (Id) => {
@@ -177,13 +182,36 @@ export const getJobseekIntentData = (Id) => {
   }
 };
 
-export const getJobseekNameData = (id) => {
+export const companyShowJobseek = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
       url: 'http://127.0.0.1:85/getJobseekNameData.php',
       data: qs.stringify({
-        Id: id
+        Id: Id
+      })
+    })
+    .then((res) => {
+      if (res.data) {
+        dispatch(importData1(res.data));
+      }
+      else {
+        message.error('获得求职人信息列表失败');
+      }
+    })
+    .catch((res) => {
+      message.warning('获得求职人信息列表网络连接失败');
+    })
+  }
+};
+
+export const getJobseekNameData = (Id) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/getJobseekNameData.php',
+      data: qs.stringify({
+        Id: Id
       })
     })
     .then((res) => {

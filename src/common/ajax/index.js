@@ -8,7 +8,7 @@ class Ajax extends PureComponent {
     const { ajax, jobSeek, company, pattern } = this.props;
     let ajaxHappen = null;
     if (ajax === 'load') {
-      ajaxHappen = <AjaxArea><AjaxLight src="./files/image/light.png"/><AjaxImg src="./files/image/load.gif"/></AjaxArea>;
+      ajaxHappen = <AjaxArea><AjaxLight src="http://localhost:3000/files/image/light.png"/><AjaxImg src="./files/image/load.gif"/></AjaxArea>;
     }
     else if (ajax === 'send') {
       let name = '';
@@ -20,14 +20,14 @@ class Ajax extends PureComponent {
       }
       ajaxHappen = <AjaxArea>
                      <AjaxSend>
-                       <SendImg src="./files/image/send.gif"/>
+                       <SendImg src="http://localhost:3000/files/image/send.gif"/>
                        <SendName>{name}</SendName>
                      </AjaxSend>
                    </AjaxArea>;
     }
     else if (ajax === 'throw') {
       ajaxHappen = <AjaxArea>
-                     <AjaxThrow src="./files/image/throw.gif"/>
+                     <AjaxThrow src="http://localhost:3000/files/image/throw.gif"/>
                    </AjaxArea>;
     }
     else {

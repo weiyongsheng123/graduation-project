@@ -1,11 +1,12 @@
 import { fromJS } from 'immutable';
-import { SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME } from './actionTypes';
+import { SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME, CHANGE_ROUTER_COMPANY_ID } from './actionTypes';
 
 const defaultState = fromJS({
   newResumeShow: false,
   modifyCompany: false,
   releaseResume: [ ],
-  reseriveList: [ ]
+  reseriveList: [ ],
+  routerId: '0'
 });
 
 export default (state = defaultState,action) => {
@@ -18,6 +19,8 @@ export default (state = defaultState,action) => {
       return state.set('releaseResume',action.values);
     case CHANGE_RESERIVE_RESUME:
       return state.set('reseriveList',action.values);
+    case CHANGE_ROUTER_COMPANY_ID:
+      return state.set('routerId',action.value);
     default:
       return state;
   }

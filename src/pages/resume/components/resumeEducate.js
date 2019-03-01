@@ -31,17 +31,20 @@ class ResumeEducate extends PureComponent {
   render () {
     const InputGroup = Input.Group;
     const Option = Select.Option;
-    const { educateData } = this.props;
+    const { educateData, routerId } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
       <EducateArea id="resumeeducate">
         <EducateTitle>教育经历</EducateTitle>
-        <EducateButton>
-          <Button type="dashed" onClick={this.showEdit}>
-            <i className="iconfont">&#xe601;</i>
-            添加教育经历
-          </Button>
-        </EducateButton>
+        {
+          routerId === '0' ? <EducateButton>
+                               <Button type="dashed" onClick={this.showEdit}>
+                                 <i className="iconfont">&#xe601;</i>
+                                 添加教育经历
+                               </Button>
+                             </EducateButton> :
+                             null
+        }
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}
@@ -54,9 +57,12 @@ class ResumeEducate extends PureComponent {
                 return (
                   <EducateItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
-                    <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
-                      <span className="iconfont">&#xe603;</span>
-                    </Popconfirm>
+                    {
+                      routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                                           <span className="iconfont">&#xe603;</span>
+                                         </Popconfirm> :
+                                         null
+                    }
                     <div className="container">
                       <span>学校名称：</span><p>{item.get('school')}</p>
                     </div>
@@ -138,15 +144,19 @@ class ResumeEducate extends PureComponent {
     })
   };
   componentDidMount () {
-    const { loginOrNot } =this.props;
-    if (loginOrNot) {
+    const { loginOrNot, jobSeek } =this.props;
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && len.length) {
       this.showEducate();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot, modifyEducate, backState } =this.props;
+    const { loginOrNot, modifyEducate, backState, jobSeek } =this.props;
     const { first } = this.state;
-    if (loginOrNot && first) {
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && first && len.length) {
       this.showEducate();
     }
     if (modifyEducate === 1) {
@@ -235,7 +245,8 @@ const mapState = (state) => ({
   educateData: state.getIn(['resume','educateData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
-  modifyEducate: state.getIn(['resume','modifyEducate'])
+  modifyEducate: state.getIn(['resume','modifyEducate']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

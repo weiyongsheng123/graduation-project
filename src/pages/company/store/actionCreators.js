@@ -1,4 +1,4 @@
-import { SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME } from './actionTypes';
+import { SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME, CHANGE_ROUTER_COMPANY_ID } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
@@ -28,6 +28,34 @@ export const changeReseriveResume = (values) => ({
   values: fromJS(values)
 });
 
+export const changeRouterCompanyId = (value) => ({
+  type: CHANGE_ROUTER_COMPANY_ID,
+  value
+});
+
+export const jobseekShowCompany = (Id) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/getCompanyDetail.php',
+      data: qs.stringify({
+        Id: Id
+      })
+    })
+    .then((res) => {
+     if (res.data) {
+       dispatch(importData(res.data));
+     }
+     else {
+       message.error('获取公司详细信息失败');
+     }
+    })
+    .catch((res) => {
+      message.warning('获取公司信息表，连接失败');
+    })
+  }
+};
+
 export const deleteReseriveResumeItem = (Id,id) => {
   return (dispatch) => {
     axios({
@@ -49,29 +77,6 @@ export const deleteReseriveResumeItem = (Id,id) => {
     })
     .catch((res)=>{
       message.warning('删除已收到的投递简历连接后台失败');
-    })
-  }
-}
-
-export const getReseriveResumeList = (companyId) => {
-  return (dispatch) => {
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:85/getReseriveResumeList.php',
-      data: qs.stringify({
-        companyId: companyId
-      })
-    })
-    .then((res)=>{
-      if (res.data) {
-        dispatch(changeReseriveResume(res.data));
-      }
-      else {
-        message.error('获取已收到简历表出错');
-      }
-    })
-    .catch((res)=>{
-      message.warning('获取已收到简历表连接网络失败');
     })
   }
 };
@@ -98,29 +103,6 @@ export const deleteReleaseResumeItem = (Id,id) => {
     })
     .catch((res)=>{
       message.warning('删除已发出招聘启事连接后台失败');
-    })
-  }
-}
-
-export const getReleaseResume = (Id) => {
-  return (dispatch) => {
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:85/getReleaseResume.php',
-      data: qs.stringify({
-        Id: Id
-      })
-    })
-    .then((res) => {
-      if (res.data) {
-        dispatch(changeReleaseResumeItem(res.data));
-      }
-      else {
-        message.error('获取已发布简历表失败');
-      }
-    })
-    .catch((res) => {
-      message.warning('接受已发布简历，网络连接失败');
     })
   }
 };
@@ -150,7 +132,53 @@ export const addNewResumeData = (values) => {
       message.warning('已经申请过了');
     })
   }
-}
+};
+
+export const getReseriveResumeList = (companyId) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/getReseriveResumeList.php',
+      data: qs.stringify({
+        companyId: companyId
+      })
+    })
+    .then((res)=>{
+      if (res.data) {
+        dispatch(changeReseriveResume(res.data));
+      }
+      else {
+        message.error('获取已收到简历表出错');
+      }
+    })
+    .catch((res)=>{
+      message.warning('获取已收到简历表连接网络失败');
+    })
+  }
+};
+
+export const getReleaseResume = (Id) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/getReleaseResume.php',
+      data: qs.stringify({
+        Id: Id
+      })
+    })
+    .then((res) => {
+      if (res.data) {
+        dispatch(changeReleaseResumeItem(res.data));
+      }
+      else {
+        message.error('获取已发布简历表失败');
+      }
+    })
+    .catch((res) => {
+      message.warning('接受已发布简历，网络连接失败');
+    })
+  }
+};
 
 export const getCompanyDetail = (Id) => {
   return (dispatch) => {

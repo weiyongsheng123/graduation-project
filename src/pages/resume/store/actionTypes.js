@@ -9,3 +9,4 @@ export const GET_UPLOAD_DATA = 'get_upload_data';
 export const CHNAGE_MODIFY_WORK = 'change_modify_work';
 export const CHNAGE_MODIFY_PROJECT = 'change_modify_project';
 export const CHNAGE_MODIFY_EDUCATE = 'change_modify_educate';
+export const GET_ROUTER_JOBSEEK_ID = 'change_router_jobseek_id';

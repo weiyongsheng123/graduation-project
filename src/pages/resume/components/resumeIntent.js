@@ -32,7 +32,7 @@ class ResumeIntent extends PureComponent {
   render () {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
-    const { salaryList, areaList, intentData } = this.props;
+    const { salaryList, areaList, intentData, routerId } = this.props;
     const { submit, modifyData, boxNumber } = this.state;
     const newIntentData = intentData.toJS();
     return (
@@ -69,10 +69,13 @@ class ResumeIntent extends PureComponent {
               <span>期望工作性质：</span>
               <p>{newIntentData['nature']}</p>
             </IntentDetail>
-            <span className="showEdit" onClick={this.showEdit}>
-              <span className="iconfont">&#xe609;</span>
-              编辑
-            </span>
+            {
+              routerId === '0' ? <span className="showEdit" onClick={this.showEdit}>
+                                    <span className="iconfont">&#xe609;</span>
+                                    编辑
+                                  </span> :
+                                  null
+            }
           </IntentProfile>
         </CSSTransition>
         <CSSTransition
@@ -163,15 +166,19 @@ class ResumeIntent extends PureComponent {
     })
   };
   componentDidMount () {
-    const { loginOrNot } =this.props;
-    if (loginOrNot) {
+    const { loginOrNot, jobSeek } =this.props;
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && len.length) {
       this.showIntent();
     }
   }
   componentDidUpdate () {
-    const { modifyIntent, backState, loginOrNot } =this.props;
+    const { modifyIntent, backState, loginOrNot, jobSeek } =this.props;
     const { first } = this.state;
-    if (loginOrNot && first) {
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && first && len.length) {
       this.showIntent();
     }
     if (modifyIntent === 1) {
@@ -256,7 +263,8 @@ const mapState = (state) => ({
   jobSeek: state.getIn(['login','jobSeek']),
   modifyIntent: state.getIn(['resume','modifyIntent']),
   intentData: state.getIn(['resume','intentData']),
-  loginOrNot: state.getIn(['login','loginOrNot'])
+  loginOrNot: state.getIn(['login','loginOrNot']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

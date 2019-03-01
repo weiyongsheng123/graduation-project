@@ -45,7 +45,7 @@ class ResumeName extends PureComponent {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
     const { modifyTruly, fade, modifyData } = this.state;
-    const { jobSeek, areaList, experienceList } = this.props;
+    const { jobSeek, areaList, experienceList, routerId } = this.props;
     const newJobseek = jobSeek.toJS();
     for (let item in newJobseek) {
       if (!newJobseek[item]) {
@@ -84,10 +84,13 @@ class ResumeName extends PureComponent {
               <i className="iconfont email">&#xe64b;</i>
               <span>{ newJobseek['email'] }</span>
             </p>
-            <span className="four" onClick={this.showEdit}>
-              <span className="iconfont">&#xe609;</span>
-              编辑
-            </span>
+            {
+              routerId === '0' ? <span className="four" onClick={this.showEdit}>
+                                    <span className="iconfont">&#xe609;</span>
+                                    编辑
+                                  </span> :
+                                  null
+            }
           </ResumeNameAreaProfile>
         </CSSTransition>
         <CSSTransition
@@ -196,7 +199,13 @@ class ResumeName extends PureComponent {
       modifyData: placeholderModify,
       first: false
     })
-  }
+  };
+  componentDidMount () {
+    const { loginOrNot } = this.props;
+    if ( loginOrNot ) {
+      this.placeholder();
+    }
+  };
   componentDidUpdate () {
     const { modifyName, namePhoto, getNewData, jobSeek, backState, loginOrNot } = this.props;
     const { first } = this.state;
@@ -216,7 +225,7 @@ class ResumeName extends PureComponent {
     if ( first && loginOrNot ) {
       this.placeholder();
     }
-  }
+  };
   submitModify () {
     const newModify = {...this.state.modifyData};
     const newTruly = {...this.state.modifyTruly};
@@ -284,7 +293,7 @@ class ResumeName extends PureComponent {
       modify(newModify,file);
       ajaxSend();
     }
-  }
+  };
   handleChangeAge (e) {
     const value = e;
     const name = 'age';
@@ -293,7 +302,7 @@ class ResumeName extends PureComponent {
     this.setState({
       modifyData: newModify
     })
-  }
+  };
   handleChange (e) {
     const value = e.target.value;
     const name = e.target.name;
@@ -347,7 +356,8 @@ const mapState = (state) => ({
   areaList: state.getIn(['home','areaList']),
   experienceList: state.getIn(['home','experienceList']),
   modifyName: state.getIn(['resume','modifyName']),
-  namePhoto: state.getIn(['resume','namePhoto'])
+  namePhoto: state.getIn(['resume','namePhoto']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

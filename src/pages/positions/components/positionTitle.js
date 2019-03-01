@@ -39,7 +39,7 @@ class PositionTitle extends PureComponent {
           <span className="right"><i className="iconfont">&#xe615;</i>{titleList['salary']}/月</span>
         </TitleTitle>
         <TitleCompany>
-          <span className="left">{titleList['companyName']}</span>
+          <span className="left" onClick={(e)=>this.routerToCompany(titleList['companyId'],e)}>{titleList['companyName']}</span>
           <p className="right">
             <span>{titleList['education']}</span>
             <span>{titleList['experience']}</span>
@@ -52,6 +52,25 @@ class PositionTitle extends PureComponent {
         </TitleButton>
       </TitleArea>
     )
+  };
+  routerToCompany (Id,e) {
+    e.stopPropagation();
+    const { loginOrNot } = this.props;
+    if (!loginOrNot) {
+      const _this = this;
+      Modal.confirm({
+        title: '查看公司失败',
+        content: '还未登录账号，登录后即可查看',
+        okText: '好的',
+        cancelText: '稍等',
+        onOk () {
+          _this.props.history.push('/login');
+        }
+      });
+    }
+    else {
+      this.props.history.push('/company/'+Id);
+    }
   };
   handleApply (resume,e) {
     e.preventDefault();

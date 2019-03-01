@@ -192,12 +192,11 @@ export const DetailItem = styled.li`
   &:hover {
     .hover {
       opacity: 1;
-      transition: opacity 0.3s;
     }
     .ant-btn-primary {
       opacity: 1;
-      transition: opacity 0.3s;
     }
+    transition: opacity 0.3s;
   }
   .hover {
     color: #1890ff;
@@ -233,6 +232,13 @@ export const DetailItem = styled.li`
     .iconfont {
       color: skyblue;
       margin-right: 5px;
+    }
+    &:hover {
+      color: #FFB433;
+      transition: color 0.3s;
+      .iconfont {
+        color: #FFB433;
+      }
     }
   }
   .need {

@@ -14,7 +14,7 @@ class ResumeUpload extends PureComponent {
     };
   }
   render () {
-    const { uploadData, getData, jobSeek } = this.props;
+    const { uploadData, getData, jobSeek, routerId } = this.props;
     const { resure } = this.state;
     const NewJobseek = jobSeek.toJS();
     const id = NewJobseek['Id'];
@@ -50,22 +50,28 @@ class ResumeUpload extends PureComponent {
                 <div className="item" key={item.get('Id')}>
                   <a href={item.get('href')} download>{item.get('title')}</a>
                   <i className="iconfont">&#xe627;</i>
-                  <Popconfirm placement="top" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
-                    <span className="iconfont">&#xe603;</span>
-                  </Popconfirm>
+                  {
+                    routerId === '0' ? <Popconfirm placement="top" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                                         <span className="iconfont">&#xe603;</span>
+                                       </Popconfirm> :
+                                       null
+                  }
                 </div>
               )
             })
           }
         </DownloadArea>
-        <Uploading>
-         <span className="title">上传区域：</span>
-         <Upload {...props} className="upload">
-           <Button>
-             <Icon type="upload" /> 上传简历等附件
-           </Button>
-         </Upload>
-        </Uploading>
+        {
+          routerId === '0' ? <Uploading>
+                               <span className="title">上传区域：</span>
+                               <Upload {...props} className="upload">
+                                 <Button>
+                                   <Icon type="upload" /> 上传简历等附件
+                                 </Button>
+                               </Upload>
+                              </Uploading> :
+                              null
+        }
       </UploadArea>
     )
   };
@@ -79,15 +85,19 @@ class ResumeUpload extends PureComponent {
     })
   };
   componentDidMount () {
-    const { loginOrNot } =this.props;
-    if (loginOrNot) {
+    const { loginOrNot, jobSeek } =this.props;
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && len.length) {
       this.showUpload();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot } =this.props;
+    const { loginOrNot, jobSeek } =this.props;
     const { first } = this.state;
-    if (loginOrNot && first) {
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && first && len.length) {
       this.showUpload();
     }
   };
@@ -104,7 +114,8 @@ class ResumeUpload extends PureComponent {
 const mapState = (state) => ({
   uploadData: state.getIn(['resume','uploadData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
-  jobSeek: state.getIn(['login','jobSeek'])
+  jobSeek: state.getIn(['login','jobSeek']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {

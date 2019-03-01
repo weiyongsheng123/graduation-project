@@ -472,6 +472,11 @@ export const IssueItem = styled.li`
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  &:hover {
+    color: #1890ff;
+    transition: color 0.3s;
+  }
   .left {
     float: left;
     display: block;
@@ -538,6 +543,11 @@ export const ReseriveItem = styled.li`
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  &:hover {
+    color: #1890ff;
+    transition: color 0.3s;
+  }
   .left {
     float: left;
     display: block;

@@ -29,17 +29,20 @@ class ResumeWork extends PureComponent {
   }
   render () {
     const Option = Select.Option;
-    const { workData } = this.props;
+    const { workData, routerId } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
       <WorkArea id="resumework">
         <WorkTitle>工作经验</WorkTitle>
-        <WorkButton>
-          <Button type="dashed" onClick={this.showEdit}>
-            <i className="iconfont">&#xe601;</i>
-            添加工作经验
-          </Button>
-        </WorkButton>
+        {
+          routerId === '0' ? <WorkButton>
+                               <Button type="dashed" onClick={this.showEdit}>
+                                 <i className="iconfont">&#xe601;</i>
+                                 添加工作经验
+                               </Button>
+                             </WorkButton> :
+                              null
+        }
         <CSSTransition
             in={ this.state.fade === 1 }
             timeout={1000}
@@ -52,9 +55,12 @@ class ResumeWork extends PureComponent {
                 return (
                   <WorkItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
-                    <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
-                      <span className="iconfont">&#xe603;</span>
-                    </Popconfirm>
+                    {
+                      routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                                           <span className="iconfont">&#xe603;</span>
+                                         </Popconfirm> :
+                                         null
+                    }
                     <div className="container">
                       <span>公司名：</span><p>{item.get('company')}</p>
                     </div>
@@ -134,15 +140,19 @@ class ResumeWork extends PureComponent {
     })
   };
   componentDidMount () {
-    const { loginOrNot } =this.props;
-    if (loginOrNot) {
+    const { loginOrNot, jobSeek } = this.props;
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && len.length) {
       this.showWork();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot, modifyWork, backState } =this.props;
+    const { loginOrNot, modifyWork, backState, jobSeek } = this.props;
     const { first } = this.state;
-    if (loginOrNot && first) {
+    const newJobseek = jobSeek.toJS();
+    const len = Object.keys(newJobseek);
+    if (loginOrNot && first && len.length) {
       this.showWork();
     }
     if (modifyWork === 1) {
@@ -222,7 +232,8 @@ const mapState = (state) => ({
   workData: state.getIn(['resume','workData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
-  modifyWork: state.getIn(['resume','modifyWork'])
+  modifyWork: state.getIn(['resume','modifyWork']),
+  routerId: state.getIn(['resume','routerId'])
 });
 
 const mapDispatch = (dispatch) => {
