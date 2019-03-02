@@ -14,7 +14,7 @@ class ResumeUpload extends PureComponent {
     };
   }
   render () {
-    const { uploadData, getData, jobSeek, routerId } = this.props;
+    const { uploadData, getData, jobSeek, routerId, jobseekId } = this.props;
     const { resure } = this.state;
     const NewJobseek = jobSeek.toJS();
     const id = NewJobseek['Id'];
@@ -51,7 +51,7 @@ class ResumeUpload extends PureComponent {
                   <a href={item.get('href')} download>{item.get('title')}</a>
                   <i className="iconfont">&#xe627;</i>
                   {
-                    routerId === '0' ? <Popconfirm placement="top" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                    routerId === jobseekId ? <Popconfirm placement="top" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
                                          <span className="iconfont">&#xe603;</span>
                                        </Popconfirm> :
                                        null
@@ -62,7 +62,7 @@ class ResumeUpload extends PureComponent {
           }
         </DownloadArea>
         {
-          routerId === '0' ? <Uploading>
+          routerId === jobseekId ? <Uploading>
                                <span className="title">上传区域：</span>
                                <Upload {...props} className="upload">
                                  <Button>
@@ -115,7 +115,8 @@ const mapState = (state) => ({
   uploadData: state.getIn(['resume','uploadData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
-  routerId: state.getIn(['resume','routerId'])
+  routerId: state.getIn(['resume','routerId']),
+  jobseekId: state.getIn(['login','jobseekId'])
 });
 
 const mapDispatch = (dispatch) => {

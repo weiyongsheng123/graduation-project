@@ -45,7 +45,7 @@ class SearchDetail extends PureComponent {
                 <DetailItem>
                   <i className="iconfont hover">&#xe6dd;</i>
                   <h4>{item['title']}</h4>
-                  <p className="companyName" onClick={(e)=>this.routerToCompany(item['compantId'],e)}><i className="iconfont">&#xe647;</i>{item['companyName']}</p>
+                  <p className="companyName" onClick={(e)=>this.routerToCompany(item['companyId'],e)}><i className="iconfont">&#xe647;</i>{item['companyName']}</p>
                   <p className="need">
                     <span>{item['area']}</span>
                     <span>{item['education']}</span>
@@ -72,6 +72,7 @@ class SearchDetail extends PureComponent {
   };
   routerToCompany (Id,e) {
     e.stopPropagation();
+    e.preventDefault();
     const { loginOrNot } = this.props;
     if (!loginOrNot) {
       const _this = this;

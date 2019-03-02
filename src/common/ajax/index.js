@@ -8,7 +8,7 @@ class Ajax extends PureComponent {
     const { ajax, jobSeek, company, pattern } = this.props;
     let ajaxHappen = null;
     if (ajax === 'load') {
-      ajaxHappen = <AjaxArea><AjaxLight src="http://localhost:3000/files/image/light.png"/><AjaxImg src="./files/image/load.gif"/></AjaxArea>;
+      ajaxHappen = <AjaxArea><AjaxLight src="http://localhost:3000/files/image/light.png"/><AjaxImg src="http://localhost:3000/files/image/load.gif"/></AjaxArea>;
     }
     else if (ajax === 'send') {
       let name = '';

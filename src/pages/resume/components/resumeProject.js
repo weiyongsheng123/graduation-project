@@ -30,13 +30,13 @@ class ResumeProject extends PureComponent {
   render () {
     const { TextArea } = Input;
     const { RangePicker } = DatePicker;
-    const { projectData, routerId } = this.props;
+    const { projectData, routerId, jobseekId } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
       <ProjectArea id="resumeproject">
         <ProjectTitle>项目经验</ProjectTitle>
         {
-          routerId === '0' ? <ProjectButton>
+          routerId === jobseekId ? <ProjectButton>
                                <Button type="dashed" onClick={this.showEdit}>
                                  <i className="iconfont">&#xe601;</i>
                                  添加项目经验
@@ -57,7 +57,7 @@ class ResumeProject extends PureComponent {
                   <ProjectItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
                     {
-                      routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                      routerId === jobseekId ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
                                            <span className="iconfont">&#xe603;</span>
                                          </Popconfirm> :
                                          null
@@ -222,7 +222,8 @@ const mapState = (state) => ({
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
   modifyProject: state.getIn(['resume','modifyProject']),
-  routerId: state.getIn(['resume','routerId'])
+  routerId: state.getIn(['resume','routerId']),
+  jobseekId: state.getIn(['login','jobseekId'])
 });
 
 const mapDispatch = (dispatch) => {

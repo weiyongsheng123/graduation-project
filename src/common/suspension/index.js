@@ -19,11 +19,11 @@ class Suspension extends PureComponent {
                     <Tooltip placement="left" title={backTop}>
                       <ScrollTop onClick={this.handleScrollTop}><i className="iconfont">&#xe732;</i></ScrollTop>
                     </Tooltip>
-                    <Tooltip placement="left" title={suggest}>
-                      <Link to="/feedback">
+                    <Link to="/feedback">
+                      <Tooltip placement="left" title={suggest}>
                         <Suggest><i className="iconfont">&#xe614;</i></Suggest>
-                      </Link>
-                    </Tooltip>
+                      </Tooltip>
+                    </Link>
                   </div>
                   : null
        }
@@ -48,7 +48,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => {
   return {
     showScoll () {
-      if(document.documentElement.scrollTop >= 400) {
+      if(document.documentElement.scrollTop >= 300) {
         dispatch(changeSuspension(true))
       }
       else {

@@ -32,7 +32,7 @@ class ResumeIntent extends PureComponent {
   render () {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
-    const { salaryList, areaList, intentData, routerId } = this.props;
+    const { salaryList, areaList, intentData, routerId, jobseekId } = this.props;
     const { submit, modifyData, boxNumber } = this.state;
     const newIntentData = intentData.toJS();
     return (
@@ -70,7 +70,7 @@ class ResumeIntent extends PureComponent {
               <p>{newIntentData['nature']}</p>
             </IntentDetail>
             {
-              routerId === '0' ? <span className="showEdit" onClick={this.showEdit}>
+              routerId === jobseekId ? <span className="showEdit" onClick={this.showEdit}>
                                     <span className="iconfont">&#xe609;</span>
                                     编辑
                                   </span> :
@@ -264,7 +264,8 @@ const mapState = (state) => ({
   modifyIntent: state.getIn(['resume','modifyIntent']),
   intentData: state.getIn(['resume','intentData']),
   loginOrNot: state.getIn(['login','loginOrNot']),
-  routerId: state.getIn(['resume','routerId'])
+  routerId: state.getIn(['resume','routerId']),
+  jobseekId: state.getIn(['login','jobseekId'])
 });
 
 const mapDispatch = (dispatch) => {

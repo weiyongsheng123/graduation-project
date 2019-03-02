@@ -36,13 +36,13 @@ export const HeadArea = styled.h1`
   width: 300px;
   height: 60px;
   display: block;
-  font-size: 30px;
+  font-size: 26px;
   line-height: 60px;
   font-weight: 550;
   margin: auto;
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   .iconfont {
     font-size: 35px;
     margin-right: 5px;
@@ -239,7 +239,7 @@ export const InfoArea = styled.div`
   margin: auto;
   box-sizing: border-box;
   padding: 20px;
-  margin-bottom: 130px;
+  margin-bottom: 10px;
 `;
 
 export const BackoutArea = styled.div`
@@ -526,4 +526,77 @@ export const InfoStep = styled.div`
   margin: auto;
   margin-top: 10px;
   margin-bottom: 25px;
+`;
+
+export const AnswerArea = styled.div`
+  width: 1150px;
+  height: auto;
+  overflow: hidden;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 20px;
+`;
+
+export const AnswerHeader = styled.h1`
+  width: 300px;
+  height: 60px;
+  display: block;
+  font-size: 26px;
+  line-height: 60px;
+  font-weight: 550;
+  margin: auto;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  vertical-align: middle;
+  .iconfont {
+    font-size: 35px;
+    margin-right: 5px;
+    color: #FFDD55;
+    margin-left: -15px;
+    vertical-align: middle;
+  }
+`;
+
+export const AnswerDetail = styled.ul`
+  width: 500px;
+  height: auto;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+export const AnswerItem = styled.li`
+  width: 500px;
+  height: auto;
+  overflow: hidden;
+  line-height: 30px;
+  padding-left: 50px;
+  .iconfont {
+    font-size: 22px;
+    line-height: 30px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .question {
+    font-weight: 900;
+    font-style: italic;
+    font-size: 17px;
+    span {
+      display: inline-block;
+      width: 92%;
+    }
+  }
+  .answer {
+    font-size: 15px;
+    .iconfont {
+      font-size: 21px;
+    }
+    span {
+      display: inline-block;
+      width: 92%;
+    }
+  }
 `;

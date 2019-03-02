@@ -1,4 +1,4 @@
-import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT, OPEN_AUTO_REMEBER } from './actionTypes';
+import { IMPORT_DATA, IMPORT_DATA1, CHANGE_WARN_INFO, CLEAR_AND_QUIT, OPEN_AUTO_REMEBER, RECODE_COMPANY_ID, RECODE_JOBSEEK_ID } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
@@ -28,7 +28,17 @@ export const clearAndQuit = () => ({
 export const openAutoRemeber = (value) => ({
   type: OPEN_AUTO_REMEBER,
   auto: value
-})
+});
+
+export const recodeCompanyId = (value) => ({
+  type: RECODE_COMPANY_ID,
+  value
+});
+
+export const recodeJobseekId = (value) => ({
+  type: RECODE_JOBSEEK_ID,
+  value
+});
 
 export const checkAccount = (values,pattern) => {
   return (dispatch) => {
@@ -53,10 +63,12 @@ export const checkAccount = (values,pattern) => {
         if (pattern === '企业端') {
           dispatch(importData(res.data));
           dispatch(changeCity(res.data['area']));
+          dispatch(recodeCompanyId(res.data['Id']));
         }
         else {
           dispatch(importData1(res.data));
           dispatch(changeCity(res.data['area']));
+          dispatch(recodeJobseekId(res.data['Id']));
         }
       }
     })

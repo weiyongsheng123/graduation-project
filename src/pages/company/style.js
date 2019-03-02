@@ -100,12 +100,17 @@ export const InputDiv = styled.div`
     margin: auto;
   }
   &.toRight {
-    padding-left: 50px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 120px;
+    height: 160px;
     .ant-btn {
-      width: 102px;
-      height: 54px;
-      line-height: 54px;
-      margin-left: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      margin-left: 20px;
     }
   }
   .warn {
@@ -303,13 +308,13 @@ export const DescImg = styled.img`
 
 export const DescInfo = styled.div`
   width: 400px;
-  height: 200px;
+  height: 270px;
   box-sizing: border-box;
   padding-left: 20px;
   p {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 30px;
     font-size: 16px;
     color: #333;
     margin-bottom: 0px;
@@ -324,18 +329,19 @@ export const DescInfo = styled.div`
 
 export const DescDetail = styled.div`
   flex: 1;
-  height: 200px;
+  height: 260px;
   p {
     width: 100%;
-    height: 43px;
-    line-height: 43px;
+    height: 33px;
+    line-height: 33px;
     font-size: 16px;
     font-weight: 550;
     margin-bottom: 0;
   }
   div {
     width: 100%;
-    height: 150px;
+    height: 250px;
+    line-height: 26px;
     overflow: hidden;
     box-sizing: border-box;
     padding-left: 20px;
@@ -383,7 +389,7 @@ export const EditArea = styled.div`
 `;
 
 export const EditDetail = styled.div`
-  width: 550px;
+  width: 580px;
   height: 600px;
   margin: auto;
   overflow: auto;
@@ -416,13 +422,18 @@ export const IssueArea = styled.div`
   box-shadow: 0 0 30px #eee;
 `;
 
-export const ReseriveArea =styled.div`
+export const ReseriveArea = styled.div`
   width: 550px;
   height: auto;
   overflow: hidden;
   float: right;
   background: #fff;
   box-shadow: 0 0 30px #eee;
+`;
+
+export const ReseriveFragment = styled.img`
+  width: 100%;
+  height: 450px;
 `;
 
 export const IssueTitle = styled.h3`

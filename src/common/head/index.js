@@ -8,18 +8,22 @@ import { getAreaSalaryExperience, getPosition } from "../../pages/home/store/act
 import { changeHeaderPattern } from '../header/store/actionCreators';
 
 class Head extends PureComponent {
-
+  constructor (props) {
+    super(props);
+    this.quitLogin = this.quitLogin.bind(this);
+  }
+  
   render () {
-    const { pattern, isShow, nowCity, loginOrNot, phoneNumber, areaList, showCityList, setCity } = this.props;
+    const { pattern, isShow, nowCity, loginOrNot, phoneNumber, areaList, showCityList, setCity, companyId, jobseekId } = this.props;
     let choice = null;
     let loginRegister = null;
     if (loginOrNot) {
-      loginRegister = <HeadQuit onClick={this.quitLogin.bind(this)}>登出</HeadQuit>;
+      loginRegister = <HeadQuit onClick={this.quitLogin}>登出</HeadQuit>;
       if (pattern === '求职者端') {
-        choice = <Link to="/resume/0"><PersonCenter>个人中心</PersonCenter></Link>;
+        choice = <Link to={"/resume/"+jobseekId}><PersonCenter>个人中心</PersonCenter></Link>;
       }
       else {
-        choice = <Link to="/company/0"><CompanyServer>企业服务</CompanyServer></Link>;
+        choice = <Link to={"/company/"+companyId}><CompanyServer>企业服务</CompanyServer></Link>;
       }
     }
     else {
@@ -88,6 +92,8 @@ const mapState = (state) => ({
   phoneNumber: state.getIn(['login','telephonenumber']),
   areaList: state.getIn(['home','areaList']),
   openAuto: state.getIn(['login','openAuto']),
+  companyId: state.getIn(['login','companyId']),
+  jobseekId: state.getIn(['login','jobseekId']),
   positionList: state.getIn(['home','positionList'])
 });
 

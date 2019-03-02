@@ -14,6 +14,7 @@ class CompanyDesc extends PureComponent {
       changeShow: false,
       modifyData: {
         name: '',
+        legalName: '',
         area: '',
         direction: '',
         beginTime: '',
@@ -35,7 +36,7 @@ class CompanyDesc extends PureComponent {
     const { TextArea } = Input;
     const Option = Select.Option;
     const InputGroup = Input.Group;
-    const { company, areaList, routerId } = this.props;
+    const { company, areaList, routerId, companyId } = this.props;
     const { submit, modifyData } = this.state;
     const newCompany = company.toJS();
     const dateFormat = 'YYYY-MM-DD';
@@ -55,6 +56,9 @@ class CompanyDesc extends PureComponent {
           <p><span>从业方向：</span>{newCompany['direction']}</p>
           <p><span>创办时间：</span>{newCompany['beginTime']}</p>
           <p><span>规模类别：</span>{newCompany['scale']}</p>
+          <p><span>法人代表：</span>{newCompany['legalName']}</p>
+          <p><span>手机号码：</span>{newCompany['telNumber']}</p>
+          <p><span>公司邮箱：</span>{newCompany['email']}</p>
         </DescInfo>
         <DescDetail>
           <p>简介：</p>
@@ -63,7 +67,7 @@ class CompanyDesc extends PureComponent {
           </div>
         </DescDetail>
         {
-          routerId === '0' ? <span className="edit" onClick={this.showEdit.bind(this)}>
+          routerId === companyId ? <span className="edit" onClick={this.showEdit.bind(this)}>
                                <span className="iconfont">&#xe609;</span>
                                编辑
                              </span> :
@@ -82,6 +86,11 @@ class CompanyDesc extends PureComponent {
                 <label htmlFor="name">公司名称</label>
                 <Input className="input" value={modifyData['name']} onChange={this.handleChange} name="name" placeholder="请输入公司名称" allowClear />
                 { submit && !modifyData['name'] ? <span className="warn">公司名称必填</span> : null }
+              </InputDiv>
+              <InputDiv>
+                <label htmlFor="legalName">法人代表</label>
+                <Input className="input" value={modifyData['legalName']} onChange={this.handleChange} name="legalName" placeholder="请输入法人代表姓名" allowClear />
+                { submit && !modifyData['legalName'] ? <span className="warn">法人代表姓名必填</span> : null }
               </InputDiv>
               <InputDiv>
                 <label htmlFor="area">地区</label>
@@ -145,6 +154,7 @@ class CompanyDesc extends PureComponent {
     const NewCompany = company.toJS();
     const placeholderModify = {};
     placeholderModify['name'] = NewCompany['name'];
+    placeholderModify['legalName'] = NewCompany['legalName'];
     placeholderModify['area'] = NewCompany['area'];
     placeholderModify['direction'] = NewCompany['direction'];
     placeholderModify['area'] = NewCompany['area'];
@@ -254,7 +264,8 @@ const mapState = (state) => ({
   company: state.getIn(['login','company']),
   areaList: state.getIn(['home','areaList']),
   modifyCompany: state.getIn(['company','modifyCompany']),
-  routerId: state.getIn(['company','routerId'])
+  routerId: state.getIn(['company','routerId']),
+  companyId: state.getIn(['login','companyId'])
 });
 
 const mapDispatch = (dispatch) => {

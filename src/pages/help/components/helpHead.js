@@ -6,7 +6,7 @@ class HelpHead extends PureComponent {
   render () {
     return (
       <HeadArea>
-        <span className="iconfont">&#xe612;</span>帮助中心
+        <span className="iconfont">&#xe632;</span>密码找回与修改信息
       </HeadArea>
     )
   }

@@ -45,7 +45,7 @@ class ResumeName extends PureComponent {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
     const { modifyTruly, fade, modifyData } = this.state;
-    const { jobSeek, areaList, experienceList, routerId } = this.props;
+    const { jobSeek, areaList, experienceList, routerId, jobseekId } = this.props;
     const newJobseek = jobSeek.toJS();
     for (let item in newJobseek) {
       if (!newJobseek[item]) {
@@ -85,7 +85,7 @@ class ResumeName extends PureComponent {
               <span>{ newJobseek['email'] }</span>
             </p>
             {
-              routerId === '0' ? <span className="four" onClick={this.showEdit}>
+              routerId === jobseekId ? <span className="four" onClick={this.showEdit}>
                                     <span className="iconfont">&#xe609;</span>
                                     编辑
                                   </span> :
@@ -357,7 +357,8 @@ const mapState = (state) => ({
   experienceList: state.getIn(['home','experienceList']),
   modifyName: state.getIn(['resume','modifyName']),
   namePhoto: state.getIn(['resume','namePhoto']),
-  routerId: state.getIn(['resume','routerId'])
+  routerId: state.getIn(['resume','routerId']),
+  jobseekId: state.getIn(['login','jobseekId'])
 });
 
 const mapDispatch = (dispatch) => {

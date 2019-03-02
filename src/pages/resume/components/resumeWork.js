@@ -29,13 +29,13 @@ class ResumeWork extends PureComponent {
   }
   render () {
     const Option = Select.Option;
-    const { workData, routerId } = this.props;
+    const { workData, routerId, jobseekId } = this.props;
     const { submit, modifyData, resure } = this.state;
     return (
       <WorkArea id="resumework">
         <WorkTitle>工作经验</WorkTitle>
         {
-          routerId === '0' ? <WorkButton>
+          routerId === jobseekId ? <WorkButton>
                                <Button type="dashed" onClick={this.showEdit}>
                                  <i className="iconfont">&#xe601;</i>
                                  添加工作经验
@@ -56,7 +56,7 @@ class ResumeWork extends PureComponent {
                   <WorkItem key={item.get('Id')}>
                     <span className="index">{++index}、</span>
                     {
-                      routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
+                      routerId === jobseekId ? <Popconfirm placement="rightTop" title={resure} onConfirm={()=>{this.handleDelete(item.get('Id'))}} okText="Yes" cancelText="No">
                                            <span className="iconfont">&#xe603;</span>
                                          </Popconfirm> :
                                          null
@@ -233,7 +233,8 @@ const mapState = (state) => ({
   loginOrNot: state.getIn(['login','loginOrNot']),
   jobSeek: state.getIn(['login','jobSeek']),
   modifyWork: state.getIn(['resume','modifyWork']),
-  routerId: state.getIn(['resume','routerId'])
+  routerId: state.getIn(['resume','routerId']),
+  jobseekId: state.getIn(['login','jobseekId'])
 });
 
 const mapDispatch = (dispatch) => {

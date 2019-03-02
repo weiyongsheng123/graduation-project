@@ -15,7 +15,7 @@ class CompanyIssue extends PureComponent {
       }
     }
   render () {
-    const { showEdit, releaseResume, routerId } = this.props;
+    const { showEdit, releaseResume, routerId, companyId } = this.props;
     const { resure } = this.state;
     const newRelease = releaseResume.toJS();
     return (
@@ -26,7 +26,7 @@ class CompanyIssue extends PureComponent {
             已发布的简历
           </span>
           {
-            routerId === '0' ? <span className="right" onClick={()=>showEdit(true)}>
+            routerId === companyId ? <span className="right" onClick={()=>showEdit(true)}>
                                  <i className="iconfont">&#xe601;</i>
                                  发布新的
                                </span> :
@@ -41,7 +41,7 @@ class CompanyIssue extends PureComponent {
                 <IssueItem>
                   <span className="left">{item['title']}</span>
                   {
-                    routerId === '0' ? <Popconfirm placement="rightTop" title={resure} onCancel={(e)=>{e.stopPropagation();}} onConfirm={(e)=>{this.handleDelete(item['Id'],e)}} okText="Yes" cancelText="No">
+                    routerId === companyId ? <Popconfirm placement="rightTop" title={resure} onCancel={(e)=>{e.stopPropagation();e.preventDefault();}} onConfirm={(e)=>{this.handleDelete(item['Id'],e)}} okText="Yes" cancelText="No">
                                          <span className="iconfont">&#xe603;</span>
                                        </Popconfirm> :
                                        null
@@ -84,6 +84,7 @@ class CompanyIssue extends PureComponent {
   };
   handleDelete (id,e) {
     e.stopPropagation();
+    e.preventDefault();
     message.info('删除中...');
     const { company, deleteItem, ajaxSend } = this.props;
     const NewCompany = company.toJS();
@@ -97,7 +98,8 @@ const mapState = (state) => ({
   loginOrNot: state.getIn(['login','loginOrNot']),
   company: state.getIn(['login','company']),
   releaseResume: state.getIn(['company','releaseResume']),
-  routerId: state.getIn(['company','routerId'])
+  routerId: state.getIn(['company','routerId']),
+  companyId: state.getIn(['login','companyId'])
 });
 
 const mapDispatch = (dispatch) => {
