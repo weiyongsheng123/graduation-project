@@ -57,30 +57,25 @@ class CompanyIssue extends PureComponent {
     )
   };
   showResumeItem () {
-    const { loadResumeItem, company } = this.props;
-    const NewCompany = company.toJS();
-    const id = NewCompany['Id'];
-    loadResumeItem(id);
-    this.setState({
-      first: false
-    })
-  };
-  componentDidMount () {
-    const { loginOrNot, company } = this.props;
-    const newCompany = company.toJS();
-    const len = Object.keys(newCompany);
-    if (loginOrNot && len.length) {
-      this.showResumeItem();
-    }
-  };
-  componentDidUpdate () {
-    const { loginOrNot, company } =this.props;
+    const { loginOrNot, company, loadResumeItem, releaseResume, companyId } = this.props;
     const { first } = this.state;
     const newCompany = company.toJS();
     const len = Object.keys(newCompany);
-    if (loginOrNot && first && len.length) {
-      this.showResumeItem();
+    const newRelease = releaseResume.toJS();
+    const len1 = Object.keys(newRelease);
+    if (loginOrNot && len.length && first && (!len1.length || newCompany['Id'] !== companyId)) {
+      const id = newCompany['Id'];
+      loadResumeItem(id);
+      this.setState({
+        first: false
+      })
     }
+  };
+  componentDidMount () {
+    this.showResumeItem();
+  };
+  componentDidUpdate () {
+    this.showResumeItem();
   };
   handleDelete (id,e) {
     e.stopPropagation();

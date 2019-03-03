@@ -39,16 +39,19 @@ class Company extends PureComponent {
   }
   componentDidMount () {
     window.scrollTo( 0, 0);
-    const { getId } = this.props;
+    const { getId, company } = this.props;
     let Id = this.props.match.params.Id;
-    if (Id !== '0') {
+    const newCompany = company.toJS();
+    const len = Object.keys(newCompany).length;
+    if (!len || newCompany['Id'] !== Id) {
       getId(Id);
     }
   }
 };
 
 const mapState = (state) => ({
-  newResumeShow: state.getIn(['company','newResumeShow'])
+  newResumeShow: state.getIn(['company','newResumeShow']),
+  company: state.getIn(['login','company'])
 });
 
 const mapDispatch = (dispatch) => {

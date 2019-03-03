@@ -6,11 +6,13 @@ import { changeShow, changeCity } from './store/actionCreators';
 import { clearAndQuit, openAutoRemeber, checkAccount } from "../../pages/login/store/actionCreators";
 import { getAreaSalaryExperience, getPosition } from "../../pages/home/store/actionCreators";
 import { changeHeaderPattern } from '../header/store/actionCreators';
+import { jobseekShowCompany, changeRouterCompanyId, getReleaseResume } from '../../pages/company/store/actionCreators';
 
 class Head extends PureComponent {
   constructor (props) {
     super(props);
     this.quitLogin = this.quitLogin.bind(this);
+    this.reloadOwn = this.reloadOwn.bind(this);
   }
   
   render () {
@@ -23,7 +25,7 @@ class Head extends PureComponent {
         choice = <Link to={"/resume/"+jobseekId}><PersonCenter>个人中心</PersonCenter></Link>;
       }
       else {
-        choice = <Link to={"/company/"+companyId}><CompanyServer>企业服务</CompanyServer></Link>;
+        choice = <Link to={"/company/"+companyId}><CompanyServer onClick={this.reloadOwn}>企业服务</CompanyServer></Link>;
       }
     }
     else {
@@ -65,6 +67,14 @@ class Head extends PureComponent {
      </HeadWrapper>
     )
   };
+  reloadOwn () {
+    const { getId, company, companyId } = this.props;
+    const newCompany = company.toJS();
+    const len = Object.keys(newCompany).length;
+    if (!len || newCompany['Id'] !== companyId) {
+      getId(companyId);
+    }
+  };
   quitLogin () {
     this.props.quitAccount();
   };
@@ -94,7 +104,8 @@ const mapState = (state) => ({
   openAuto: state.getIn(['login','openAuto']),
   companyId: state.getIn(['login','companyId']),
   jobseekId: state.getIn(['login','jobseekId']),
-  positionList: state.getIn(['home','positionList'])
+  positionList: state.getIn(['home','positionList']),
+  company: state.getIn(['login','company'])
 });
 
 const mapDispatch = (dispatch) => {
@@ -119,6 +130,11 @@ const mapDispatch = (dispatch) => {
     },
     getPositionList () {
       dispatch(getPosition());
+    },
+    getId (Id) {
+      dispatch(jobseekShowCompany(Id));
+      dispatch(changeRouterCompanyId(Id));
+      dispatch(getReleaseResume(Id));
     }
   }
 }
