@@ -48,10 +48,13 @@ export const submitApplice = (values) => {
           dispatch(changeAppliceErrorInfo('邮箱已被注册'));message.error('邮箱已被注册');break;
         case 'F':
           dispatch(changeAppliceErrorInfo('注册账号导入失败，请重试'));message.error('注册账号导入失败，请重试');break;
-        default:
+        case 'S':
           dispatch(changeAppliceErrorInfo(''));
           dispatch(changeApplicantRegiste(true));
-          message.success('注册成功');
+          message.success('注册成功');break;
+        default:
+          dispatch(changeAppliceErrorInfo('后台发生错误，注册失败'));
+          message.error('后台发生错误，注册失败');
       }
     })
     .catch((res) => {
@@ -85,10 +88,13 @@ export const submitCompany = (values) => {
           dispatch(changeCompanyErrorInfo('邮箱已被注册'));message.error('邮箱已被注册');break;
         case 'F':
           dispatch(changeCompanyErrorInfo('注册账号导入失败，请重试'));message.error('注册账号导入失败，请重试');break;
-        default:
+        case 'S':
           dispatch(changeCompanyErrorInfo(''));
           dispatch(changeCompanyRegiste(true));
-          message.success('注册成功');
+          message.success('注册成功');break;
+        default:
+          dispatch(changeCompanyErrorInfo('后台发生错误，注册失败'));
+          message.error('后台发生错误，注册失败');
       }
     })
     .catch((res) => {

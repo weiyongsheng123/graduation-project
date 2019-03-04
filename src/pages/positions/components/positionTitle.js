@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { TitleArea, TitleContinue, TitleTitle, TitleCompany, TitleButton } from '../style';
 import { Modal, Button } from 'antd';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getResumePositionList, addNewApply } from '../../search/store/actionCreators';
 import { getPositionCompanyData } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
@@ -55,6 +56,7 @@ class PositionTitle extends PureComponent {
   };
   routerToCompany (Id,e) {
     e.stopPropagation();
+    e.preventDefault();
     const { loginOrNot } = this.props;
     if (!loginOrNot) {
       const _this = this;
@@ -137,4 +139,4 @@ const mapDispatch = (dispatch) => {
   }
 };
 
-export default connect(mapState,mapDispatch)(PositionTitle);
+export default connect(mapState,mapDispatch)(withRouter(PositionTitle));

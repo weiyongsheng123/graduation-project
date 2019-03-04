@@ -212,8 +212,6 @@ export const NameArea = styled.div`
 `;
 
 export const Name = styled.span`
-  color: #2788f3;
-  border-bottom: 2px solid #2788f3;
   width: 16.6%;
   height: 52px;
   overflow: hidden;
@@ -225,8 +223,32 @@ export const Name = styled.span`
   cursor: pointer;
   float: left;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: .71px;
+  &.active {
+    color: #2788f3;
+    border-bottom: 2px solid #2788f3;
+  }
+`;
+
+export const SendResume = styled.span`
+  width: 16.6%;
+  height: 52px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  line-height: 50px;
+  padding: 0 1em;
+  cursor: pointer;
+  float: left;
+  box-sizing: border-box;
+  font-size: 16px;
+  letter-spacing: .71px;
+  &.active {
+    color: #2788f3;
+    border-bottom: 2px solid #2788f3;
+  }
 `;
 
 export const DetailWrapper = styled.div`
@@ -1082,5 +1104,19 @@ export const CallPolice = styled.a`
     height: 60px;
     line-height: 60px;
     margin-left: 5px;
+  }
+`;
+
+export const SendArea = styled.div`
+  width: 1050px;
+  height: 350px;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  .ant-table-wrapper {
+    height: 350px;
+    .ant-spin-nested-loading {
+      height: 300px;
+    }
   }
 `;

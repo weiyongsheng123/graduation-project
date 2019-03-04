@@ -1,4 +1,4 @@
-import { CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
+import { CHANGE_SHOW_RESUME, CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import qs from 'qs';
@@ -6,6 +6,11 @@ import { message } from 'antd';
 import { importData1 } from '../../login/store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 import { changeCity } from '../../../common/head/store/actionCreators';
+
+export const changeShowResume = (value) => ({
+  type: CHANGE_SHOW_RESUME,
+  value
+});
 
 export const changeModifyName = (value) => ({
   type: CHNAGE_MODIFY_NAME,

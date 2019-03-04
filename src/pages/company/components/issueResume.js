@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { IssueArea, IssueTitle, IssueList, IssueItem } from '../style';
 import { Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { showOrHide, getReleaseResume, deleteReleaseResumeItem } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
@@ -59,13 +59,13 @@ class CompanyIssue extends PureComponent {
   showResumeItem () {
     const { loginOrNot, company, loadResumeItem, releaseResume, companyId } = this.props;
     const { first } = this.state;
+    let Id = this.props.match.params.Id;
     const newCompany = company.toJS();
     const len = Object.keys(newCompany);
     const newRelease = releaseResume.toJS();
     const len1 = Object.keys(newRelease);
-    if (loginOrNot && len.length && first && (!len1.length || newCompany['Id'] !== companyId)) {
-      const id = newCompany['Id'];
-      loadResumeItem(id);
+    if (loginOrNot && len.length && first && (!len1.length || Id !== companyId)) {
+      loadResumeItem(Id);
       this.setState({
         first: false
       })
@@ -117,4 +117,4 @@ const mapDispatch = (dispatch) => {
   }
 };
 
-export default connect(mapState,mapDispatch)(CompanyIssue);
+export default connect(mapState,mapDispatch)(withRouter(CompanyIssue));

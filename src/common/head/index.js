@@ -20,7 +20,7 @@ class Head extends PureComponent {
     let choice = null;
     let loginRegister = null;
     if (loginOrNot) {
-      loginRegister = <HeadQuit onClick={this.quitLogin}>登出</HeadQuit>;
+      loginRegister = <Link to="/"><HeadQuit onClick={this.quitLogin}>登出</HeadQuit></Link>;
       if (pattern === '求职者端') {
         choice = <Link to={"/resume/"+jobseekId}><PersonCenter>个人中心</PersonCenter></Link>;
       }

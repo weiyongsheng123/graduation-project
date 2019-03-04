@@ -8,6 +8,7 @@ import { ResumeWrapper, ResumeContent } from './style';
 import ResumeHeader from './components/resumeHeader';
 import ResumeDetail from './components/indexDetail';
 import ResumeNav from './components/resumeNav';
+import ResumeSend from './components/resumeSend';
 import { companyShowJobseek, getRouterJobseekId } from './store/actionCreators';
 
 class Resume extends PureComponent {
@@ -17,10 +18,11 @@ class Resume extends PureComponent {
       <ResumeWrapper>
         <Head/>
         <ResumeHeader/>
-        <ResumeContent>
+        <ResumeContent style={{'display':'none'}}>
           <ResumeDetail/>
           <ResumeNav/>
         </ResumeContent>
+        <ResumeSend/>
         <Suspension/>
         <Ajax/>
       </ResumeWrapper>

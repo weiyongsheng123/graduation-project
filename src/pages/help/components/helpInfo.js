@@ -4,7 +4,7 @@ import { Input, Button, Steps } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { modifyAccountData } from '../store/actionCreators';
+import { modifyAccountData, modifyDataSuccess } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class HelpInfo extends PureComponent {
@@ -33,6 +33,7 @@ class HelpInfo extends PureComponent {
     this.showPassword = this.showPassword.bind(this);
     this.showInfo = this.showInfo.bind(this);
     this.showSuccess = this.showSuccess.bind(this);
+    this.backState = this.backState.bind(this);
   }
   render () {
     const Step = Steps.Step;
@@ -45,7 +46,7 @@ class HelpInfo extends PureComponent {
     if (submitPassword && validatePasswordError===2) {
       stepNow = 2;
     }
-    if (modifySuccess) {
+    if (modifySuccess === ' ') {
       stepNow = 3;
     }
     return (
@@ -55,8 +56,8 @@ class HelpInfo extends PureComponent {
             <BackoutArea>
               <Backout>
                 <h3>尚未登录，不能留言</h3>
-                <Link to="/login"><Button>去登录</Button></Link>
-                <Link to="/"><Button>回首页</Button></Link>
+                <Link to="/login"><Button onClick={this.backState}>去登录</Button></Link>
+                <Link to="/"><Button onClick={this.backState}>回首页</Button></Link>
               </Backout>
             </BackoutArea>
         }
@@ -107,14 +108,14 @@ class HelpInfo extends PureComponent {
               <Input placeholder="请输入6位以上字母加数字密码" name="password" allowClear onChange={this.handleChange1}/>
               { !modifyTruly['password']&&submitModify ? <span className="warn">密码不合格</span> : null }
             </InputContain>
-            { modifySuccess === 2 ? <span className="error">请仔细检查每项是否合格</span> : null }
+            <span className="error">{modifySuccess}</span>
             <Button type="primary" loading={false} onClick={this.showSuccess}>
               提交
             </Button>
           </InfoInput>
         </CSSTransition>
         <CSSTransition
-            in={ modifySuccess === 1 ? true : false }
+            in={ modifySuccess === ' ' ? true : false }
             timeout={1000}
             classNames='fade'
             unmountOnExit
@@ -128,6 +129,9 @@ class HelpInfo extends PureComponent {
         </CSSTransition>
       </InfoArea>
     )
+  }
+  backState () {
+    this.props.back();
   }
   handleChange1 (e) {
     const index = e.target.name;
@@ -236,6 +240,9 @@ const mapDispatch = (dispatch) => {
     },
     ajaxSend () {
       dispatch(changeAjax('load'));
+    },
+    back () {
+      dispatch(modifyDataSuccess(''));
     }
   }
 };

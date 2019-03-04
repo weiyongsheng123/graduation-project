@@ -4,7 +4,7 @@ import { GET_YOUR_PASSWORD, MODIFY_DATA_SUCCESS } from './actionTypes';
 const defaultState = fromJS({
   password: '',
   getError: false,
-  modifySuccess: 0
+  modifySuccess: ''
 });
 
 export default (state = defaultState,action) => {

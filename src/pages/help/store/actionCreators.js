@@ -11,7 +11,7 @@ const getYourPassword = (value,getError) => ({
   getError: getError
 });
 
-const modifyDataSuccess = (value) => ({
+export const modifyDataSuccess = (value) => ({
   type: MODIFY_DATA_SUCCESS,
   value
 });
@@ -44,20 +44,28 @@ export const modifyAccountData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'modifyAccount.php',
+      url: 'http://127.0.0.1:85/modifyAccount.php',
       data: qs.stringify(values)
     })
     .then ((res)=>{
       dispatch(changeAjax(''));
-      if (res.data) {
-        dispatch(modifyDataSuccess(1));
-        dispatch(clearAndQuit());
-        window.localStorage.removeItem("peiqiAccount");
-        message.success('修改信息成功');
-      }
-      else {
-        dispatch(modifyDataSuccess(2));
-        message.error('修改信息失败');
+      switch(res.data) {
+        case 'TE':
+          dispatch(modifyDataSuccess('手机号及邮箱已被注册'));message.error('手机号及邮箱已被注册');break;
+        case 'T':
+          dispatch(modifyDataSuccess('手机号已被注册'));message.error('手机号已被注册');break;
+        case 'E':
+          dispatch(modifyDataSuccess('邮箱已被注册'));message.error('邮箱已被注册');break;
+        case 'F':
+          dispatch(modifyDataSuccess('注册账号导入失败，请重试'));message.error('注册账号导入失败，请重试');break;
+        case 'S':
+          dispatch(modifyDataSuccess(' '));
+          dispatch(clearAndQuit());
+          window.localStorage.removeItem("peiqiAccount");
+          message.success('修改成功');break;
+        default:
+          dispatch(modifyDataSuccess('后台发生错误，修改失败'));
+          message.error('后台发生错误，注册失败');
       }
     })
     .catch ((res)=>{
