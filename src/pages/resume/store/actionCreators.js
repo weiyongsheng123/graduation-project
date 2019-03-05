@@ -1,4 +1,4 @@
-import { CHANGE_SHOW_RESUME, CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
+import { CHANGE_SHOW_RESUME, CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, CHANGE_SEND_RESUME_LIST, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
 import axios from 'axios';
 import { fromJS } from 'immutable';
 import qs from 'qs';
@@ -71,6 +71,34 @@ export const getRouterJobseekId = (value) => ({
   type: GET_ROUTER_JOBSEEK_ID,
   value
 });
+
+export const changeSendResumeList = (values) => ({
+  type: CHANGE_SEND_RESUME_LIST,
+  values: fromJS(values)
+});
+
+export const getSendResumeList = (jobseekId) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/getSendResumeList.php',
+      data: qs.stringify({
+        jobseekId: jobseekId
+      })
+    })
+    .then((res)=>{
+      if (res.data) {
+        dispatch(changeSendResumeList(res.data));
+      }
+      else {
+        message.error('获取已发出申请表出错');
+      }
+    })
+    .catch((res)=>{
+      message.warning('获取已发出申请表连接网络失败');
+    })
+  }
+};
 
 export const getJobseekUploadData = (Id) => {
   return (dispatch) => {
@@ -237,6 +265,31 @@ export const getJobseekNameData = (Id) => {
     })
     .catch((res) => {
       message.warning('获得求职人信息列表网络连接失败');
+    })
+  }
+};
+
+export const deleteSendResumeItem = (Id,id) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:85/deleteReseriveResumeItem.php',
+      data: qs.stringify({
+        Id: id
+      })
+    })
+    .then((res)=>{
+      dispatch(changeAjax(''));
+      if (res.data) {
+        message.success("删除成功");
+        dispatch(getSendResumeList(Id));
+      }
+      else {
+        message.error('删除已发送的投递简历失败');
+      }
+    })
+    .catch((res)=>{
+      message.warning('删除已发送的投递简历连接后台失败');
     })
   }
 };

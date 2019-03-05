@@ -14,15 +14,19 @@ import { companyShowJobseek, getRouterJobseekId } from './store/actionCreators';
 class Resume extends PureComponent {
 
   render () {
+    const { showResume } = this.props;
     return (
       <ResumeWrapper>
         <Head/>
         <ResumeHeader/>
-        <ResumeContent style={{'display':'none'}}>
-          <ResumeDetail/>
-          <ResumeNav/>
-        </ResumeContent>
-        <ResumeSend/>
+        {
+          showResume ? <ResumeContent>
+                         <ResumeDetail/>
+                         <ResumeNav/>
+                       </ResumeContent>
+                     :
+                       <ResumeSend/>
+        }
         <Suspension/>
         <Ajax/>
       </ResumeWrapper>
@@ -39,7 +43,7 @@ class Resume extends PureComponent {
 };
 
 const mapState = (state) => ({
-  
+  showResume: state.getIn(['resume','showResume'])
 });
 
 const mapDispatch = (dispatch) => {

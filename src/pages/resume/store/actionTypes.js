@@ -11,3 +11,4 @@ export const CHNAGE_MODIFY_WORK = 'change_modify_work';
 export const CHNAGE_MODIFY_PROJECT = 'change_modify_project';
 export const CHNAGE_MODIFY_EDUCATE = 'change_modify_educate';
 export const GET_ROUTER_JOBSEEK_ID = 'change_router_jobseek_id';
+export const CHANGE_SEND_RESUME_LIST = 'change_send_resume_list';

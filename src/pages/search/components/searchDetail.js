@@ -113,6 +113,8 @@ class SearchDetail extends PureComponent {
       applyData['companyId'] = resume['companyId'];
       applyData['resumeName'] = resume['title'];
       applyData['jobseekName'] = newJobSeek['name'];
+      applyData['jobseekSex'] = newJobSeek['sex'];
+      applyData['jobseekAge'] = newJobSeek['age'];
       applyData['companyName'] = resume['companyName'];
       let date = new Date();
       let time = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();

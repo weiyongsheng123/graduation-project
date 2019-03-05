@@ -30,8 +30,8 @@ class Company extends PureComponent {
           classNames='fade'
           unmountOnExit
           >
-            <AddNewResume/>
-          </CSSTransition>
+          <AddNewResume/>
+        </CSSTransition>
         <Suspension/>
         <Ajax/>
       </CompanyWrapper>
@@ -39,12 +39,15 @@ class Company extends PureComponent {
   }
   componentDidMount () {
     window.scrollTo( 0, 0);
-    const { getId, company } = this.props;
+    const { getId, company, getRouterId } = this.props;
     let Id = this.props.match.params.Id;
     const newCompany = company.toJS();
     const len = Object.keys(newCompany).length;
     if (!len || newCompany['Id'] !== Id) {
       getId(Id);
+    }
+    else {
+      getRouterId(Id);
     }
   }
 };
@@ -58,6 +61,9 @@ const mapDispatch = (dispatch) => {
   return {
     getId (Id) {
       dispatch(jobseekShowCompany(Id));
+      dispatch(changeRouterCompanyId(Id));
+    },
+    getRouterId (Id) {
       dispatch(changeRouterCompanyId(Id));
     }
   }

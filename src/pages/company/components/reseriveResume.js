@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { ReseriveArea, ReseriveTitle, ReseriveList, ReseriveItem, ReseriveFragment } from '../style';
 import { connect } from 'react-redux';
 import { Popconfirm, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { getReseriveResumeList, deleteReseriveResumeItem } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
@@ -62,28 +62,23 @@ class CompanyReserive extends PureComponent {
     ajaxSend();
   };
   getReserive () {
-    const { company, getReseriveResume } = this.props;
-    const newCompany = company.toJS();
-    let companyId = newCompany['Id'];
+    const { getReseriveResume } = this.props;
+    let companyId = this.props.match.params.Id;
     getReseriveResume(companyId);
     this.setState({
       first: false
     })
   };
   componentDidMount () {
-    const { loginOrNot, company } = this.props;
-    const newCompany = company.toJS();
-    const len = Object.keys(newCompany);
-    if ( loginOrNot && len.length ) {
+    const { loginOrNot } = this.props;
+    if ( loginOrNot ) {
       this.getReserive();
     }
   };
   componentDidUpdate () {
-    const { loginOrNot, company } = this.props;
+    const { loginOrNot } = this.props;
     const { first } = this.state;
-    const newCompany = company.toJS();
-    const len = Object.keys(newCompany);
-    if ( first && loginOrNot && len.length ) {
+    if ( first && loginOrNot ) {
       this.getReserive();
     }
   };
@@ -111,4 +106,4 @@ const mapDispatch = (dispatch) => {
   }
 };
 
-export default connect(mapState,mapDispatch)(CompanyReserive);
+export default connect(mapState,mapDispatch)(withRouter(CompanyReserive));

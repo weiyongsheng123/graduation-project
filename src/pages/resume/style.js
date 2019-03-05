@@ -1109,14 +1109,46 @@ export const CallPolice = styled.a`
 
 export const SendArea = styled.div`
   width: 1050px;
-  height: 350px;
+  height: 385px;
   margin: auto;
+  margin-top: 40px;
+  margin-bottom: 70px;
   overflow: hidden;
   background: #fff;
   .ant-table-wrapper {
-    height: 350px;
+    height: 385px;
+    position: relative;
     .ant-spin-nested-loading {
-      height: 300px;
+      height: 323px;
+      position: static;
+      .ant-spin-container {
+        position: static;
+        .ant-table {
+          .ant-table-thead {
+            th {
+              text-align: center;
+            }
+          }
+          .ant-table-tbody {
+            td {
+              max-width: 190px;
+              text-align: center;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              cursor: pointer;
+            }
+          }
+          .ant-table-placeholder {
+            height: 270px;
+          }
+        }
+        .ant-pagination {
+          position: absolute;
+          bottom: 0px;
+          right: 10px;
+        }
+      }
     }
   }
 `;

@@ -64,7 +64,7 @@ class CompanyIssue extends PureComponent {
     const len = Object.keys(newCompany);
     const newRelease = releaseResume.toJS();
     const len1 = Object.keys(newRelease);
-    if (loginOrNot && len.length && first && (!len1.length || Id !== companyId)) {
+    if (loginOrNot && len.length && first && (!len1.length || Id !== companyId || Id !== newCompany['Id'])) {
       loadResumeItem(Id);
       this.setState({
         first: false
