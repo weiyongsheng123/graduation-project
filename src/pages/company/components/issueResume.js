@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import { IssueArea, IssueTitle, IssueList, IssueItem } from '../style';
-import { Popconfirm, message } from 'antd';
+import React, { PureComponent, Fragment } from 'react';
+import { IssueArea, IssueTitle, IssueList } from '../style';
+import { Table, Divider, Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { showOrHide, getReleaseResume, deleteReleaseResumeItem } from '../store/actionCreators';
+import { showOrHide, getReleaseResume, deleteReleaseResumeItem, changeReleaseResume } from '../store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 
 class CompanyIssue extends PureComponent {
@@ -11,13 +11,75 @@ class CompanyIssue extends PureComponent {
       super(props);
       this.state = {
         resure: '确认要删除此条',
-        first: true
+        first: true,
+        page: 1
       }
     }
   render () {
     const { showEdit, releaseResume, routerId, companyId } = this.props;
     const { resure } = this.state;
-    const newRelease = releaseResume.toJS();
+    const data = releaseResume.toJS();
+    const columns = [{
+      title: '职位标题',
+      dataIndex: 'title',
+      key: 'title',
+      render: (text, record) => <Link to={"/positions/"+record.resumeId}>{text}</Link>
+      }, {
+        title: '职位类型',
+        dataIndex: 'position',
+        key: 'jobseekName',
+      }, {
+        title: '薪资',
+        dataIndex: 'salary',
+        key: 'salary',
+      }, {
+        title: '学历',
+        dataIndex: 'education',
+        key: 'education'
+      }, {
+        title: '经验',
+        dataIndex: 'experience',
+        key: 'experience'
+      }, {
+        title: '地区',
+        dataIndex: 'area',
+        key: 'areae'
+      }, {
+        title: '人数',
+        dataIndex: 'numbers',
+        key: 'numbers'
+      }, {
+        title: '发布公司',
+        dataIndex: 'companyName',
+        key: 'companyName'
+      }, {
+        title: '发布时间',
+        dataIndex: 'time',
+        key: 'time',
+      }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <span onClick={()=>this.upTop(record.Id)}>置顶</span>
+            {
+              routerId === companyId ? <Fragment>
+                                         <Divider type="vertical" />
+                                         <Popconfirm placement="rightTop" title={resure} onCancel={(e)=>{e.stopPropagation();e.preventDefault();}} onConfirm={(e)=>{this.handleDelete(record.Id,e)}} okText="Yes" cancelText="No">
+                                           <span>删除</span>
+                                         </Popconfirm>
+                                       </Fragment> :
+                                       null
+            }
+          </span>
+        ),
+    }];
+    const setPage = {
+      defaultPageSize: 5,
+      total: data.length,
+      showTotal: (total, range) => `${range[0]}-${range[1]} 条，共 ${total} 条`,
+      onChange: this.handleChange
+    }
     return (
       <IssueArea>
         <IssueTitle>
@@ -34,24 +96,7 @@ class CompanyIssue extends PureComponent {
           }
         </IssueTitle>
         <IssueList>
-          {
-            newRelease.map((item)=>{
-              return (
-                <Link to={"/positions/" + item['Id']} key={item['Id']}>
-                <IssueItem>
-                  <span className="left">{item['title']}</span>
-                  {
-                    routerId === companyId ? <Popconfirm placement="rightTop" title={resure} onCancel={(e)=>{e.stopPropagation();e.preventDefault();}} onConfirm={(e)=>{this.handleDelete(item['Id'],e)}} okText="Yes" cancelText="No">
-                                         <span className="iconfont">&#xe603;</span>
-                                       </Popconfirm> :
-                                       null
-                  }
-                  <span className="right">{item['time']}</span>
-                </IssueItem>
-                </Link>
-              )
-            })
-          }
+          <Table columns={columns} pagination={setPage} dataSource={data} />
         </IssueList>
       </IssueArea>
     )
@@ -76,6 +121,28 @@ class CompanyIssue extends PureComponent {
   };
   componentDidUpdate () {
     this.showResumeItem();
+  };
+  handleChange = (page) => {
+    this.setState({
+      page: page
+    });
+  };
+  upTop (Id) {
+    const { changeIndex, releaseResume} = this.props;
+    const { page } = this.state;
+    let newRelease = releaseResume.toJS();
+    let index = 0;
+    for (var i = 0; i<newRelease.length;i++) {
+      if (newRelease[i]['Id']===Id) {
+        index = i;
+        break;
+      }
+    }
+    let upItem = newRelease[index];
+    newRelease.splice(index,1);
+    let newIndex = (page-1)*5;
+    newRelease.splice(newIndex,0,upItem);
+    changeIndex(newRelease);
   };
   handleDelete (id,e) {
     e.stopPropagation();
@@ -113,6 +180,9 @@ const mapDispatch = (dispatch) => {
     },
     ajaxSend () {
       dispatch(changeAjax('throw'));
+    },
+    changeIndex (values) {
+      dispatch(changeReleaseResume(values));
     }
   }
 };

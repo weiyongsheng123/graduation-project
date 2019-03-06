@@ -30,6 +30,7 @@ class ResumeName extends PureComponent {
           email: true
         },
         file: null,
+        fileCheck: true,
         first: true
       };
       this.showProfile = this.showProfile.bind(this);
@@ -44,7 +45,7 @@ class ResumeName extends PureComponent {
   render () {
     const RadioGroup = Radio.Group;
     const Option = Select.Option;
-    const { modifyTruly, fade, modifyData } = this.state;
+    const { modifyTruly, fade, modifyData, fileCheck } = this.state;
     const { jobSeek, areaList, experienceList, routerId, jobseekId } = this.props;
     const newJobseek = jobSeek.toJS();
     for (let item in newJobseek) {
@@ -174,6 +175,7 @@ class ResumeName extends PureComponent {
             <InputDiv>
               <label htmlFor="file">头像</label>
               <input className="file" onChange={this.uploadFile} type="file" name="file"/>
+              { !fileCheck ? <span className="warn">上传图片格式不符合(将不会上传)</span> : null }
             </InputDiv>
             <InputDiv>
               <Button onClick={this.submitModify}>提交</Button>
@@ -292,6 +294,9 @@ class ResumeName extends PureComponent {
       newModify['Id'] = id;
       modify(newModify,file);
       ajaxSend();
+      this.setState({
+        fileCheck: true
+      });
     }
   };
   handleChangeAge (e) {
@@ -332,6 +337,19 @@ class ResumeName extends PureComponent {
   };
   uploadFile (e) {
     let file = e.target.files[0];
+    let fileName = file.name;
+    var re = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/g;
+    if (re.test(fileName)) {
+      this.setState({
+        fileCheck: true
+      });
+    }
+    else {
+      this.setState({
+        fileCheck: false
+      });
+      return;
+    }
     let data = new FormData();
     data.append("file",file);
     this.setState({

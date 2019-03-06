@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { CompanyWrapper, CompanyContent } from './style';
+import { CompanyWrapper } from './style';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Head from '../../common/head';
@@ -15,15 +15,15 @@ import { jobseekShowCompany, changeRouterCompanyId } from './store/actionCreator
 class Company extends PureComponent {
 
   render () {
-    const { newResumeShow } = this.props;
+    const { newResumeShow, routerId, companyId } = this.props;
     return (
       <CompanyWrapper>
         <Head/>
         <CompanyDesc/>
-        <CompanyContent >
-          <CompanyIssue/>
-          <CompanyReserive/>
-        </CompanyContent>
+        <CompanyIssue/>
+        {
+          routerId === companyId ? <CompanyReserive/> : null
+        }
         <CSSTransition
           in={ newResumeShow }
           timeout={1000}
@@ -54,7 +54,9 @@ class Company extends PureComponent {
 
 const mapState = (state) => ({
   newResumeShow: state.getIn(['company','newResumeShow']),
-  company: state.getIn(['login','company'])
+  company: state.getIn(['login','company']),
+  routerId: state.getIn(['company','routerId']),
+  companyId: state.getIn(['login','companyId'])
 });
 
 const mapDispatch = (dispatch) => {

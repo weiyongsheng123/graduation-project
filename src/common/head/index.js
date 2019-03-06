@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeShow, changeCity } from './store/actionCreators';
 import { clearAndQuit, openAutoRemeber, checkAccount } from "../../pages/login/store/actionCreators";
+import { clearAndQuitCompany } from "../../pages/company/store/actionCreators";
+import { clearAndQuitJobseek } from "../../pages/resume/store/actionCreators";
 import { getAreaSalaryExperience, getPosition } from "../../pages/home/store/actionCreators";
 import { changeHeaderPattern } from '../header/store/actionCreators';
 import { jobseekShowCompany, changeRouterCompanyId, getReleaseResume } from '../../pages/company/store/actionCreators';
@@ -119,6 +121,8 @@ const mapDispatch = (dispatch) => {
     },
     quitAccount () {
       dispatch(clearAndQuit());
+      dispatch(clearAndQuitCompany());
+      dispatch(clearAndQuitJobseek());
       dispatch(openAutoRemeber(false));
     },
     autoLogin (values,pattern) {

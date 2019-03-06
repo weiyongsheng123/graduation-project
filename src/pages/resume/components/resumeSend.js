@@ -11,7 +11,8 @@ class ResumeSend extends PureComponent {
     super(props);
     this.state = {
       resure: '确认要删除此条',
-      first: true
+      first: true,
+      page: 1
     }
   }
   render () {
@@ -47,9 +48,9 @@ class ResumeSend extends PureComponent {
     }, {
       title: '操作',
       key: 'action',
-      render: (text, record, index) => (
+      render: (text, record) => (
         <span>
-          <span onClick={()=>this.upTop(index)}>置顶</span>
+          <span onClick={()=>this.upTop(record.Id)}>置顶</span>
           <Divider type="vertical" />
           <Popconfirm placement="rightTop" title={resure} onCancel={(e)=>{e.stopPropagation();e.preventDefault();}} onConfirm={(e)=>{this.handleDelete(record.Id,e)}} okText="Yes" cancelText="No">
             <span>删除</span>
@@ -60,7 +61,8 @@ class ResumeSend extends PureComponent {
    const setPage = {
      defaultPageSize: 5,
      total: data.length,
-     showTotal: (total, range) => `${range[0]}-${range[1]} 条，共 ${total} 条`
+     showTotal: (total, range) => `${range[0]}-${range[1]} 条，共 ${total} 条`,
+     onChange: this.handleChange
    }
     return (
       <SendArea>
@@ -68,12 +70,26 @@ class ResumeSend extends PureComponent {
       </SendArea>
     )
   };
-  upTop (index) {
+  handleChange = (page) => {
+    this.setState({
+      page: page
+    });
+  };
+  upTop (Id) {
     const { changeIndex, sendResumeList } = this.props;
+    const { page } = this.state;
     let newSend = sendResumeList.toJS();
+    let index = 0;
+    for (var i = 0; i<newSend.length;i++) {
+      if (newSend[i]['Id']===Id) {
+        index = i;
+        break;
+      }
+    }
     let upItem = newSend[index];
     newSend.splice(index,1);
-    newSend.splice(0,0,upItem);
+    let newIndex = (page-1)*5;
+    newSend.splice(newIndex,0,upItem);
     changeIndex(newSend);
   }
   handleDelete (id,e) {

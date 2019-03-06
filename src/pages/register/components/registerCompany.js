@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RegisterDiv, AnimateArea, AnimatePart, SubmitButton, InputH3, InputSpan, InputDiv, InputSubmit, IdentContainer, BackLogin } from '../style';
-import { Input, Button, Icon, Checkbox } from 'antd';
+import { Input, Button, Icon, Checkbox, Select } from 'antd';
 import Ident from '../../../common/identCode';
 import { CSSTransition } from 'react-transition-group';
 import { Link, Redirect } from 'react-router-dom';
@@ -46,17 +46,20 @@ class RegistrationForm extends PureComponent {
          Captcha: '验证码错误',
          CheckRead: '请阅读后同意协议及政策'
        },
-       success: true
+       success: true,
+       ButtonGroup: Button.Group,
+       Option: Select.Option
      };
      this.prevOne = this.prevOne.bind(this);
      this.nextOne = this.nextOne.bind(this);
      this.submit = this.submit.bind(this);
+     this.handleChangeArea = this.handleChangeArea.bind(this);
+     this.handleRequireArea = this.handleRequireArea.bind(this);
   }
 
   render () {
-    const ButtonGroup = Button.Group;
-    const { condition, warnInfo, success } = this.state;
-    const { company, companyErrorInfo } = this.props;
+    const { condition, warnInfo, success, ButtonGroup, Option } = this.state;
+    const { company, companyErrorInfo, areaList } = this.props;
     const redirect = company ? <Redirect to="/login"></Redirect> : null;
     let headOne = true;
     let headTwo = true;
@@ -124,7 +127,23 @@ class RegistrationForm extends PureComponent {
            </InputDiv>
            <InputDiv>
              <label htmlFor="RecruitArea">招聘地区</label>
-             <Input className="input" name="RecruitArea" onBlur={(e)=>{this.handleRequired(e)}} onChange={(e)=>{this.handleChange(e)}} placeholder="请输入地区，可多选" allowClear />
+             <Select
+                  name="RecruitArea"
+                  showSearch
+                  placeholder="请选择地区"
+                  optionFilterProp="children"
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  onChange={this.handleChangeArea}
+                  onBlur={this.handleRequireArea}
+                >
+                {
+                  areaList.map((item)=>{
+                    return (
+                      <Option value={item} key={item}>{item}</Option>
+                    )
+                  })
+                }
+             </Select>
              <span className="warning">{condition.RecruitArea === 2 ? warnInfo.RecruitArea : ''}</span>
            </InputDiv>
            <InputSubmit>
@@ -277,7 +296,30 @@ class RegistrationForm extends PureComponent {
         success: false
       })
     }
-  }
+  };
+  handleChangeArea (e) {
+    const value = `${e}`;
+    const name = 'RecruitArea';
+    const newArray = {...this.state.values};
+    newArray[name] = value;
+    this.setState({
+      values: newArray
+    });
+  };
+  handleRequireArea (e) {
+    const value = `${e}`;
+    const name = 'RecruitArea';
+    const newCondition = {...this.state.condition};
+    if (value !== 'undefined') {
+      newCondition[name] = 1;
+    }
+    else {
+      newCondition[name] = 2;
+    }
+    this.setState({
+      condition: newCondition
+    })
+  };
   handleCaptcha (e) {
     const value = e.target.value;
     var strCaptcha = '';
@@ -295,7 +337,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handleResure (e) {
     const value = e.target.value;
     const password = this.state.values.Password;
@@ -309,7 +351,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handlePassword (e) {
     const value = e.target.value;
     var re = /[a-z0-9]{6,25}/g;
@@ -323,7 +365,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handlePhone (e) {
     const value = e.target.value;
     var re = /\d{7,13}/g;
@@ -337,7 +379,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handleRequired (e) {
     const value = e.target.value;
     const name = e.target.name;
@@ -351,7 +393,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handleEmail (e) {
     const value = e.target.value;
     var re = /^\w+@[0-9a-z]+\.[a-z]+$/g;
@@ -365,7 +407,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handleChecked (e) {
     const newArray = {...this.state.values};
     newArray['CheckRead'] = e.target.checked;
@@ -382,7 +424,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       condition: newCondition
     })
-  }
+  };
   handleChange (e) {
     const name = e.target.name;
     const newArray = {...this.state.values};
@@ -390,7 +432,7 @@ class RegistrationForm extends PureComponent {
     this.setState({
       values: newArray
     })
-  }
+  };
   handleClick (index,e) {
     e.stopPropagation();
     this.setState({
@@ -412,6 +454,7 @@ class RegistrationForm extends PureComponent {
 const mapState = (state) => ({
   code: state.getIn(['ident','code']),
   company: state.getIn(['register','companyRegiste']),
+  areaList: state.getIn(['home','areaList']),
   companyErrorInfo: state.getIn(['register','companyErrorInfo'])
 });
 

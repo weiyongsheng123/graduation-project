@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { CHANGE_SHOW_RESUME, CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, CHANGE_SEND_RESUME_LIST, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
+import { CLEAR_AND_QUIT_JOBSEEK, CHANGE_SHOW_RESUME, CHNAGE_MODIFY_NAME, CHNAGE_NAME_PHOTO, CHNAGE_MODIFY_INTENT, CHNAGE_MODIFY_WORK, CHNAGE_MODIFY_PROJECT, CHNAGE_MODIFY_EDUCATE, CHANGE_SEND_RESUME_LIST, GET_INTENT_DATA, GET_WORK_DATA, GET_PROJECT_DATA, GET_EDUCATE_DATA, GET_UPLOAD_DATA, GET_ROUTER_JOBSEEK_ID } from './actionTypes';
 
 const defaultState = fromJS({
   showResume: true,
@@ -20,6 +20,15 @@ const defaultState = fromJS({
 
 export default (state = defaultState,action) => {
   switch (action.type) {
+    case CLEAR_AND_QUIT_JOBSEEK:
+      return state.merge({
+        intentData: fromJS({}),
+        workData: fromJS([]),
+        projectData: fromJS([]),
+        educateData: fromJS([]),
+        uploadData: fromJS([]),
+        sendResumeList: fromJS([])
+      });
     case CHANGE_SHOW_RESUME:
       return state.set('showResume',action.value);
     case CHNAGE_MODIFY_INTENT:

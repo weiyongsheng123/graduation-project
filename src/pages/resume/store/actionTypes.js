@@ -1,3 +1,4 @@
+export const CLEAR_AND_QUIT_JOBSEEK = 'clear_and_quit_jobseek';
 export const CHANGE_SHOW_RESUME = 'change_show_resume';
 export const CHNAGE_MODIFY_NAME = 'change_modify_name';
 export const CHNAGE_NAME_PHOTO = 'change_name_photo';

@@ -1,4 +1,4 @@
-import { SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME, CHANGE_ROUTER_COMPANY_ID } from './actionTypes';
+import { CLEAR_AND_QUIT_COMPANY, SHOW_OR_HIDE, CHANGE_MODIFY_COMPANY, CHANGE_RELEASE_RESUME, CHANGE_RESERIVE_RESUME, CHANGE_ROUTER_COMPANY_ID } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
@@ -7,6 +7,10 @@ import { importData } from '../../login/store/actionCreators';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
 import { changeCity } from '../../../common/head/store/actionCreators';
 import { getResumePositionList } from '../../search/store/actionCreators';
+
+export const clearAndQuitCompany = () => ({
+  type: CLEAR_AND_QUIT_COMPANY
+});
 
 export const showOrHide = (show) => ({
   type: SHOW_OR_HIDE,
@@ -18,7 +22,7 @@ export const changeModifyCompany = (value) => ({
   value
 });
 
-export const changeReleaseResumeItem = (values) => ({
+export const changeReleaseResume = (values) => ({
   type: CHANGE_RELEASE_RESUME,
   values: fromJS(values)
 });
@@ -168,7 +172,7 @@ export const getReleaseResume = (Id) => {
     })
     .then((res) => {
       if (res.data) {
-        dispatch(changeReleaseResumeItem(res.data));
+        dispatch(changeReleaseResume(res.data));
       }
       else {
         message.error('获取已发布简历表失败');

@@ -374,6 +374,22 @@ export const InputDiv = styled.div`
     top: 55px;
     left: 100px;
   }
+  .ant-select {
+    height: 44px;
+    line-height: 44px;
+    width: 335px;
+    .ant-select-selection {
+      height: 44px;
+      line-height: 44px;
+      border: 0;
+      .ant-select-selection__rendered {
+        margin-left: 20px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 16px;
+      }
+    }
+  }
 `;
 
 export const InputSubmit = styled.div`

@@ -22,6 +22,7 @@ class CompanyDesc extends PureComponent {
         desc: ''
       },
       file: null,
+      fileCheck: true,
       submit: false,
       first: true
     };
@@ -37,7 +38,7 @@ class CompanyDesc extends PureComponent {
     const Option = Select.Option;
     const InputGroup = Input.Group;
     const { company, areaList, routerId, companyId } = this.props;
-    const { submit, modifyData } = this.state;
+    const { submit, modifyData, fileCheck } = this.state;
     const newCompany = company.toJS();
     const dateFormat = 'YYYY-MM-DD';
     for (let item in newCompany) {
@@ -133,6 +134,7 @@ class CompanyDesc extends PureComponent {
               <InputDiv className="less">
                 <label htmlFor="file">头像</label>
                 <input className="file" onChange={this.uploadFile} type="file" name="file"/>
+                { submit && !fileCheck ? <span className="warn">上传图片格式不符合(将不会上传)</span> : null }
               </InputDiv>
               <InputDiv className="chooseMany">
                 <label htmlFor="desc">简介</label>
@@ -208,6 +210,9 @@ class CompanyDesc extends PureComponent {
       newModify['Id'] = id;
       modify(newModify,file);
       ajaxSend();
+      this.setState({
+        fileCheck: true
+      });
     }
   };
   handleChange (e) {
@@ -238,6 +243,19 @@ class CompanyDesc extends PureComponent {
   };
   uploadFile (e) {
     let file = e.target.files[0];
+    let fileName = file.name;
+    var re = /\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/g;
+    if (re.test(fileName)) {
+      this.setState({
+        fileCheck: true
+      });
+    }
+    else {
+      this.setState({
+        fileCheck: false
+      });
+      return;
+    }
     let data = new FormData();
     data.append("file",file);
     this.setState({

@@ -260,14 +260,6 @@ export const CompanyWrapper = styled.div`
   background: #f4f6f9;
 `;
 
-export const CompanyContent = styled.div`
-  width: 1150px;
-  height: auto;
-  overflow: hidden;
-  margin: auto;
-  margin-top: 30px;
-`;
-
 export const DescArea = styled.div`
   width: 1150px;
   height: auto;
@@ -332,11 +324,12 @@ export const DescDetail = styled.div`
   height: 260px;
   p {
     width: 100%;
-    height: 33px;
-    line-height: 33px;
+    height: 35px;
+    line-height: 35px;
     font-size: 16px;
     font-weight: 550;
     margin-bottom: 0;
+    margin-top: -5px;
   }
   div {
     width: 100%;
@@ -366,6 +359,7 @@ export const EditArea = styled.div`
   top: 0px;
   left: 0px;
   background: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
   &.fade-enter {
     left: -1350px;
   }
@@ -414,26 +408,25 @@ export const EditDetail = styled.div`
 `;
 
 export const IssueArea = styled.div`
-  width: 550px;
-  height: auto;
-  overflow: hidden;
-  float: left;
-  background: #fff;
+  width: 1150px;
   box-shadow: 0 0 30px #eee;
+  height: 435px;
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  background: #fff;
 `;
 
 export const ReseriveArea = styled.div`
-  width: 550px;
-  height: auto;
-  overflow: hidden;
-  float: right;
-  background: #fff;
+  width: 1150px;
   box-shadow: 0 0 30px #eee;
-`;
-
-export const ReseriveFragment = styled.img`
-  width: 100%;
-  height: 450px;
+  height: 435px;
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  background: #fff;
 `;
 
 export const IssueTitle = styled.h3`
@@ -470,56 +463,44 @@ export const IssueTitle = styled.h3`
 `;
 
 export const IssueList = styled.ul`
-  width: 100%;
-  height: 400px;
-  box-sizing: border-box;
-  padding: 5px;
-  overflow: auto;
-`;
-
-export const IssueItem = styled.li`
-  width: 100%;
-  height: auto;
+  width: 1150px;
+  height: 385px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  border-bottom: 1px solid #f0f0f0;
-  color: #333;
-  &:hover {
-    color: #1890ff;
-    transition: color 0.3s;
-  }
-  .left {
-    float: left;
-    display: block;
-    margin-left: 30px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 18px;
-    font-weight: 550;
-    max-width: 350px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .right { 
-    float: right;
-    display: block;
-    margin-right: 25px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-  }
-  .iconfont { 
-    float: right;
-    display: block;
-    margin-right: 30px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    &:hover {
-      color: red;
-      transition: color 0.3s;
+  background: #fff;
+  .ant-table-wrapper {
+    height: 385px;
+    position: relative;
+    .ant-spin-nested-loading {
+      height: 323px;
+      position: static;
+      .ant-spin-container {
+        position: static;
+        .ant-table {
+          .ant-table-thead {
+            th {
+              text-align: center;
+            }
+          }
+          .ant-table-tbody {
+            td {
+              max-width: 190px;
+              text-align: center;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              cursor: pointer;
+            }
+          }
+          .ant-table-placeholder {
+            height: 270px;
+          }
+        }
+        .ant-pagination {
+          position: absolute;
+          bottom: 0px;
+          right: 10px;
+        }
+      }
     }
   }
 `;
@@ -541,63 +522,44 @@ export const ReseriveTitle = styled.h3`
 `;
 
 export const ReseriveList = styled.ul`
-  width: 100%;
-  height: 400px;
-  box-sizing: border-box;
-  padding: 5px;
-  overflow: auto;
-`;
-
-export const ReseriveItem = styled.li`
-  width: 100%;
-  height: auto;
+  width: 1150px;
+  height: 385px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  border-bottom: 1px solid #f0f0f0;
-  color: #333;
-  &:hover {
-    color: #1890ff;
-    transition: color 0.3s;
-  }
-  .left {
-    float: left;
-    display: block;
-    margin-right: 15px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 18px;
-    &:first-of-type {
-      margin-left: 30px;
-      font-weight: 550;
-    }
-  }
-  .max {
-    max-width: 230px;
-    font-size: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: bottom;
-  }
-  .right { 
-    float: right;
-    display: block;
-    margin-right: 25px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-  }
-  .iconfont { 
-    float: right;
-    display: block;
-    margin-right: 30px;
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    &:hover {
-      color: red;
-      transition: color 0.3s;
+  background: #fff;
+  .ant-table-wrapper {
+    height: 385px;
+    position: relative;
+    .ant-spin-nested-loading {
+      height: 323px;
+      position: static;
+      .ant-spin-container {
+        position: static;
+        .ant-table {
+          .ant-table-thead {
+            th {
+              text-align: center;
+            }
+          }
+          .ant-table-tbody {
+            td {
+              max-width: 190px;
+              text-align: center;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              cursor: pointer;
+            }
+          }
+          .ant-table-placeholder {
+            height: 270px;
+          }
+        }
+        .ant-pagination {
+          position: absolute;
+          bottom: 0px;
+          right: 10px;
+        }
+      }
     }
   }
 `;
