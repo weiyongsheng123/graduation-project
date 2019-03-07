@@ -359,7 +359,7 @@ export const EditArea = styled.div`
   top: 0px;
   left: 0px;
   background: rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 1;
   &.fade-enter {
     left: -1350px;
   }
@@ -493,6 +493,7 @@ export const IssueList = styled.ul`
           }
           .ant-table-placeholder {
             height: 270px;
+            z-index: 0;
           }
         }
         .ant-pagination {
@@ -552,6 +553,7 @@ export const ReseriveList = styled.ul`
           }
           .ant-table-placeholder {
             height: 270px;
+            z-index: 0;
           }
         }
         .ant-pagination {
@@ -572,6 +574,7 @@ export const NewArea = styled.div`
   position: fixed;
   left: 0px;
   top: 0px;
+  z-index: 1;
   &.fade-enter {
     top: -650px;
   }

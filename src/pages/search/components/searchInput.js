@@ -22,7 +22,7 @@ class SearchInput extends PureComponent {
     const Option = Select.Option;
     return (
       <InputArea>
-        <LogoImg src="./files/image/logo2.png"/>
+        <LogoImg src="https://recruit.applinzi.com/files/image/logo2.png"/>
         <InputGroup compact>
           <Select defaultValue="全部" onChange={this.handleChangeSelect}>
             <Option value="全部">全部</Option>

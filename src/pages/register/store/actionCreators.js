@@ -28,7 +28,7 @@ export const submitApplice = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/addApplice.php',
+      url: 'https://recruit.applinzi.com/php/addApplice.php',
       data: qs.stringify({
         name: values.name,
         prefix: values.prefix,
@@ -67,7 +67,7 @@ export const submitCompany = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/addCompany.php',
+      url: 'https://recruit.applinzi.com/php/addCompany.php',
       data: qs.stringify({
         name: values.CompanyName,
         area: values.RecruitArea,

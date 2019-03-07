@@ -8,7 +8,7 @@ class PositionCompany extends PureComponent {
     const { companyData } = this.props;
     let newData = companyData.toJS();
     if (!newData['logoUrl']) {
-      newData['logoUrl'] = "http://localhost:3000/files/image/companyLogoUrl.jpg";
+      newData['logoUrl'] = "https://recruit.applinzi.com/files/image/companyLogoUrl.jpg";
     }
     return (
       <CompanyArea>

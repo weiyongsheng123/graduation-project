@@ -85,7 +85,7 @@ export const getSendResumeList = (jobseekId) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getSendResumeList.php',
+      url: 'https://recruit.applinzi.com/php/getSendResumeList.php',
       data: qs.stringify({
         jobseekId: jobseekId
       })
@@ -108,7 +108,7 @@ export const getJobseekUploadData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/getJobseekUploadData.php',
+        url: 'https://recruit.applinzi.com/php/getJobseekUploadData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -131,7 +131,7 @@ export const getJobseekEducateData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/getJobseekEducateData.php',
+        url: 'https://recruit.applinzi.com/php/getJobseekEducateData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -154,7 +154,7 @@ export const getJobseekProjectData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/getJobseekProjectData.php',
+        url: 'https://recruit.applinzi.com/php/getJobseekProjectData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -177,7 +177,7 @@ export const getJobseekWorkData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/getJobseekWorkData.php',
+        url: 'https://recruit.applinzi.com/php/getJobseekWorkData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -200,7 +200,7 @@ export const getJobseekIntentData = (Id) => {
   return (dispatch) => {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/getJobseekIntentData.php',
+        url: 'https://recruit.applinzi.com/php/getJobseekIntentData.php',
         data: qs.stringify({
           Id: Id
         })
@@ -223,7 +223,7 @@ export const companyShowJobseek = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getJobseekNameData.php',
+      url: 'https://recruit.applinzi.com/php/getJobseekNameData.php',
       data: qs.stringify({
         Id: Id
       })
@@ -246,7 +246,7 @@ export const getJobseekNameData = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getJobseekNameData.php',
+      url: 'https://recruit.applinzi.com/php/getJobseekNameData.php',
       data: qs.stringify({
         Id: Id
       })
@@ -277,7 +277,7 @@ export const deleteSendResumeItem = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteReseriveResumeItem.php',
+      url: 'https://recruit.applinzi.com/php/deleteReseriveResumeItem.php',
       data: qs.stringify({
         Id: id
       })
@@ -302,7 +302,7 @@ export const deleteJobseekUploadData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteJobseekUploadData.php',
+      url: 'https://recruit.applinzi.com/php/deleteJobseekUploadData.php',
       data: qs.stringify({
         Id: id
       })
@@ -327,7 +327,7 @@ export const deleteJobseekEducateData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteJobseekEducateData.php',
+      url: 'https://recruit.applinzi.com/php/deleteJobseekEducateData.php',
       data: qs.stringify({
         Id: id
       })
@@ -352,7 +352,7 @@ export const deleteJobseekProjectData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteJobseekProjectData.php',
+      url: 'https://recruit.applinzi.com/php/deleteJobseekProjectData.php',
       data: qs.stringify({
         Id: id
       })
@@ -377,7 +377,7 @@ export const deleteJobseekWorkData = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteJobseekWorkData.php',
+      url: 'https://recruit.applinzi.com/php/deleteJobseekWorkData.php',
       data: qs.stringify({
         Id: id
       })
@@ -402,7 +402,7 @@ export const modifyJobseekEducateData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyJobseekEducateData.php',
+      url: 'https://recruit.applinzi.com/php/modifyJobseekEducateData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -427,7 +427,7 @@ export const modifyJobseekProjectData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyJobseekProjectData.php',
+      url: 'https://recruit.applinzi.com/php/modifyJobseekProjectData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -452,7 +452,7 @@ export const modifyJobseekWorkData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyJobseekWorkData.php',
+      url: 'https://recruit.applinzi.com/php/modifyJobseekWorkData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -477,7 +477,7 @@ export const modifyJobseekIntentData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyJobseekIntentData.php',
+      url: 'https://recruit.applinzi.com/php/modifyJobseekIntentData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -485,15 +485,15 @@ export const modifyJobseekIntentData = (values) => {
       if (res.data) {
         dispatch(changeModifyIntent(1));
         dispatch(getJobseekIntentData(values['Id']));
-        message.success('更新期待成功');
+        message.success('更新意向成功');
       }
       else {
         dispatch(changeModifyIntent(2));
-        message.error("更新期待失败");
+        message.error("更新意向失败");
       }
     })
     .catch((res) => {
-      message.warning("更新期待网络连接失败");
+      message.warning("更新意向网络连接失败");
     })
   }
 };
@@ -502,7 +502,7 @@ export const modifyJobseekName = (values,file) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyJobseekName.php',
+      url: 'https://recruit.applinzi.com/php/modifyJobseekName.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -521,7 +521,7 @@ export const modifyJobseekName = (values,file) => {
     if (file) {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:85/addFiles.php',
+        url: 'https://recruit.applinzi.com/php/addFiles.php',
         data: file,
         params: {
           Id: values['Id']

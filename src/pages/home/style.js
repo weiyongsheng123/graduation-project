@@ -143,10 +143,11 @@ export const LogoCityArea = styled.div`
   background: #fff;
   box-shadow: 0 0 30px #eee;
   img {
-    width: 180px;
+    width: 170px;
     height: 80px;
     display: inline-block;
     margin: 50px 20px 60px 20px;
+    vertical-align: middle;
   }
   h3 {
      width: 80px;

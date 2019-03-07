@@ -53,7 +53,7 @@ class SomethingElse extends PureComponent {
                  return (
                    <li key={item['Id']}>
                      <a target="_blank" rel="noopener noreferrer" href={item['href']} title={item['title']}>{item['desc']}</a>
-                     <img src="./files/image/new.png" alt="最新"/>
+                     <img src="https://recruit.applinzi.com/files/image/new.png" alt="最新"/>
                    </li>
                  )
                })

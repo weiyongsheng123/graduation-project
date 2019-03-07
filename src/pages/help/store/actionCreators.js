@@ -44,7 +44,7 @@ export const modifyAccountData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyAccount.php',
+      url: 'https://recruit.applinzi.com/php/modifyAccount.php',
       data: qs.stringify(values)
     })
     .then ((res)=>{

@@ -44,7 +44,7 @@ export const checkAccount = (values,pattern) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/checkAccount.php',
+      url: 'https://recruit.applinzi.com/php/checkAccount.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -67,7 +67,9 @@ export const checkAccount = (values,pattern) => {
         }
         else {
           dispatch(importData1(res.data));
-          dispatch(changeCity(res.data['area']));
+          if (res.data['area']) {
+            dispatch(changeCity(res.data['area']));
+          };
           dispatch(recodeJobseekId(res.data['Id']));
         }
       }

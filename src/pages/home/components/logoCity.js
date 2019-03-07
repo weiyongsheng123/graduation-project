@@ -12,7 +12,7 @@ class LogoCity extends PureComponent {
     }
     return (
       <LogoCityArea>
-        <img src="./files/image/logoName.png" alt=""/>
+        <img src="https://recruit.applinzi.com/files/image/logoName.png" alt="野猪佩奇"/>
         <h3>{ city }</h3>
       </LogoCityArea>
     )

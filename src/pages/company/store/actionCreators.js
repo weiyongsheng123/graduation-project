@@ -41,7 +41,7 @@ export const jobseekShowCompany = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getCompanyDetail.php',
+      url: 'https://recruit.applinzi.com/php/getCompanyDetail.php',
       data: qs.stringify({
         Id: Id
       })
@@ -64,7 +64,7 @@ export const deleteReseriveResumeItem = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteReseriveResumeItem.php',
+      url: 'https://recruit.applinzi.com/php/deleteReseriveResumeItem.php',
       data: qs.stringify({
         Id: id
       })
@@ -89,7 +89,7 @@ export const deleteReleaseResumeItem = (Id,id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/deleteReleaseResumeItem.php',
+      url: 'https://recruit.applinzi.com/php/deleteReleaseResumeItem.php',
       data: qs.stringify({
         Id: id
       })
@@ -115,7 +115,7 @@ export const addNewResumeData = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/addNewResumeData.php',
+      url: 'https://recruit.applinzi.com/php/addNewResumeData.php',
       data: qs.stringify(values)
     })
     .then((res) => {
@@ -142,7 +142,7 @@ export const getReseriveResumeList = (companyId) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getReseriveResumeList.php',
+      url: 'https://recruit.applinzi.com/php/getReseriveResumeList.php',
       data: qs.stringify({
         companyId: companyId
       })
@@ -165,7 +165,7 @@ export const getReleaseResume = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getReleaseResume.php',
+      url: 'https://recruit.applinzi.com/php/getReleaseResume.php',
       data: qs.stringify({
         Id: Id
       })
@@ -188,7 +188,7 @@ export const getCompanyDetail = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getCompanyDetail.php',
+      url: 'https://recruit.applinzi.com/php/getCompanyDetail.php',
       data: qs.stringify({
         Id: Id
       })
@@ -213,7 +213,7 @@ export const modifyCompanyDetail = (values,file) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/modifyCompanyDetail.php',
+      url: 'https://recruit.applinzi.com/php/modifyCompanyDetail.php',
       data: file,
       params: values,
     })

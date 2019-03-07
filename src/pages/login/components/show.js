@@ -13,10 +13,10 @@ class Show extends PureComponent {
     const { pattern } = this.props;
     let img = null;
     if (pattern === '求职者端') {
-      img = <Img src="./files/image/personLogin.png"/>
+      img = <Img src="https://recruit.applinzi.com/files/image/personLogin.png"/>
     }
     else {
-      img = <Img src="./files/image/companyLogin.png"/>
+      img = <Img src="https://recruit.applinzi.com/files/image/companyLogin.png"/>
     }
     return (
       <ImgShow>

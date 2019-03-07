@@ -20,7 +20,7 @@ class ResumeUpload extends PureComponent {
     const id = NewJobseek['Id'];
     const props = {
       name: 'file',
-      action: 'modifyJobseekUploadData.php',
+      action: 'https://recruit.applinzi.com/php/modifyJobseekUploadData.php',
       data: {
         Id: id
       },

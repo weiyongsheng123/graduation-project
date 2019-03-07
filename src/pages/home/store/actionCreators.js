@@ -40,7 +40,7 @@ export const getRecommendSkill = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getRecommendSkill.php'
+      url: 'https://recruit.applinzi.com/php/getRecommendSkill.php'
     })
     .then((res)=>{
       dispatch(addRecommendSkillList(res.data));
@@ -55,7 +55,7 @@ export const getRecommendWork = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getRecommendWork.php'
+      url: 'https://recruit.applinzi.com/php/getRecommendWork.php'
     })
     .then((res)=>{
       dispatch(addRecommendWorkList(res.data));
@@ -70,7 +70,7 @@ export const getAdvertisement = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getAdvertise.php'
+      url: 'https://recruit.applinzi.com/php/getAdvertise.php'
     })
     .then((res)=>{
       dispatch(addAdvertisementList(res.data));
@@ -85,7 +85,7 @@ export const getPosition = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/positionList.php'
+      url: 'https://recruit.applinzi.com/php/positionList.php'
     })
     .then((res)=>{
       dispatch(addPositionList(res.data));
@@ -100,7 +100,7 @@ export const getAreaSalaryExperience = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/areaSalaryExperience.php'
+      url: 'https://recruit.applinzi.com/php/areaSalaryExperience.php'
     })
     .then((res)=>{
       const salary = res.data[0];

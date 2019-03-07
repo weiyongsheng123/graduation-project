@@ -13,7 +13,7 @@ export const submitSuggest = (values) =>{
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/addSuggest.php',
+      url: 'https://recruit.applinzi.com/php/addSuggest.php',
       data: qs.stringify(values)
     })
     .then((res) => {

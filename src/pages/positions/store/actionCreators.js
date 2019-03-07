@@ -23,7 +23,7 @@ export const getPositionCompanyData = (Id) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getCompanyDetail.php',
+      url: 'https://recruit.applinzi.com/php/getCompanyDetail.php',
       data: qs.stringify({
         Id: Id
       })

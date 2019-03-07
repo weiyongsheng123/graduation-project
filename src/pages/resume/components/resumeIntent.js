@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { IntentArea, IntentTitle, IntentDetail, IntentProfile, IntentEdit, InputDiv } from '../style';
-import { Input, Radio, Select, Button, Checkbox, Row, Col } from 'antd';
+import { Input, Radio, Select, Button, Checkbox, Row, Col, message } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { modifyJobseekIntentData, changeModifyIntent, getJobseekIntentData } from '../store/actionCreators';
@@ -189,7 +189,7 @@ class ResumeIntent extends PureComponent {
       backState();
     }
     else if (modifyIntent === 2) {
-      alert("更新出错");
+      message.error("更新出错");
       backState();
     }
   }

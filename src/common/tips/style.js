@@ -15,10 +15,11 @@ export const TipArea = styled.div`
 `;
 
 export const TipWord = styled.p`
-  width: 480px;
+  width: 500px;
   height: 30px;
   line-height: 30px;
   margin-bottom: 0;
   position: absolute;
   top: 0px;
+  font-size: 14px;
 `;

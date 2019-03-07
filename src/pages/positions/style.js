@@ -221,6 +221,8 @@ export const InfoDesc = styled.div`
   .content {
     width: 60%;
     height: auto;
+    margin-top: 15px;
+    font-size: 14px;
     word-wrap: break-word;
     word-break: normal;
   }

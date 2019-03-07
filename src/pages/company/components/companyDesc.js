@@ -47,7 +47,7 @@ class CompanyDesc extends PureComponent {
       }
     }
     if (newCompany['logoUrl'] === '[空]') {
-      newCompany['logoUrl'] = './files/image/companyLogoUrl.jpg';
+      newCompany['logoUrl'] = 'https://recruit.applinzi.com/files/image/companyLogoUrl.jpg';
     }
     return (
       <DescArea>
@@ -122,7 +122,7 @@ class CompanyDesc extends PureComponent {
               <InputDiv>
                 <label htmlFor="beginTime">创办时间</label>
                 <InputGroup compact>
-                  <DatePicker name="beginTime" value={moment(modifyData['beginTime'], dateFormat)} format={dateFormat} onChange={this.handleChangeDate} placeholder="请选择时间"/>
+                  <DatePicker name="beginTime" value={modifyData['beginTime'] ? moment(modifyData['beginTime'], dateFormat) : null} format={dateFormat} onChange={this.handleChangeDate} placeholder="请选择时间"/>
                 </InputGroup>
                 { submit && !modifyData['beginTime'] ? <span className="warn">创办时间必填</span> : null }
               </InputDiv>

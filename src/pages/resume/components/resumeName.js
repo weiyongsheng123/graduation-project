@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ResumeNameArea, ResumeNameAreaProfile, ResumeNameAreaEdit, InputDiv } from '../style';
-import { Input, Radio, InputNumber, Select, Button } from 'antd';
+import { Input, Radio, message, InputNumber, Select, Button } from 'antd';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { modifyJobseekName, getJobseekNameData, changeModifyName, changeNamePhoto } from '../store/actionCreators';
@@ -54,7 +54,7 @@ class ResumeName extends PureComponent {
       }
     }
     if (newJobseek['photo'] === '[空]') {
-      newJobseek['photo'] = './files/image/headphoto.png';
+      newJobseek['photo'] = 'https://recruit.applinzi.com/files/image/headphoto.png';
     }
     return (
       <ResumeNameArea id="resumename">
@@ -221,7 +221,7 @@ class ResumeName extends PureComponent {
       backState();
     }
     else if (modifyName === 2 && namePhoto === 2) {
-      alert("更新出错");
+      message.error("更新出错");
       backState();
     }
     if ( first && loginOrNot ) {

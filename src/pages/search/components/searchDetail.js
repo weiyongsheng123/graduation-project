@@ -64,7 +64,7 @@ class SearchDetail extends PureComponent {
           </DetailList>
           :
           <DetailList>
-            <DetailEmpty imgUrl="./files/image/emptyList.png" title="未查询到相关数据"/>
+            <DetailEmpty imgUrl="https://recruit.applinzi.com/files/image/emptyList.png" title="未查询到相关数据"/>
           </DetailList>
         }
       </DetailArea>

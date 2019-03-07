@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { GlobalStyle } from './style';
 import { Iconfont } from "./statics/iconfont/iconfont";
 import 'antd/dist/antd.css';
@@ -24,7 +24,7 @@ class App extends Component {
       <Provider store={store}>
         <GlobalStyle/>
         <Iconfont/>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Route
               path="/login"
@@ -93,7 +93,7 @@ class App extends Component {
             >
             </Route>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     )
   }

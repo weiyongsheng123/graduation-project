@@ -167,7 +167,7 @@ class ResumeEducate extends PureComponent {
       backState();
     }
     else if (modifyEducate === 2) {
-      alert("更新出错");
+      message.error("更新出错");
       backState();
     }
   };

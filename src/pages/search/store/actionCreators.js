@@ -39,7 +39,7 @@ export const addNewApply = (values) => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/addApply.php',
+      url: 'https://recruit.applinzi.com/php/addApply.php',
       data: qs.stringify(values)
     })
     .then((res)=>{
@@ -55,7 +55,6 @@ export const addNewApply = (values) => {
     })
     .catch((res)=>{
       message.warning('申请失败，连接网络出错');
-      console.log(res);
     })
   }
 };
@@ -64,7 +63,7 @@ export const getResumePositionList = () => {
   return (dispatch) => {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:85/getResumePositionList.php'
+      url: 'https://recruit.applinzi.com/php/getResumePositionList.php'
     })
     .then((res)=>{
       if (res.data) {
