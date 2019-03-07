@@ -1,9 +1,14 @@
-import { CHANGE_PAGE, CHANGE_NEEDS,  CHANGE_TOTAL_PAGE, GET_NEW_POSITION_ARRAY, GET_RESUME_POSITION_ARRAY } from './actionTypes';
+import { CHANGE_SEARCH_FIRST_TIP, CHANGE_PAGE, CHANGE_NEEDS,  CHANGE_TOTAL_PAGE, GET_NEW_POSITION_ARRAY, GET_RESUME_POSITION_ARRAY } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
 import { fromJS } from 'immutable';
 import { changeAjax } from '../../../common/ajax/store/actionCreators';
+
+export const changeSearchFirstTip = (value) => ({
+  type: CHANGE_SEARCH_FIRST_TIP,
+  value
+});
 
 export const changeTotalPages = (list) => ({
   type: CHANGE_TOTAL_PAGE,

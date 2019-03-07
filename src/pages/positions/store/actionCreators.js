@@ -1,8 +1,13 @@
-import { SHOW_POSITION_ID, CHANGE_POSITION_COMPANY } from './actionTypes';
+import { CHANGE_POSITION_FIRST_TIP, SHOW_POSITION_ID, CHANGE_POSITION_COMPANY } from './actionTypes';
 import axios from 'axios';
 import qs from 'qs';
 import { message } from 'antd';
 import { fromJS } from 'immutable';
+
+export const changePositionFirstTip = (value) => ({
+  type: CHANGE_POSITION_FIRST_TIP,
+  value
+});
 
 export const showPositionId = (Id) => ({
   type: SHOW_POSITION_ID,

@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
+import { CHANGE_HOME_FIRST_TIP, ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
 
 const defaultState = fromJS({
   positionList: [],
@@ -9,11 +9,14 @@ const defaultState = fromJS({
   guessSearch: [],
   advertisementList: [],
   recommendWorkList: [],
-  recommendSkillList: []
+  recommendSkillList: [],
+  firstTip: true
 });
 
 export default (state = defaultState,action) => {
   switch (action.type) {
+    case CHANGE_HOME_FIRST_TIP:
+      return state.set('firstTip',action.value);
     case ADD_POSITION_LIST:
       return state.set('positionList',action.array);
     case ADD_ARSAEX_LIST:

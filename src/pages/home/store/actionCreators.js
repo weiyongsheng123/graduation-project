@@ -1,8 +1,12 @@
-import { ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
+import { CHANGE_HOME_FIRST_TIP, ADD_POSITION_LIST, ADD_ARSAEX_LIST, ADD_ADVERTISEMENT_LIST, ADD_RECOMMENDWORK_LIST, ADD_RECOMMENDSKILL_LIST } from './actionTypes';
 import axios from 'axios';
 import { message } from 'antd';
-
 import { fromJS } from 'immutable';
+
+export const changeHomeFirstTip = (value) => ({
+  type: CHANGE_HOME_FIRST_TIP,
+  value
+});
 
 const addPositionList = (array) => ({
   type: ADD_POSITION_LIST,

@@ -1,3 +1,4 @@
+export const CHANGE_SEARCH_FIRST_TIP = 'change_search_first_tip';
 export const CHANGE_PAGE = 'change_page';
 export const CHANGE_NEEDS = 'change_needs';
 export const CHANGE_TOTAL_PAGE = 'change_total_page';

@@ -93,7 +93,7 @@ class Head extends PureComponent {
       getAreaSalaryExperienceList();
       getPositionList();
     }
-  }
+  };
 };
 
 const mapState = (state) => ({
