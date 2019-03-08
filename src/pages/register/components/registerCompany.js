@@ -328,7 +328,7 @@ class RegistrationForm extends PureComponent {
       strCaptcha = strCaptcha + newArray[i];
     }
     const newCondition = {...this.state.condition};
-    if (value === strCaptcha) {
+    if (value.toLocaleLowerCase() === strCaptcha.toLocaleLowerCase()) {
       newCondition['Captcha'] = 1;
     }
     else {

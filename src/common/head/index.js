@@ -51,7 +51,7 @@ class Head extends PureComponent {
                         {
                           alist.map((item)=>{
                             return (
-                              <li onClick={(e)=>{setCity(false,e)}} key={item}>{item}</li>
+                              <li onClick={(e)=>{setCity(false,e)}} className={item === nowCity ? 'active' : ''} key={item}>{item}</li>
                             )
                           })
                         }

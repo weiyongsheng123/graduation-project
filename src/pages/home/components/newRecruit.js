@@ -22,7 +22,7 @@ class NewRecruit extends PureComponent {
         {
           bestNewList.map((item)=>{
             return (
-              <Link to={"/positions/" + item['Id']} key={item['Id']}>
+              <Link to={"/positions/" + item['Id']} target="_Blank" key={item['Id']}>
               <NewsItem key={item['Id']}>
                 <h3 title={item['title']}>{item['title']}</h3>
                 <span className="salary">{item['salary']}</span>

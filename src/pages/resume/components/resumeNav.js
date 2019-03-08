@@ -49,7 +49,7 @@ class ResumeNav extends PureComponent {
             })
           }
         </NavUl>
-        <CallPolice>
+        <CallPolice href="http://www.cyberpolice.cn/wfjb" title="报警电话">
           <i className="police"></i>
           <span>网络110报警服务</span>
         </CallPolice>

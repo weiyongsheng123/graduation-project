@@ -98,6 +98,10 @@ export const CityChoose = styled.div`
         color: #000;
         transition: all 0.4s;
       }
+      &.active {
+        box-shadow: 0 0 20px #ddd;
+        color: #1890ff;
+      }
     }
   }
 }

@@ -41,7 +41,7 @@ class SearchDetail extends PureComponent {
           {
             list.map((item)=>{
               return (
-                <Link to={"/positions/" + item['Id']} key={item['Id']}>
+                <Link to={"/positions/" + item['Id']} target="_Blank"  key={item['Id']}>
                 <DetailItem>
                   <i className="iconfont hover">&#xe6dd;</i>
                   <h4>{item['title']}</h4>

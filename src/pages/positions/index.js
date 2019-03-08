@@ -38,7 +38,7 @@ class Positions extends PureComponent {
 };
 
 const mapState = (state) => ({
-  firstTip: state.getIn(['position','firstTip'])
+  firstTip: state.getIn(['positions','firstTip'])
 });
 
 const mapDispatch = (dispatch) => {
@@ -46,9 +46,9 @@ const mapDispatch = (dispatch) => {
    getId (Id) {
      dispatch(showPositionId(Id));
    },
-    changeFirst () {
-      dispatch(changePositionFirstTip(false));
-    }
+   changeFirst () {
+     dispatch(changePositionFirstTip(false));
+   }
  }
 }
 

@@ -53,7 +53,7 @@ class RegistrationForm extends PureComponent {
     for (let i = 0; i<newArray.length; i++) {
       strCaptcha = strCaptcha + newArray[i];
     }
-    if (value === strCaptcha) {
+    if (value.toLocaleLowerCase() === strCaptcha.toLocaleLowerCase()) {
       callback();
     }
     callback('验证码错误');
@@ -232,14 +232,7 @@ class RegistrationForm extends PureComponent {
     )
   }
   componentDidMount () {
-    var strCaptcha = '';
-    const newArray = this.props.code.toJS();
-    for (let i = 0; i<newArray.length; i++) {
-      strCaptcha = strCaptcha + newArray[i];
-    }
-    this.setState({
-      codeStr: strCaptcha
-    })
+    
   }
 };
 
