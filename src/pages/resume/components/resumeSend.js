@@ -22,7 +22,7 @@ class ResumeSend extends PureComponent {
     const columns = [{
       title: '职位名',
       dataIndex: 'resumeName',
-      key: 'resumenName',
+      key: 'resumeName',
       render: (text, record) => <Link to={"/positions/"+record.resumeId}>{text}</Link>
     }, {
       title: '申请人',

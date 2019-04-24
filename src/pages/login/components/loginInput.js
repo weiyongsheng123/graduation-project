@@ -118,6 +118,20 @@ class LoginInput extends PureComponent {
       })
     }
   }
+  componentDidMount(){
+    //组件挂载时候，注册keypress事件
+      document.addEventListener('keypress',this.handleEnterKey);
+  }
+  componentWillUmount(){
+    //组件卸载时候，注销keypress事件
+    document.removeEventListener("keypress",this.handleEnterKey);
+  }
+  handleEnterKey = (e) => {
+    const { pattern } = this.props;
+    if(e.keyCode === 13){ //主要区别就是这里，可以直接获取到keyCode的值
+         this.submit(pattern);
+    }
+  }
 };
 
 const mapState = (state) => ({

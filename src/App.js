@@ -14,6 +14,8 @@ import Search from './pages/search/loadable';
 import Positions from './pages/positions/loadable';
 import Help from './pages/help/loadable';
 import Feedback from './pages/feedback/loadable';
+import AdminLogin from './pages/adminLogin/loadable';
+import Admin from './pages/admin/loadable';
 import UserProtocol from './pages/register/components/useServiceProtocol';
 import PrivacyPolicy from './pages/register/components/privacyPolicy';
 
@@ -90,6 +92,18 @@ class App extends Component {
               path="/feedback"
               exact
               component={Feedback}
+            >
+            </Route>
+            <Route
+              path="/adminLogin"
+              exact
+              component={AdminLogin}
+            >
+            </Route>
+            <Route
+              path="/admin"
+              exact
+              component={Admin}
             >
             </Route>
           </div>
